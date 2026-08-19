@@ -1,0 +1,1893 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ReactJS Notes</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* =========================
+           RESET
+        ========================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* =========================
+           BODY
+        ========================= */
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: linear-gradient(135deg, #e3f2fd, #f5f7fa);
+            color: #222;
+            line-height: 1.7;
+            padding: 40px 20px;
+        }
+
+        /* =========================
+           MAIN CONTAINER
+        ========================= */
+        .container {
+            width: 100%;
+            margin: auto;
+        }
+
+        .login-screen {
+            display: flex;
+            min-height: calc(100vh - 80px);
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+
+        .login-card {
+            width: min(420px, 100%);
+            padding: 42px 32px;
+            border: 1px solid #dfe5ea;
+            border-radius: 18px;
+            background: #fff;
+            text-align: center;
+            box-shadow: 0 18px 45px rgba(0, 0, 0, 0.12);
+        }
+
+        .login-logo {
+            width: 58px;
+            height: 58px;
+            margin-bottom: 18px;
+            border-radius: 16px;
+        }
+
+        .login-card h1 {
+            margin-bottom: 8px;
+            font-size: 30px;
+        }
+
+        .login-card p {
+            margin-bottom: 26px;
+            color: #667781;
+        }
+
+        .login-form {
+            text-align: left;
+        }
+
+        .login-form label {
+            display: block;
+            margin: 14px 0 6px;
+            color: #3c4043;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .login-form input {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #c8d0d6;
+            border-radius: 6px;
+            color: #263238;
+            font-size: 15px;
+            outline: none;
+        }
+
+        .login-form input:focus {
+            border-color: #4285f4;
+            box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.14);
+        }
+
+        .password-field {
+            position: relative;
+        }
+
+        .password-field input {
+            padding-right: 46px;
+        }
+
+        .password-toggle {
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            width: 30px;
+            height: 30px;
+            border: none;
+            background: transparent;
+            color: #667781;
+            cursor: pointer;
+            transform: translateY(-50%);
+        }
+
+        .forgot-password {
+            display: block;
+            margin: 9px 0 0     ;
+            border: none;
+            background: transparent;
+            color: #087ea4;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        .login-submit {
+            width: 100%;
+            margin-top: 20px;
+            padding: 12px 18px;
+            border: none;
+            border-radius: 6px;
+            background: #087ea4;
+            color: #fff;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .login-submit:hover {
+            background: #065d7a;
+        }
+
+        .login-divider {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 22px 0;
+            color: #667781;
+            font-size: 12px;
+        }
+
+        .login-divider::before,
+        .login-divider::after {
+            flex: 1;
+            height: 1px;
+            background: #e0e5e8;
+            content: "";
+        }
+
+        .signup-button {
+            margin-top: 18px;
+            border: none;
+            background: transparent;
+            color: #087ea4;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .google-login {
+            display: flex;
+            width: 100%;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 12px 18px;
+            border: 1px solid #dadce0;
+            border-radius: 6px;
+            background: #fff;
+            color: #3c4043;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+        }
+
+        .google-login:hover {
+            background: #f8fafd;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.14);
+        }
+
+        .google-mark {
+            width: 20px;
+            height: 20px;
+        }
+
+        .app-content {
+            display: none;
+        }
+
+        .google-chooser {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 10002;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: rgba(32, 33, 36, 0.52);
+        }
+
+        .google-chooser.open {
+            display: flex;
+        }
+
+        .chooser-card {
+            width: min(420px, 100%);
+            padding: 32px;
+            border: 1px solid #dadce0;
+            border-radius: 8px;
+            background: #fff;
+            color: #202124;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .chooser-google-logo {
+            width: 38px;
+            height: 38px;
+            margin-bottom: 18px;
+        }
+
+        .chooser-card h2 {
+            margin-bottom: 8px;
+            color: #202124;
+            font-size: 24px;
+        }
+
+        .chooser-card p {
+            margin-bottom: 22px;
+            color: #5f6368;
+            font-size: 14px;
+        }
+
+        .google-account-option,
+        .another-account-option {
+            display: flex;
+            width: 100%;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 8px;
+            border: none;
+            border-top: 1px solid #e0e0e0;
+            background: #fff;
+            color: #202124;
+            text-align: left;
+            cursor: pointer;
+        }
+
+        .google-account-option:hover,
+        .another-account-option:hover {
+            background: #f8fafd;
+        }
+
+        .chooser-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .chooser-account-name,
+        .chooser-account-email {
+            display: block;
+        }
+
+        .chooser-account-name {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .chooser-account-email {
+            margin-top: 3px;
+            color: #5f6368;
+            font-size: 13px;
+        }
+
+        .chooser-cancel {
+            display: block;
+            margin: 20px 0 0 auto;
+            border: none;
+            background: transparent;
+            color: #1a73e8;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .signup-screen {
+            display: none;
+            min-height: calc(100vh - 80px);
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+
+        .top-bar {
+            display: flex;
+            justify-content: flex-end;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto 18px;
+        }
+
+        .account-wrap {
+            position: relative;
+        }
+
+        .account-button {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 6px 6px 6px 6px;
+            border: 1px solid #d7e0e6;
+            border-radius: 50%;
+            background: #fff;
+            color: #263238;
+            cursor: pointer;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+        }
+
+        .account-avatar {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            object-fit: cover;
+            background: #e8f0fe;
+        }
+
+        .account-info {
+            text-align: left;
+            line-height: 1.2;
+        }
+
+        
+
+        /* =========================
+           MAIN NOTE BOX
+        ========================= */
+        .note-box {
+            background: #ffffff;
+            border: 2px solid #ddd;
+            border-radius: 20px;
+            padding: 40px;
+
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+
+            transition: 0.3s ease;
+        }
+
+        .note-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.18);
+        }
+
+        /* =========================
+           HEADING
+        ========================= */
+
+        h1 {
+            text-align: center;
+            color: #087ea4;
+            font-size: 42px;
+            margin-bottom: 15px;
+        }
+
+        h2 {
+            color: #087ea4;
+            font-size: 26px;
+            margin-bottom: 12px;
+        }
+
+        .intro {
+            text-align: center;
+            color: #666;
+            font-size: 18px;
+            margin-bottom: 35px;
+        }
+
+        p {
+            color: #444;
+            font-size: 16px;
+        }
+
+        /* =========================
+           CONTENT BOX
+        ========================= */
+
+        .content-box {
+            background: #f8fbfd;
+
+            border-left: 6px solid #087ea4;
+
+            border-radius: 12px;
+
+            padding: 25px;
+
+            margin-top: 25px;
+
+            transition: 0.3s ease;
+        }
+
+        .content-box:hover {
+            background: #eef9fc;
+            transform: translateX(5px);
+        }
+
+        /* =========================
+           LIST
+        ========================= */
+
+        ul {
+            margin-top: 15px;
+            padding-left: 25px;
+        }
+
+        li {
+            margin-bottom: 8px;
+            color: #444;
+        }
+
+        li::marker {
+            color: #087ea4;
+        }
+
+        /* =========================
+           CODE BOX
+        ========================= */
+
+        .code-box {
+            position: relative;
+
+            margin-top: 25px;
+
+            background: #82cdff;
+
+            border-radius: 15px;
+
+            overflow: hidden;
+
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        /* =========================
+           COPY BUTTON
+        ========================= */
+
+        .copy-btn {
+            position: absolute;
+
+            top: 12px;
+            right: 12px;
+
+            padding: 8px 16px;
+
+            border: none;
+
+            border-radius: 8px;
+
+            background: #ffffff;
+
+            color: #087ea4;
+
+            font-size: 14px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.3s ease;
+        }
+
+        .copy-btn:hover {
+            background: #087ea4;
+            color: white;
+        }
+
+        .copy-btn.copied {
+            background: #198754;
+            color: white;
+        }
+
+        /* =========================
+           PRE
+        ========================= */
+
+        pre {
+            margin: 0;
+
+            padding: 55px 25px 25px;
+
+            overflow-x: auto;
+
+            color: black;
+
+            font-family: "Courier New", monospace;
+
+            font-size: 15px;
+
+            line-height: 1.6;
+
+            white-space: pre;
+        }
+
+        code {
+            font-family: "Courier New", monospace;
+        }
+
+        /* =========================
+           TABLET
+        ========================= */
+
+        @media (max-width: 768px) {
+
+            body {
+                padding: 25px 15px;
+            }
+
+            .note-box {
+                padding: 25px;
+                border-radius: 15px;
+            }
+
+            h1 {
+                font-size: 34px;
+            }
+
+            h2 {
+                font-size: 23px;
+            }
+
+            .intro {
+                font-size: 16px;
+            }
+
+            .content-box {
+                padding: 20px;
+            }
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 480px) {
+
+            body {
+                padding: 15px 10px;
+            }
+
+            .note-box {
+                padding: 18px;
+                border-radius: 12px;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+
+            h2 {
+                font-size: 20px;
+            }
+
+            p,
+            li {
+                font-size: 14px;
+            }
+
+            .content-box {
+                padding: 15px;
+                border-left-width: 4px;
+            }
+
+            pre {
+                padding: 55px 15px 15px;
+                font-size: 12px;
+            }
+
+            .copy-btn {
+                top: 10px;
+                right: 10px;
+
+                padding: 6px 12px;
+
+                font-size: 12px;
+            }
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #fff;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #38bdf8;
+            border-radius: 10px;
+            border: 2px solid #fff;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #0ea5e9;
+        }
+
+        /* =========================
+        FIXED AI BUTTON
+        ========================= */
+
+        .ai-button {
+            position: fixed;
+            right: 25px;
+            bottom: 25px;
+
+            width: 60px;
+            height: 60px;
+
+            border: none;
+            border-radius: 50%;
+
+            background: linear-gradient(135deg, #087ea4, #38bdf8);
+            color: white;
+
+            font-size: 18px;
+            font-weight: bold;
+
+            cursor: pointer;
+
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+
+            z-index: 9999;
+
+            transition: all 0.3s ease;
+        }
+
+        .ai-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 30px rgba(8, 126, 164, 0.4);
+        }
+
+        .ai-button:active {
+            transform: scale(0.95);
+        }
+
+        /* Mobile */
+        @media (max-width: 480px) {
+            .ai-button {
+                width: 52px;
+                height: 52px;
+
+                right: 15px;
+                bottom: 15px;
+
+                font-size: 16px;
+            }
+
+            .add-button {
+                width: 82px;
+                height: 48px;
+                right: 15px;
+                bottom: 82px;
+                top: auto;
+                border-radius: 24px;
+                font-size: 14px;
+            }
+        }
+
+        i {
+            color: black;
+        }
+
+        .ai-button {
+            position: fixed;
+            right: 25px;
+            bottom: 25px;
+            width: 60px;
+            height: 60px;
+            border: none;
+            border-radius: 50%;
+            background: white;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 9999;
+        }
+
+        .ai-button img {
+            width: 32px;
+            height: 32px;
+        }
+
+        /* =========================
+        ADD BUTTON
+        ========================= */
+
+        .add-button {
+            position: fixed;
+            right: 25px;
+            bottom: 100px;
+
+            width: 60px;
+            height: 60px;
+
+            border: none;
+            border-radius: 50%;
+
+            background: linear-gradient(135deg, #087ea4, #38bdf8);
+            color: white;
+
+            font-size: 18px;
+            font-weight: bold;
+
+            cursor: pointer;
+
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+
+            z-index: 9999;
+
+            transition: all 0.3s ease;
+        }
+
+        .add-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 30px rgba(8, 126, 164, 0.4);
+        }
+
+
+        /* =========================
+        MODAL
+        ========================= */
+
+        .add-modal {
+            display: none;
+
+            position: fixed;
+
+            inset: 0;
+
+            background: rgba(0, 0, 0, 0.55);
+
+            backdrop-filter: blur(5px);
+
+            justify-content: center;
+            align-items: center;
+
+            z-index: 10000;
+
+            padding: 20px;
+        }
+
+
+        /* =========================
+        FORM
+        ========================= */
+
+        .add-form {
+            position: relative;
+
+            width: 600px;
+            max-width: 100%;
+
+            max-height: 90vh;
+
+            overflow-y: auto;
+
+            background: white;
+
+            padding: 30px;
+
+            border-radius: 20px;
+
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .add-form h2 {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+
+        .add-form label {
+            display: block;
+
+            margin-top: 15px;
+            margin-bottom: 6px;
+
+            font-weight: bold;
+
+            color: #333;
+        }
+
+
+        .add-form input,
+        .add-form textarea {
+            width: 100%;
+
+            padding: 12px;
+
+            border: 1px solid #ccc;
+
+            border-radius: 8px;
+
+            font-family: Arial, sans-serif;
+
+            font-size: 15px;
+
+            outline: none;
+
+            transition: 0.3s;
+        }
+
+
+        .add-form input:focus,
+        .add-form textarea:focus {
+            border-color: #087ea4;
+
+            box-shadow: 0 0 0 3px rgba(8, 126, 164, 0.12);
+        }
+
+
+        .add-form textarea {
+            min-height: 100px;
+
+            resize: vertical;
+        }
+
+
+        /* =========================
+        CLOSE BUTTON
+        ========================= */
+
+        .close-btn {
+            position: absolute;
+
+            top: 12px;
+            right: 15px;
+
+            width: 35px;
+            height: 35px;
+
+            border: none;
+
+            border-radius: 50%;
+
+            background: #f1f1f1;
+
+            font-size: 24px;
+
+            cursor: pointer;
+        }
+
+
+        /* =========================
+        SUBMIT
+        ========================= */
+
+        .submit-add {
+            width: 100%;
+
+            margin-top: 25px;
+
+            padding: 13px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            background: #087ea4;
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        .submit-add:hover {
+            background: #065d7a;
+        }
+
+
+        /* MOBILE */
+
+        @media (max-width: 480px) {
+
+            .ai-button {
+                width: 52px;
+                height: 52px;
+                right: 15px;
+                bottom: 15px;
+            }
+
+            .add-button {
+                width: 82px;
+                height: 48px;
+                right: 15px;
+                bottom: 80px;
+                top: auto;
+                border-radius: 24px;
+                font-size: 14px;
+
+                padding: 12px 18px;
+            }
+
+            .add-form {
+                padding: 20px;
+            }
+
+            .account-name {
+                font-size: 13px;
+            }
+
+            .account-email {
+                font-size: 10px;
+            }
+        }
+
+        /* =========================
+        DELETE BUTTON
+        ========================= */
+
+        .delete-btn {
+            float: right;
+
+            padding: 8px 14px;
+
+            border: none;
+            border-radius: 8px;
+
+            background: #dc3545;
+            color: white;
+
+            font-size: 14px;
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        .delete-btn:hover {
+            background: #b02a37;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="login-screen" id="loginScreen">
+        <section class="login-card" aria-labelledby="loginTitle">
+            <img class="login-logo" src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google">
+            <h1 id="loginTitle">Sign in to Note in Rect</h1>
+            <p>Sign in to continue to your ReactJS notes.</p>
+            <form class="login-form" onsubmit="loginWithEmail(event)">
+                <label for="loginEmail">Email</label>
+                <input id="loginEmail" type="email" placeholder="Enter your email" required>
+
+                <label for="loginPassword">Password</label>
+                <div class="password-field">
+                    <input id="loginPassword" type="password" placeholder="Enter your password" required>
+                    <button class="password-toggle" type="button" onclick="togglePassword('loginPassword', this)" aria-label="Show password">
+                        <i class="bi bi-eye" aria-hidden="true"></i>
+                    </button>
+                </div>
+                <button class="forgot-password" type="button" onclick="forgotPassword()">Forgot password?</button>
+
+                <button class="login-submit" type="submit">Login</button>
+            </form>
+
+            <div class="login-divider">OR</div>
+
+            <button class="google-login" type="button" onclick="loginWithGoogle()">
+                <img class="google-mark" src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="">
+                Continue with Google
+            </button>
+
+            <button class="signup-button" type="button" onclick="signUp()">Create a new account</button>
+        </section>
+    </main>
+
+    <div class="google-chooser" id="googleChooser" role="dialog" aria-modal="true" aria-labelledby="chooserTitle">
+        <section class="chooser-card">
+            <img class="chooser-google-logo" src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google">
+            <h2 id="chooserTitle">Choose an account</h2>
+            <p>to continue to Note in Rect</p>
+
+            <button class="google-account-option" type="button" onclick="chooseGoogleAccount()">
+                <img class="chooser-avatar" src="https://lh3.googleusercontent.com/ogw/AF2bZyhMJ8MaLOB4Ev2szETIl8GhqY7nUmUyTXqFUpWLGICmxXc=s64-c-mo" alt="">
+                <span>
+                    <span class="chooser-account-name">Nishant Mehta</span>
+                    <span class="chooser-account-email">nishantm2304@gmail.com</span>
+                </span>
+            </button>
+
+            <button class="another-account-option" type="button" onclick="useAnotherGoogleAccount()">
+                <i class="bi bi-person-plus" aria-hidden="true"></i>
+                <span>Use another account</span>
+            </button>
+
+            <button class="chooser-cancel" type="button" onclick="closeGoogleChooser()">Cancel</button>
+        </section>
+    </div>
+
+    <main class="signup-screen" id="signupScreen">
+        <section class="login-card" aria-labelledby="signupTitle">
+            <img class="login-logo" src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="">
+            <h1 id="signupTitle">Create your account</h1>
+            <p>Sign up to save and manage your ReactJS notes.</p>
+
+            <form class="login-form" onsubmit="createAccount(event)">
+                <label for="signupName">Full name</label>
+                <input id="signupName" type="text" placeholder="Enter your name" required>
+
+                <label for="signupEmail">Email</label>
+                <input id="signupEmail" type="email" placeholder="Enter your email" required>
+
+                <label for="signupPassword">Password</label>
+                <input id="signupPassword" type="password" placeholder="Create a password" minlength="6" required>
+
+                <label for="signupConfirmPassword">Confirm password</label>
+                <input id="signupConfirmPassword" type="password" placeholder="Confirm your password" minlength="6" required>
+
+                <button class="login-submit" type="submit">Create Account</button>
+            </form>
+
+            <button class="signup-button" type="button" onclick="showLogin()">Already have an account? Login</button>
+        </section>
+    </main>
+
+    <div class="app-content" id="appContent">
+
+    <div class="top-bar">
+        <div class="account-wrap">
+            <button class="account-button" type="button" onclick="toggleAccountMenu()" aria-expanded="false">
+                <a class="account-avatar" aria-expanded="false" aria-label="Google Account: Nishant Mehta  (nishantm2304@gmail.com)"
+                    href="https://accounts.google.com/SignOutOptions?hl=en&amp;continue=https://www.google.com%3Fhl%3Den-US&amp;ec=GBRA8wE"
+                    tabindex="0" role="button" target="_top"><span class="gb_ke"><img class="account-avatar"
+                            src="https://lh3.googleusercontent.com/ogw/AF2bZyhMJ8MaLOB4Ev2szETIl8GhqY7nUmUyTXqFUpWLGICmxXc=s32-c-mo"
+                            srcset="https://lh3.googleusercontent.com/ogw/AF2bZyhMJ8MaLOB4Ev2szETIl8GhqY7nUmUyTXqFUpWLGICmxXc=s32-c-mo 1x, https://lh3.googleusercontent.com/ogw/AF2bZyhMJ8MaLOB4Ev2szETIl8GhqY7nUmUyTXqFUpWLGICmxXc=s64-c-mo 2x "
+                            alt="" aria-hidden="true" data-noaft=""></span>
+                    
+                </a>
+               
+            </button>
+            
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="note-box">
+
+            <h1>Note in Rect</h1>
+
+            <p class="intro">
+                Complete ReactJS Notes
+            </p>
+
+            <div class="content-box">
+                <h2>Notes:</h2>
+            </div>
+
+            <div class="content-box">
+
+                <h2>What is the History of ReactJS?</h2>
+
+                <p>
+                    ReactJS was created by Jordan Walke, a software engineer
+                    at Facebook. It was first deployed on Facebook's news feed
+                    in 2011 and later on Instagram in 2012.
+                </p>
+
+            </div>
+
+
+            <div class="content-box">
+
+                <h2>What are the Features of ReactJS?</h2>
+
+                <p>
+                    Some of the key features of ReactJS include:
+                </p>
+
+                <ul>
+                    <li>Component-based architecture</li>
+                    <li>Virtual DOM for efficient rendering</li>
+                    <li>Unidirectional data flow</li>
+                    <li>JSX syntax for writing HTML-like code in JavaScript</li>
+                </ul>
+
+
+
+                <div class="code-box">
+
+                    <!-- COPY BUTTON -->
+                    <button class="copy-btn" onclick="copyCode(this)">
+                        Copy
+                    </button>
+
+                    <pre><code id="reactCode">
+                        // Example of a simple React component
+
+                        import React from 'react';
+
+                        function HelloWorld() {
+                            return &lt;h1&gt;Hello, World!&lt;/h1&gt;;
+                        }
+
+                        export default HelloWorld;</code></pre>
+
+                </div>
+
+            </div>
+
+            <div class="content-box">
+                <h2>What are the Advantages of ReactJS?with example.</h2>
+
+                <p>
+                    Some of the advantages of using ReactJS include:
+                </p>
+
+                <ul>
+                    <li>Reusable components</li>
+                    <li>Improved performance with virtual DOM</li>
+                    <li>Strong community support</li>
+                    <li>Easy to learn and use</li>
+                </ul>
+                <div class="code-box">
+                    <!-- COPY BUTTON -->
+                    <button class="copy-btn" onclick="copyCode(this)">
+                        Copy
+                    </button>
+
+                    <pre><code id="reactCode">
+                        // Example of a reusable React component
+
+                        import React from 'react';
+
+                        function Button(props) {
+                            return &lt;button&gt;{props.label}&lt;/button&gt;;
+                        }
+
+                        export default Button;</code></pre>
+                </div>
+            </div>
+
+            <div class="content-box">
+                <h2>what is History of Next.JS?</h2>
+                <p>
+                    Next.js was created by Vercel (formerly known as ZEIT) and
+                    was first released in October 2016. It was designed to make
+                    server-side rendering and static site generation easier for
+                    React applications.
+                </p>
+            </div>
+
+            <div class="content-box">
+                <h2>What are the Features of Next.JS?with example.</h2>
+                <p>
+                    Some of the key features of Next.js include:
+                </p>
+
+                <ul>
+                    <li>Server-side rendering (SSR)</li>
+                    <li>Static site generation (SSG)</li>
+                    <li>API routes for building backend functionality</li>
+                    <li>Built-in CSS and Sass support</li>
+                </ul>
+                <div class="code-box">
+                    <!-- COPY BUTTON -->
+                    <button class="copy-btn" onclick="copyCode(this)">
+                        Copy
+                    </button>
+
+                    <pre><code id="reactCode">
+                        // Example of a Next.js page component
+
+                        import React from 'react';
+
+                        function HomePage() {
+                            return &lt;h1&gt;Welcome to Next.js!&lt;/h1&gt;;
+                        }
+
+                        export default HomePage;</code>
+                    </pre>
+
+                </div>
+            </div>
+
+            <div class="content-box">
+                <h2>What are the Advantages of Next.JS?with example.</h2>
+                <p>
+                    Some of the advantages of using Next.js include:
+                </p>
+
+                <ul>
+                    <li>Improved performance with server-side rendering</li>
+                    <li>Better SEO with pre-rendered pages</li>
+                    <li>Easy deployment with Vercel</li>
+                    <li>Built-in routing and API support</li>
+                </ul>
+                <div class="code-box">
+                    <!-- COPY BUTTON -->
+                    <button class="copy-btn" onclick="copyCode(this)">
+                        Copy
+                    </button>
+
+                    <pre><code id="reactCode">
+                        // Example of a Next.js API route
+
+                        export default function handler(req, res) {
+                            res.status(200).json({ message: 'Hello from Next.js API!' });
+                        }</code></pre>
+
+                </div>
+            </div>
+
+            <div class="content-box">
+                <h2>what is npm, yarn and npx different?with example.</h2>
+                <p>
+                    npm (Node Package Manager) is the default package manager for Node.js, used to install and manage
+                    packages. Yarn is an alternative package manager that offers faster performance and better
+                    dependency management. npx is a tool that comes with npm, allowing you to run Node.js packages
+                    without globally installing them.
+                </p>
+
+                <div class="code-box">
+                    <!-- COPY BUTTON -->
+                    <button class="copy-btn" onclick="copyCode(this)">
+                        Copy
+                    </button>
+
+                    <pre><code id="reactCode">
+                        // Example of using npm, yarn, and npx
+
+                        // Using npm to install a package
+                        npm install react
+
+                        // Using yarn to install a package
+                        yarn add react
+
+                        // Using npx to run a package without installing it globally
+                        npx create-react-app my-app</code>
+                    </pre>
+                </div>
+            </div>
+
+            <div class="content-box">
+                <h2>what is Installation of ReactJS using npx?</h2>
+                <p>
+                    To install ReactJS using npx, you can run the following command in your terminal:
+                </p>
+                <div class="code-box">
+                    <button class="copy-btn" onclick="copyCode(this)">
+                        Copy
+                    </button>
+                    <pre><code id="reactCode">npx create-react-app my-app</code></pre>
+                </div>
+            </div>
+
+            <div class="content-box">
+                <h2>what is NodeJS VS Code editor setup?</h2>
+                <p>
+                    To set up Node.js and VS Code editor, follow these steps:
+                </p>
+                <ul>
+                    <li>Download and install Node.js from the official website.</li>
+                    <li>Install Visual Studio Code (VS Code) from the official website.</li>
+                    <li>Open VS Code and install the "Node.js Extension Pack" for better development experience.</li>
+                    <li>Verify the installation by running <code>node -v</code> and <code>npm -v</code> in the terminal.
+                    </li>
+                </ul>
+                <div class="code-box">
+                    <button class="copy-btn" onclick="copyCode(this)">
+                        Copy
+                    </button>
+                    <pre><code id="reactCode">
+                        // Example of checking Node.js and npm versions
+
+                        node -v
+                        npm -v</code>
+                    </pre>
+                </div>
+            </div>
+
+            <div class="content-box">
+                <h2> what is First React App?</h2>
+                <p>
+                    The first React app is typically created using the Create React App tool, which sets up a new React
+                    project with a standard structure and configuration. You can create your first React app by running:
+                </p>
+                <div class="code-box">
+                    <button class="copy-btn" onclick="copyCode(this)">
+                        Copy
+                    </button>
+                    <pre><code id="reactCode">npx create-react-app my-first-app</code></pre>
+                </div>
+            </div>
+
+            <div class="content-box">
+                <h2>what is Understanding Rest and Spread Operator?</h2>
+                <p>
+                    The rest operator (`...`) allows you to capture a variable number of arguments as an array, while
+                    the spread operator also uses `...` but expands an array into individual elements.
+                </p>
+                <div class="code-box">
+                    <button class="copy-btn" onclick="copyCode(this)">
+                        Copy
+                    </button>
+                    <pre><code id="reactCode">
+                        // Example of rest operator
+                        function sum(...numbers) {
+                            return numbers.reduce((acc, curr) => acc + curr, 0);
+                        }
+
+                        // Example of spread operator
+                        const arr1 = [1, 2, 3];
+                        const arr2 = [4, 5, 6];
+                        const combined = [...arr1, ...arr2];</code></pre>
+                </div>
+            </div>
+
+            <div class="content-box">
+                <h2>what is Operators used with Array & Objects?</h2>
+                <p>
+                    In JavaScript, there are several operators that are commonly used with arrays and objects:
+                </p>
+                <div class="code-box">
+                    <button class="copy-btn" onclick="copyCode(this)">
+                        Copy
+                    </button>
+                    <pre><code id="reactCode">
+                        // Example of array operators
+                        const arr = [1, 2, 3];
+                        const newArr = [...arr, 4, 5]; // Spread operator
+                        const [first, ...rest] = arr; // Destructuring
+
+                        // Example of object operators
+                        const obj = { a: 1, b: 2 };
+                        const newObj = { ...obj, c: 3 }; // Spread operator
+                        const { a, ...other } = obj; // Destructuring</code></pre>
+                </div>
+            </div>
+
+            <div class="content-box">
+                <h2>what is State in React JS?</h2>
+                <p>
+                    State is a built-in object in React that allows you to store and manage data that can change over
+                    time. It is used to create dynamic and interactive user interfaces.
+                </p>
+                <div class="code-box">
+                    <button class="copy-btn" onclick="copyCode(this)">
+                        Copy
+                    </button>
+                    <pre><code id="reactCode">
+                        // Example of using state in a React component
+
+                        import React, { useState } from 'react';
+
+                        function Counter() {
+                            const [count, setCount] = useState(0);
+
+                            return (
+                                &lt;div&gt;
+                                    &lt;p&gt;Count: {count}&lt;/p&gt;
+                                    &lt;button onClick={() => setCount(count + 1)}&gt;Increment&lt;/button&gt;
+                                &lt;/div&gt;
+                            );
+                        }
+
+                        export default Counter;</code>
+                    </pre>
+                </div>
+
+            </div>
+
+            <div class="content-box">
+                <h2>what is Props in React JS?</h2>
+                <p>
+                    Props (short for properties) are read-only attributes that are passed from a parent component to a
+                    child component in React. They allow you to pass data and functions between components, making it
+                    easy to create reusable and dynamic user interfaces.
+                </p>
+                <div class="code-box">
+                    <button class="copy-btn" onclick="copyCode(this)">
+                        Copy
+                    </button>
+                    <pre><code id="reactCode">
+                        // Example of using props in a React component
+
+                        import React from 'react';
+
+                        function Greeting({ name }) {
+                            return (
+                                &lt;div&gt;
+                                    &lt;p&gt;Hello, {name}!&lt;/p&gt;
+                                &lt;/div&gt;
+                            );
+                        }
+
+                        export default Greeting;</code>
+                    </pre>
+                </div>
+            </div>
+
+            <div class="content-box">
+                <h2>Example: City, state, Country</h2>
+                <p>
+                    Here's an example of how you might use props to display city, state, and country information:
+                </p>
+                <div class="code-box">
+                    <button class="copy-btn" onclick="copyCode(this)">
+                        Copy
+                    </button>
+                    <pre><code id="reactCode">
+                        // Example of using props for location information
+
+                        import React from 'react';
+
+                        function Location({ city, state, country }) {
+                            return (
+                                &lt;div&gt;
+                                    &lt;p&gt;{city}, {state}, {country}&lt;/p&gt;
+                                &lt;/div&gt;
+                            );
+                        }
+
+                        export default Location;</code>
+                    </pre>
+                </div>
+            </div>
+
+            <div class="content-box">
+                <h2>what is Understand useEffect?</h2>
+                <p>
+                    The useEffect hook in React allows you to perform side effects in function components. It can be
+                    used for tasks such as data fetching, subscriptions, or manually changing the DOM. The useEffect
+                    hook runs after the component renders and can be configured to run only when certain dependencies
+                    change.
+                </p>
+                <div class="code-box">
+                    <button class="copy-btn" onclick="copyCode(this)">
+                        Copy
+                    </button>
+                    <pre><code id="reactCode">
+                        // Example of using useEffect in a React component
+
+                        import React, { useState, useEffect } from 'react';
+
+                        function DataFetcher() {
+                            const [data, setData] = useState(null);
+
+                            useEffect(() => {
+                                fetch('https://api.example.com/data')
+                                    .then(response => response.json())
+                                    .then(data => setData(data));
+                            }, []); // Empty dependency array means this effect runs once after the initial render
+
+                            return (
+                                &lt;div&gt;
+                                    &lt;p&gt;Data: {JSON.stringify(data)}&lt;/p&gt;
+                                &lt;/div&gt;
+                            );
+                        }
+
+                        export default DataFetcher;</code>
+                    </pre>
+                </div>
+            </div>
+
+            <div class="content-box">
+                <h2>what is Store data into localstorage help of useEffect?</h2>
+                <p>
+                    In React, the <strong>useEffect</strong> hook can be used to store data
+                    in the browser's <strong>localStorage</strong>. LocalStorage keeps data
+                    even after the page is refreshed or the browser is closed. Whenever the
+                    state value changes, useEffect can automatically save the updated data
+                    into localStorage.
+                </p>
+
+                <div class="code-box">
+                    <button class="copy-btn" onclick="copyCode(this)">
+                        Copy
+                    </button>
+
+                    <pre><code id="reactCode">
+                        // Example: Store data into LocalStorage using useEffect
+
+                        import React, { useState, useEffect } from 'react';
+
+                        function App() {
+                            const [name, setName] = useState('');
+
+                            useEffect(() => {
+                                localStorage.setItem('name', name);
+                            }, [name]);
+
+                            return (
+                                &lt;div&gt;
+                                    &lt;input
+                                        type="text"
+                                        value={name}
+                                        onChange={(e) =&gt; setName(e.target.value)}
+                                        placeholder="Enter your name"
+                                    /&gt;
+
+                                    &lt;p&gt;Name: {name}&lt;/p&gt;
+                                &lt;/div&gt;
+                            );
+                        }
+
+                        export default App;</code>
+                    </pre>
+                </div>
+            </div>
+
+
+
+        </div>
+
+    </div>
+
+    <!-- ADD BUTTON -->
+    <button class="add-button" onclick="openAddForm()">
+        + Add
+    </button>
+
+    <!-- ADD FORM MODAL -->
+    <div class="add-modal" id="addModal">
+
+        <div class="add-form">
+
+            <button class="close-btn" onclick="closeAddForm()">×</button>
+
+            <h2>Add New React Note</h2>
+
+            <label>Heading</label>
+            <input type="text" id="newHeading" placeholder="Example: What is useState?">
+
+            <label>Paragraph</label>
+            <textarea id="newParagraph" placeholder="Enter explanation..."></textarea>
+
+            <label>List Items</label>
+            <textarea id="newList"
+                placeholder="Enter items separated by comma&#10;Example: Easy, Fast, Reusable"></textarea>
+
+            <label>Code</label>
+            <textarea id="newCode" placeholder="Enter your code..."></textarea>
+
+            <button class="submit-add" onclick="addNewNote()">
+                Submit
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- AI BUTTON -->
+    <button class="ai-button" onclick="openAI()">
+        <img src="https://img.icons8.com/color/1200/chatgpt.jpg" alt="OpenAI">
+    </button>
+
+    </div>
+    <!-- =========================
+         JAVASCRIPT
+    ========================= -->
+
+    <script>
+
+        function showApp() {
+            localStorage.setItem("noteInRectLoggedIn", "true");
+            document.getElementById("loginScreen").style.display = "none";
+            document.getElementById("signupScreen").style.display = "none";
+            document.getElementById("googleChooser").classList.remove("open");
+            document.getElementById("appContent").style.display = "block";
+        }
+
+        function checkLoginStatus() {
+            if (localStorage.getItem("noteInRectLoggedIn") === "true") {
+                showApp();
+            }
+        }
+
+        window.addEventListener("DOMContentLoaded", checkLoginStatus);
+
+        function loginWithGoogle() {
+            document.getElementById("googleChooser").classList.add("open");
+        }
+
+        function chooseGoogleAccount() {
+            showApp();
+        }
+
+        function useAnotherGoogleAccount() {
+            closeGoogleChooser();
+        }
+
+        function closeGoogleChooser() {
+            document.getElementById("googleChooser").classList.remove("open");
+        }
+
+        function loginWithEmail(event) {
+            event.preventDefault();
+            showApp();
+        }
+
+        function togglePassword(inputId, button) {
+            const passwordInput = document.getElementById(inputId);
+            const icon = button.querySelector("i");
+            const showingPassword = passwordInput.type === "text";
+
+            passwordInput.type = showingPassword ? "password" : "text";
+            icon.className = showingPassword ? "bi bi-eye" : "bi bi-eye-slash";
+            button.setAttribute("aria-label", showingPassword ? "Show password" : "Hide password");
+        }
+
+        function forgotPassword() {
+            const email = document.getElementById("loginEmail").value.trim();
+
+            if (email === "") {
+                alert("Please enter your email first.");
+                document.getElementById("loginEmail").focus();
+                return;
+            }
+
+            alert("Password reset link will be sent to " + email + ".");
+        }
+
+        function signUp() {
+            document.getElementById("loginScreen").style.display = "none";
+            document.getElementById("signupScreen").style.display = "flex";
+        }
+
+        function showLogin() {
+            document.getElementById("signupScreen").style.display = "none";
+            document.getElementById("loginScreen").style.display = "flex";
+        }
+
+        function createAccount(event) {
+            event.preventDefault();
+
+            const password = document.getElementById("signupPassword").value;
+            const confirmPassword = document.getElementById("signupConfirmPassword").value;
+
+            if (password !== confirmPassword) {
+                alert("Passwords do not match!");
+                return;
+            }
+
+            alert("Account created successfully. Please login.");
+            document.getElementById("signupScreen").style.display = "none";
+            document.getElementById("loginScreen").style.display = "flex";
+        }
+
+        function copyCode(button) {
+            // jis code box ke button par click hua
+            const codeBox = button.closest(".code-box");
+
+            // us code box ke andar ka code
+            const code = codeBox.querySelector("code").innerText;
+
+            navigator.clipboard.writeText(code)
+                .then(function () {
+
+                    button.innerText = "✓ Copied";
+                    button.classList.add("copied");
+
+                    setTimeout(function () {
+                        button.innerText = "Copy";
+                        button.classList.remove("copied");
+                    }, 2000);
+
+                })
+                .catch(function () {
+                    alert("Copy failed!");
+                });
+        }
+
+
+        function openAI() {
+            window.open("https://chatgpt.com/", "_blank");
+        }
+
+        // =========================
+        // OPEN ADD FORM
+        // =========================
+
+        function openAddForm() {
+            document.getElementById("addModal").style.display = "flex";
+        }
+
+
+        // =========================
+        // CLOSE ADD FORM
+        // =========================
+
+        function closeAddForm() {
+            document.getElementById("addModal").style.display = "none";
+        }
+
+        function toggleAccountMenu() {
+            const menu = document.getElementById("accountMenu");
+            const button = document.querySelector(".account-button");
+            const isOpen = menu.classList.toggle("open");
+
+            button.setAttribute("aria-expanded", isOpen);
+        }
+
+
+        // =========================
+        // ADD NEW NOTE
+        // =========================
+
+        function addNewNote() {
+
+            const heading =
+                document.getElementById("newHeading").value.trim();
+
+            const paragraph =
+                document.getElementById("newParagraph").value.trim();
+
+            const listText =
+                document.getElementById("newList").value.trim();
+
+            const code =
+                document.getElementById("newCode").value.trim();
+
+
+            // Heading required
+            if (heading === "") {
+                alert("Please enter heading!");
+                return;
+            }
+
+
+            // Create content box
+            const contentBox = document.createElement("div");
+
+            contentBox.className = "content-box";
+
+
+            const h2 = document.createElement("h2");
+
+            h2.textContent = heading;
+
+
+            // Delete Button
+            const deleteButton = document.createElement("button");
+
+            deleteButton.className = "delete-btn";
+
+            deleteButton.textContent = "Delete";
+
+            deleteButton.onclick = function () {
+
+                if (confirm("Are you sure you want to delete this note?")) {
+
+                    contentBox.remove();
+
+                }
+
+            };
+
+
+            // Heading ke andar button
+            h2.appendChild(deleteButton);
+
+            contentBox.appendChild(h2);
+
+            // Paragraph
+            if (paragraph !== "") {
+
+                const p = document.createElement("p");
+
+                p.textContent = paragraph;
+
+                contentBox.appendChild(p);
+            }
+
+
+            // List
+            if (listText !== "") {
+
+                const ul = document.createElement("ul");
+
+                const items = listText
+                    .split(",")
+                    .map(item => item.trim())
+                    .filter(item => item !== "");
+
+
+                items.forEach(item => {
+
+                    const li = document.createElement("li");
+
+                    li.textContent = item;
+
+                    ul.appendChild(li);
+
+                });
+
+
+                contentBox.appendChild(ul);
+            }
+
+
+            // Code
+            if (code !== "") {
+                const codeBox = document.createElement("div");
+                codeBox.className = "code-box";
+
+                const copyButton = document.createElement("button");
+                copyButton.className = "copy-btn";
+                copyButton.textContent = "Copy";
+                copyButton.onclick = function () {
+                    copyCode(this);
+                };
+
+                const pre = document.createElement("pre");
+                const codeElement = document.createElement("code");
+                codeElement.textContent = code;
+
+                pre.appendChild(codeElement);
+                codeBox.appendChild(copyButton);
+                codeBox.appendChild(pre);
+                contentBox.appendChild(codeBox);
+            }
+
+
+            // Add the new note at the bottom and scroll to it
+            document.querySelector(".note-box").appendChild(contentBox);
+
+
+            // Clear form
+            document.getElementById("newHeading").value = "";
+            document.getElementById("newParagraph").value = "";
+            document.getElementById("newList").value = "";
+            document.getElementById("newCode").value = "";
+
+
+            // Close modal
+            closeAddForm();
+
+            contentBox.scrollIntoView({ behavior: "smooth", block: "center" });
+
+
+            alert("New note added successfully!");
+        }
+
+
+
+
+
+
+    </script>
+
+</body>
+
+</html>
