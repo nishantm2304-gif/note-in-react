@@ -4,8 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <meta name="google" value="notranslate">
+    <meta name="robots" content="noindex">
+    <meta name="google-site-verification" content="LrdTUW9psUAMbh4Ia074-BPEVmcpBxF6Gwf0MSgQXZs">
     <title>ReactJS Notes</title>
+    <link rel="icon" type="image/svg+xml" href="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg">
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->
@@ -38,6 +41,93 @@
             color: #222;
             line-height: 1.7;
             padding: 40px 20px;
+        }
+
+        body.dark-mode {
+            background: linear-gradient(135deg, #111827, #1f2937);
+            color: #e5e7eb;
+        }
+
+        .theme-button {
+            display: grid;
+            width: 42px;
+            height: 42px;
+            place-items: center;
+            border: 1px solid #d7e0e6;
+            border-radius: 50%;
+            background: #fff;
+            color: #263238;
+            cursor: pointer;
+            font-size: 19px;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+        }
+
+        .theme-button:hover {
+            background: #eef3f6;
+        }
+
+        body.dark-mode .theme-button,
+        body.dark-mode .apps-button,
+        body.dark-mode .account-button {
+            border-color: #4b5563;
+            background: #273244;
+            color: #f9fafb;
+        }
+
+        body.dark-mode .note-box {
+            background: #172033;
+            border-color: #374151;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.35);
+        }
+
+        body.dark-mode .content-box {
+            background: #202b3d;
+            border-left-color: #38bdf8;
+            color:white;
+        }
+
+        body.dark-mode .content-box:hover {
+            background: #26364c;
+        }
+
+        body.dark-mode h1,
+        body.dark-mode h2 {
+            color: #67d4ff;
+        }
+
+        body.dark-mode .intro,
+        body.dark-mode p,
+        body.dark-mode li {
+            color: #d1d5db;
+        }
+
+        body.dark-mode .code-box {
+            background: #0f172a;
+            border-color: #334155;
+        }
+
+        body.dark-mode .code-box pre,
+        body.dark-mode .code-box code {
+            color: #e5e7eb;
+        }
+
+        body.dark-mode .add-form,
+        body.dark-mode .login-card {
+            background: #172033;
+            border-color: #374151;
+            color: #e5e7eb;
+        }
+
+        body.dark-mode .add-form input,
+        body.dark-mode .add-form textarea,
+        body.dark-mode .login-form input {
+            border-color: #4b5563;
+            background: #202b3d;
+            color: #f9fafb;
+        }
+
+        body.dark-mode .app-tile i {
+            color: #111827;
         }
 
         /* =========================
@@ -133,7 +223,7 @@
 
         .forgot-password {
             display: block;
-            margin: 9px 0 0     ;
+            margin: 9px 0 0;
             border: none;
             background: transparent;
             color: #087ea4;
@@ -322,13 +412,94 @@
 
         .top-bar {
             display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 12px;
             justify-content: flex-end;
             width: 100%;
-            max-width: 1200px;
+            
             margin: 0 auto 18px;
         }
 
+        .apps-button {
+            display: grid;
+            flex: 0 0 42px;
+            width: 42px;
+            height: 42px;
+            place-items: center;
+            border: none;
+            border-radius: 50%;
+            background: #fff;
+            color: #52616b;
+            cursor: pointer;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+        }
+
+        .apps-launcher {
+            position: relative;
+        }
+
+        .apps-panel {
+            display: none;
+            position: absolute;
+            top: 52px;
+            right: 0;
+            z-index: 1000;
+            width: 330px;
+            max-height: 430px;
+            overflow-y: auto;
+            padding: 18px;
+            border: 1px solid #3c4043;
+            border-radius: 24px;
+            background: #202124;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.35);
+        }
+
+        .apps-panel.open {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+
+        .app-tile {
+            display: flex;
+            min-height: 92px;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 8px 4px;
+            border-radius: 14px;
+            color: #e8eaed;
+            font-size: 12px;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .app-tile:hover {
+            background: #303134;
+        }
+
+        .app-tile img {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            object-fit: contain;
+            background: #fff;
+        }
+
+        .apps-button:hover {
+            background: #eef3f6;
+        }
+
+        .apps-icon {
+            width: 24px;
+            height: 24px;
+        }
+
         .account-wrap {
+            display: flex;
+            align-items: center;
             position: relative;
         }
 
@@ -358,7 +529,7 @@
             line-height: 1.2;
         }
 
-        
+
 
         /* =========================
            MAIN NOTE BOX
@@ -692,10 +863,7 @@
             }
         }
 
-        i {
-            color: black;
-        }
-
+        
         .ai-button {
             position: fixed;
             right: 25px;
@@ -975,6 +1143,14 @@
             background: #b02a37;
             transform: scale(1.05);
         }
+
+        .bi{
+            color:black;
+        }
+
+        .sun{
+            color:yellow;
+        }
     </style>
 </head>
 
@@ -982,7 +1158,8 @@
 
     <main class="login-screen" id="loginScreen">
         <section class="login-card" aria-labelledby="loginTitle">
-            <img class="login-logo" src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google">
+            <img class="login-logo" src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
+                alt="Google">
             <h1 id="loginTitle">Sign in to Note in Rect</h1>
             <p>Sign in to continue to your ReactJS notes.</p>
             <form class="login-form" onsubmit="loginWithEmail(event)">
@@ -992,7 +1169,8 @@
                 <label for="loginPassword">Password</label>
                 <div class="password-field">
                     <input id="loginPassword" type="password" placeholder="Enter your password" required>
-                    <button class="password-toggle" type="button" onclick="togglePassword('loginPassword', this)" aria-label="Show password">
+                    <button class="password-toggle" type="button" onclick="togglePassword('loginPassword', this)"
+                        aria-label="Show password">
                         <i class="bi bi-eye" aria-hidden="true"></i>
                     </button>
                 </div>
@@ -1004,7 +1182,8 @@
             <div class="login-divider">OR</div>
 
             <button class="google-login" type="button" onclick="loginWithGoogle()">
-                <img class="google-mark" src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="">
+                <img class="google-mark" src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
+                    alt="">
                 Continue with Google
             </button>
 
@@ -1014,12 +1193,15 @@
 
     <div class="google-chooser" id="googleChooser" role="dialog" aria-modal="true" aria-labelledby="chooserTitle">
         <section class="chooser-card">
-            <img class="chooser-google-logo" src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google">
+            <img class="chooser-google-logo" src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
+                alt="Google">
             <h2 id="chooserTitle">Choose an account</h2>
             <p>to continue to Note in Rect</p>
 
             <button class="google-account-option" type="button" onclick="chooseGoogleAccount()">
-                <img class="chooser-avatar" src="https://lh3.googleusercontent.com/ogw/AF2bZyhMJ8MaLOB4Ev2szETIl8GhqY7nUmUyTXqFUpWLGICmxXc=s64-c-mo" alt="">
+                <img class="chooser-avatar"
+                    src="https://lh3.googleusercontent.com/ogw/AF2bZyhMJ8MaLOB4Ev2szETIl8GhqY7nUmUyTXqFUpWLGICmxXc=s64-c-mo"
+                    alt="">
                 <span>
                     <span class="chooser-account-name">Nishant Mehta</span>
                     <span class="chooser-account-email">nishantm2304@gmail.com</span>
@@ -1052,7 +1234,8 @@
                 <input id="signupPassword" type="password" placeholder="Create a password" minlength="6" required>
 
                 <label for="signupConfirmPassword">Confirm password</label>
-                <input id="signupConfirmPassword" type="password" placeholder="Confirm your password" minlength="6" required>
+                <input id="signupConfirmPassword" type="password" placeholder="Confirm your password" minlength="6"
+                    required>
 
                 <button class="login-submit" type="submit">Create Account</button>
             </form>
@@ -1062,76 +1245,93 @@
     </main>
 
     <div class="app-content" id="appContent">
-
-    <div class="top-bar">
-        <div class="account-wrap">
-            <button class="account-button" type="button" onclick="toggleAccountMenu()" aria-expanded="false">
-                <a class="account-avatar" aria-expanded="false" aria-label="Google Account: Nishant Mehta  (nishantm2304@gmail.com)"
-                    href="https://accounts.google.com/SignOutOptions?hl=en&amp;continue=https://www.google.com%3Fhl%3Den-US&amp;ec=GBRA8wE"
-                    tabindex="0" role="button" target="_top"><span class="gb_ke"><img class="account-avatar"
-                            src="https://lh3.googleusercontent.com/ogw/AF2bZyhMJ8MaLOB4Ev2szETIl8GhqY7nUmUyTXqFUpWLGICmxXc=s32-c-mo"
-                            srcset="https://lh3.googleusercontent.com/ogw/AF2bZyhMJ8MaLOB4Ev2szETIl8GhqY7nUmUyTXqFUpWLGICmxXc=s32-c-mo 1x, https://lh3.googleusercontent.com/ogw/AF2bZyhMJ8MaLOB4Ev2szETIl8GhqY7nUmUyTXqFUpWLGICmxXc=s64-c-mo 2x "
-                            alt="" aria-hidden="true" data-noaft=""></span>
-                    
-                </a>
-               
+        <div class="top-bar">
+            <button class="theme-button" id="themeButton" type="button" aria-label="Switch to dark mode"
+                title="Switch theme" onclick="toggleTheme()">
+                <i class="bi bi-moon-stars-fill" aria-hidden="true"></i>
             </button>
-            
-        </div>
-    </div>
+            <div class="apps-launcher">
+                <button class="apps-button" type="button" aria-label="Google apps" title="Google apps"
+                    aria-expanded="false" onclick="toggleAppsMenu(event)">
+                <svg class="apps-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24">
+                    <path fill="currentColor"
+                        d="M6 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm6 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm6 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4ZM6 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm6 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm6 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4ZM6 20a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm6 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm6 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z" />
+                </svg>
+                </button>
+                <div class="apps-panel" id="appsPanel" aria-label="Apps menu">
+                    <a class="app-tile" href="https://drive.google.com" target="_blank"><img src="https://cdn.simpleicons.org/googledrive" alt="Drive"><span>Drive</span></a>
+                    <a class="app-tile" href="https://mail.google.com" target="_blank"><img src="https://cdn.simpleicons.org/gmail" alt="Gmail"><span>Gmail</span></a>
+                    <a class="app-tile" href="https://www.youtube.com" target="_blank"><img src="https://cdn.simpleicons.org/youtube" alt="YouTube"><span>YouTube</span></a>
+                    <a class="app-tile" href="https://gemini.google.com" target="_blank"><img src="https://cdn.simpleicons.org/googlegemini" alt="Gemini"><span>Gemini</span></a>
+                    <a class="app-tile" href="https://maps.google.com" target="_blank"><img src="https://cdn.simpleicons.org/googlemaps" alt="Maps"><span>Maps</span></a>
+                    <a class="app-tile" href="https://calendar.google.com" target="_blank"><img src="https://cdn.simpleicons.org/googlecalendar" alt="Calendar"><span>Calendar</span></a>
+                    <a class="app-tile" href="https://photos.google.com" target="_blank"><img src="https://cdn.simpleicons.org/googlephotos" alt="Photos"><span>Photos</span></a>
+                    <a class="app-tile" href="https://meet.google.com" target="_blank"><img src="https://cdn.simpleicons.org/googlemeet" alt="Meet"><span>Meet</span></a>
+                    <a class="app-tile" href="https://news.google.com" target="_blank"><img src="https://cdn.simpleicons.org/googlenews" alt="News"><span>News</span></a>
+                </div>
+            </div>
+            <div class="account-wrap">
+                <button class="account-button" type="button" onclick="toggleAccountMenu()" aria-expanded="false">
+                    <a class="account-avatar" aria-expanded="false"
+                        aria-label="Google Account: Nishant Mehta  (nishantm2304@gmail.com)"
+                        href="https://accounts.google.com/SignOutOptions?hl=en&amp;continue=https://www.google.com%3Fhl%3Den-US&amp;ec=GBRA8wE"
+                        tabindex="0" role="button" target="_top"><span class="gb_ke"><img class="account-avatar"
+                                src="https://lh3.googleusercontent.com/ogw/AF2bZyhMJ8MaLOB4Ev2szETIl8GhqY7nUmUyTXqFUpWLGICmxXc=s32-c-mo"
+                                srcset="https://lh3.googleusercontent.com/ogw/AF2bZyhMJ8MaLOB4Ev2szETIl8GhqY7nUmUyTXqFUpWLGICmxXc=s32-c-mo 1x, https://lh3.googleusercontent.com/ogw/AF2bZyhMJ8MaLOB4Ev2szETIl8GhqY7nUmUyTXqFUpWLGICmxXc=s64-c-mo 2x "
+                                alt="" aria-hidden="true" data-noaft=""></span>
 
-    <div class="container">
+                    </a>
 
-        <div class="note-box">
+                </button>
 
-            <h1>Note in Rect</h1>
-
-            <p class="intro">
-                Complete ReactJS Notes
-            </p>
-
-            <div class="content-box">
-                <h2>Notes:</h2>
+                </div>
             </div>
 
-            <div class="content-box">
+            <div class="container">
+                <div class="note-box">
+                    <h1>Note in React</h1>
+                <div class="content-box">
+                    <h2>Notes:</h2>
+                </div>
 
-                <h2>What is the History of ReactJS?</h2>
+                <div class="content-box">
 
-                <p>
-                    ReactJS was created by Jordan Walke, a software engineer
-                    at Facebook. It was first deployed on Facebook's news feed
-                    in 2011 and later on Instagram in 2012.
-                </p>
+                    <h2>What is the History of ReactJS?</h2>
 
-            </div>
+                    <p>
+                        ReactJS was created by Jordan Walke, a software engineer
+                        at Facebook. It was first deployed on Facebook's news feed
+                        in 2011 and later on Instagram in 2012.
+                    </p>
 
-
-            <div class="content-box">
-
-                <h2>What are the Features of ReactJS?</h2>
-
-                <p>
-                    Some of the key features of ReactJS include:
-                </p>
-
-                <ul>
-                    <li>Component-based architecture</li>
-                    <li>Virtual DOM for efficient rendering</li>
-                    <li>Unidirectional data flow</li>
-                    <li>JSX syntax for writing HTML-like code in JavaScript</li>
-                </ul>
+                </div>
 
 
+                <div class="content-box">
 
-                <div class="code-box">
+                    <h2>What are the Features of ReactJS?</h2>
 
-                    <!-- COPY BUTTON -->
-                    <button class="copy-btn" onclick="copyCode(this)">
-                        Copy
-                    </button>
+                    <p>
+                        Some of the key features of ReactJS include:
+                    </p>
 
-                    <pre><code id="reactCode">
+                    <ul>
+                        <li>Component-based architecture</li>
+                        <li>Virtual DOM for efficient rendering</li>
+                        <li>Unidirectional data flow</li>
+                        <li>JSX syntax for writing HTML-like code in JavaScript</li>
+                    </ul>
+
+
+
+                    <div class="code-box">
+
+                        <!-- COPY BUTTON -->
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            Copy
+                        </button>
+
+                        <pre><code id="reactCode">
                         // Example of a simple React component
 
                         import React from 'react';
@@ -1142,30 +1342,30 @@
 
                         export default HelloWorld;</code></pre>
 
+                    </div>
+
                 </div>
 
-            </div>
+                <div class="content-box">
+                    <h2>What are the Advantages of ReactJS?with example.</h2>
 
-            <div class="content-box">
-                <h2>What are the Advantages of ReactJS?with example.</h2>
+                    <p>
+                        Some of the advantages of using ReactJS include:
+                    </p>
 
-                <p>
-                    Some of the advantages of using ReactJS include:
-                </p>
+                    <ul>
+                        <li>Reusable components</li>
+                        <li>Improved performance with virtual DOM</li>
+                        <li>Strong community support</li>
+                        <li>Easy to learn and use</li>
+                    </ul>
+                    <div class="code-box">
+                        <!-- COPY BUTTON -->
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            Copy
+                        </button>
 
-                <ul>
-                    <li>Reusable components</li>
-                    <li>Improved performance with virtual DOM</li>
-                    <li>Strong community support</li>
-                    <li>Easy to learn and use</li>
-                </ul>
-                <div class="code-box">
-                    <!-- COPY BUTTON -->
-                    <button class="copy-btn" onclick="copyCode(this)">
-                        Copy
-                    </button>
-
-                    <pre><code id="reactCode">
+                        <pre><code id="reactCode">
                         // Example of a reusable React component
 
                         import React from 'react';
@@ -1175,38 +1375,38 @@
                         }
 
                         export default Button;</code></pre>
+                    </div>
                 </div>
-            </div>
 
-            <div class="content-box">
-                <h2>what is History of Next.JS?</h2>
-                <p>
-                    Next.js was created by Vercel (formerly known as ZEIT) and
-                    was first released in October 2016. It was designed to make
-                    server-side rendering and static site generation easier for
-                    React applications.
-                </p>
-            </div>
+                <div class="content-box">
+                    <h2>what is History of Next.JS?</h2>
+                    <p>
+                        Next.js was created by Vercel (formerly known as ZEIT) and
+                        was first released in October 2016. It was designed to make
+                        server-side rendering and static site generation easier for
+                        React applications.
+                    </p>
+                </div>
 
-            <div class="content-box">
-                <h2>What are the Features of Next.JS?with example.</h2>
-                <p>
-                    Some of the key features of Next.js include:
-                </p>
+                <div class="content-box">
+                    <h2>What are the Features of Next.JS?with example.</h2>
+                    <p>
+                        Some of the key features of Next.js include:
+                    </p>
 
-                <ul>
-                    <li>Server-side rendering (SSR)</li>
-                    <li>Static site generation (SSG)</li>
-                    <li>API routes for building backend functionality</li>
-                    <li>Built-in CSS and Sass support</li>
-                </ul>
-                <div class="code-box">
-                    <!-- COPY BUTTON -->
-                    <button class="copy-btn" onclick="copyCode(this)">
-                        Copy
-                    </button>
+                    <ul>
+                        <li>Server-side rendering (SSR)</li>
+                        <li>Static site generation (SSG)</li>
+                        <li>API routes for building backend functionality</li>
+                        <li>Built-in CSS and Sass support</li>
+                    </ul>
+                    <div class="code-box">
+                        <!-- COPY BUTTON -->
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            Copy
+                        </button>
 
-                    <pre><code id="reactCode">
+                        <pre><code id="reactCode">
                         // Example of a Next.js page component
 
                         import React from 'react';
@@ -1218,53 +1418,54 @@
                         export default HomePage;</code>
                     </pre>
 
+                    </div>
                 </div>
-            </div>
 
-            <div class="content-box">
-                <h2>What are the Advantages of Next.JS?with example.</h2>
-                <p>
-                    Some of the advantages of using Next.js include:
-                </p>
+                <div class="content-box">
+                    <h2>What are the Advantages of Next.JS?with example.</h2>
+                    <p>
+                        Some of the advantages of using Next.js include:
+                    </p>
 
-                <ul>
-                    <li>Improved performance with server-side rendering</li>
-                    <li>Better SEO with pre-rendered pages</li>
-                    <li>Easy deployment with Vercel</li>
-                    <li>Built-in routing and API support</li>
-                </ul>
-                <div class="code-box">
-                    <!-- COPY BUTTON -->
-                    <button class="copy-btn" onclick="copyCode(this)">
-                        Copy
-                    </button>
+                    <ul>
+                        <li>Improved performance with server-side rendering</li>
+                        <li>Better SEO with pre-rendered pages</li>
+                        <li>Easy deployment with Vercel</li>
+                        <li>Built-in routing and API support</li>
+                    </ul>
+                    <div class="code-box">
+                        <!-- COPY BUTTON -->
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            Copy
+                        </button>
 
-                    <pre><code id="reactCode">
+                        <pre><code id="reactCode">
                         // Example of a Next.js API route
 
                         export default function handler(req, res) {
                             res.status(200).json({ message: 'Hello from Next.js API!' });
                         }</code></pre>
 
+                    </div>
                 </div>
-            </div>
 
-            <div class="content-box">
-                <h2>what is npm, yarn and npx different?with example.</h2>
-                <p>
-                    npm (Node Package Manager) is the default package manager for Node.js, used to install and manage
-                    packages. Yarn is an alternative package manager that offers faster performance and better
-                    dependency management. npx is a tool that comes with npm, allowing you to run Node.js packages
-                    without globally installing them.
-                </p>
+                <div class="content-box">
+                    <h2>what is npm, yarn and npx different?with example.</h2>
+                    <p>
+                        npm (Node Package Manager) is the default package manager for Node.js, used to install and
+                        manage
+                        packages. Yarn is an alternative package manager that offers faster performance and better
+                        dependency management. npx is a tool that comes with npm, allowing you to run Node.js packages
+                        without globally installing them.
+                    </p>
 
-                <div class="code-box">
-                    <!-- COPY BUTTON -->
-                    <button class="copy-btn" onclick="copyCode(this)">
-                        Copy
-                    </button>
+                    <div class="code-box">
+                        <!-- COPY BUTTON -->
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            Copy
+                        </button>
 
-                    <pre><code id="reactCode">
+                        <pre><code id="reactCode">
                         // Example of using npm, yarn, and npx
 
                         // Using npm to install a package
@@ -1276,72 +1477,77 @@
                         // Using npx to run a package without installing it globally
                         npx create-react-app my-app</code>
                     </pre>
+                    </div>
                 </div>
-            </div>
 
-            <div class="content-box">
-                <h2>what is Installation of ReactJS using npx?</h2>
-                <p>
-                    To install ReactJS using npx, you can run the following command in your terminal:
-                </p>
-                <div class="code-box">
-                    <button class="copy-btn" onclick="copyCode(this)">
-                        Copy
-                    </button>
-                    <pre><code id="reactCode">npx create-react-app my-app</code></pre>
+                <div class="content-box">
+                    <h2>what is Installation of ReactJS using npx?</h2>
+                    <p>
+                        To install ReactJS using npx, you can run the following command in your terminal:
+                    </p>
+                    <div class="code-box">
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            Copy
+                        </button>
+                        <pre><code id="reactCode">npx create-react-app my-app</code></pre>
+                    </div>
                 </div>
-            </div>
 
-            <div class="content-box">
-                <h2>what is NodeJS VS Code editor setup?</h2>
-                <p>
-                    To set up Node.js and VS Code editor, follow these steps:
-                </p>
-                <ul>
-                    <li>Download and install Node.js from the official website.</li>
-                    <li>Install Visual Studio Code (VS Code) from the official website.</li>
-                    <li>Open VS Code and install the "Node.js Extension Pack" for better development experience.</li>
-                    <li>Verify the installation by running <code>node -v</code> and <code>npm -v</code> in the terminal.
-                    </li>
-                </ul>
-                <div class="code-box">
-                    <button class="copy-btn" onclick="copyCode(this)">
-                        Copy
-                    </button>
-                    <pre><code id="reactCode">
+                <div class="content-box">
+                    <h2>what is NodeJS VS Code editor setup?</h2>
+                    <p>
+                        To set up Node.js and VS Code editor, follow these steps:
+                    </p>
+                    <ul>
+                        <li>Download and install Node.js from the official website.</li>
+                        <li>Install Visual Studio Code (VS Code) from the official website.</li>
+                        <li>Open VS Code and install the "Node.js Extension Pack" for better development experience.
+                        </li>
+                        <li>Verify the installation by running <code>node -v</code> and <code>npm -v</code> in the
+                            terminal.
+                        </li>
+                    </ul>
+                    <div class="code-box">
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            Copy
+                        </button>
+                        <pre><code id="reactCode">
                         // Example of checking Node.js and npm versions
 
                         node -v
                         npm -v</code>
                     </pre>
+                    </div>
                 </div>
-            </div>
 
-            <div class="content-box">
-                <h2> what is First React App?</h2>
-                <p>
-                    The first React app is typically created using the Create React App tool, which sets up a new React
-                    project with a standard structure and configuration. You can create your first React app by running:
-                </p>
-                <div class="code-box">
-                    <button class="copy-btn" onclick="copyCode(this)">
-                        Copy
-                    </button>
-                    <pre><code id="reactCode">npx create-react-app my-first-app</code></pre>
+                <div class="content-box">
+                    <h2> what is First React App?</h2>
+                    <p>
+                        The first React app is typically created using the Create React App tool, which sets up a new
+                        React
+                        project with a standard structure and configuration. You can create your first React app by
+                        running:
+                    </p>
+                    <div class="code-box">
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            Copy
+                        </button>
+                        <pre><code id="reactCode">npx create-react-app my-first-app</code></pre>
+                    </div>
                 </div>
-            </div>
 
-            <div class="content-box">
-                <h2>what is Understanding Rest and Spread Operator?</h2>
-                <p>
-                    The rest operator (`...`) allows you to capture a variable number of arguments as an array, while
-                    the spread operator also uses `...` but expands an array into individual elements.
-                </p>
-                <div class="code-box">
-                    <button class="copy-btn" onclick="copyCode(this)">
-                        Copy
-                    </button>
-                    <pre><code id="reactCode">
+                <div class="content-box">
+                    <h2>what is Understanding Rest and Spread Operator?</h2>
+                    <p>
+                        The rest operator (`...`) allows you to capture a variable number of arguments as an array,
+                        while
+                        the spread operator also uses `...` but expands an array into individual elements.
+                    </p>
+                    <div class="code-box">
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            Copy
+                        </button>
+                        <pre><code id="reactCode">
                         // Example of rest operator
                         function sum(...numbers) {
                             return numbers.reduce((acc, curr) => acc + curr, 0);
@@ -1351,19 +1557,19 @@
                         const arr1 = [1, 2, 3];
                         const arr2 = [4, 5, 6];
                         const combined = [...arr1, ...arr2];</code></pre>
+                    </div>
                 </div>
-            </div>
 
-            <div class="content-box">
-                <h2>what is Operators used with Array & Objects?</h2>
-                <p>
-                    In JavaScript, there are several operators that are commonly used with arrays and objects:
-                </p>
-                <div class="code-box">
-                    <button class="copy-btn" onclick="copyCode(this)">
-                        Copy
-                    </button>
-                    <pre><code id="reactCode">
+                <div class="content-box">
+                    <h2>what is Operators used with Array & Objects?</h2>
+                    <p>
+                        In JavaScript, there are several operators that are commonly used with arrays and objects:
+                    </p>
+                    <div class="code-box">
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            Copy
+                        </button>
+                        <pre><code id="reactCode">
                         // Example of array operators
                         const arr = [1, 2, 3];
                         const newArr = [...arr, 4, 5]; // Spread operator
@@ -1373,20 +1579,21 @@
                         const obj = { a: 1, b: 2 };
                         const newObj = { ...obj, c: 3 }; // Spread operator
                         const { a, ...other } = obj; // Destructuring</code></pre>
+                    </div>
                 </div>
-            </div>
 
-            <div class="content-box">
-                <h2>what is State in React JS?</h2>
-                <p>
-                    State is a built-in object in React that allows you to store and manage data that can change over
-                    time. It is used to create dynamic and interactive user interfaces.
-                </p>
-                <div class="code-box">
-                    <button class="copy-btn" onclick="copyCode(this)">
-                        Copy
-                    </button>
-                    <pre><code id="reactCode">
+                <div class="content-box">
+                    <h2>what is State in React JS?</h2>
+                    <p>
+                        State is a built-in object in React that allows you to store and manage data that can change
+                        over
+                        time. It is used to create dynamic and interactive user interfaces.
+                    </p>
+                    <div class="code-box">
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            Copy
+                        </button>
+                        <pre><code id="reactCode">
                         // Example of using state in a React component
 
                         import React, { useState } from 'react';
@@ -1404,22 +1611,24 @@
 
                         export default Counter;</code>
                     </pre>
+                    </div>
+
                 </div>
 
-            </div>
-
-            <div class="content-box">
-                <h2>what is Props in React JS?</h2>
-                <p>
-                    Props (short for properties) are read-only attributes that are passed from a parent component to a
-                    child component in React. They allow you to pass data and functions between components, making it
-                    easy to create reusable and dynamic user interfaces.
-                </p>
-                <div class="code-box">
-                    <button class="copy-btn" onclick="copyCode(this)">
-                        Copy
-                    </button>
-                    <pre><code id="reactCode">
+                <div class="content-box">
+                    <h2>what is Props in React JS?</h2>
+                    <p>
+                        Props (short for properties) are read-only attributes that are passed from a parent component to
+                        a
+                        child component in React. They allow you to pass data and functions between components, making
+                        it
+                        easy to create reusable and dynamic user interfaces.
+                    </p>
+                    <div class="code-box">
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            Copy
+                        </button>
+                        <pre><code id="reactCode">
                         // Example of using props in a React component
 
                         import React from 'react';
@@ -1434,19 +1643,19 @@
 
                         export default Greeting;</code>
                     </pre>
+                    </div>
                 </div>
-            </div>
 
-            <div class="content-box">
-                <h2>Example: City, state, Country</h2>
-                <p>
-                    Here's an example of how you might use props to display city, state, and country information:
-                </p>
-                <div class="code-box">
-                    <button class="copy-btn" onclick="copyCode(this)">
-                        Copy
-                    </button>
-                    <pre><code id="reactCode">
+                <div class="content-box">
+                    <h2>Example: City, state, Country</h2>
+                    <p>
+                        Here's an example of how you might use props to display city, state, and country information:
+                    </p>
+                    <div class="code-box">
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            Copy
+                        </button>
+                        <pre><code id="reactCode">
                         // Example of using props for location information
 
                         import React from 'react';
@@ -1461,22 +1670,23 @@
 
                         export default Location;</code>
                     </pre>
+                    </div>
                 </div>
-            </div>
 
-            <div class="content-box">
-                <h2>what is Understand useEffect?</h2>
-                <p>
-                    The useEffect hook in React allows you to perform side effects in function components. It can be
-                    used for tasks such as data fetching, subscriptions, or manually changing the DOM. The useEffect
-                    hook runs after the component renders and can be configured to run only when certain dependencies
-                    change.
-                </p>
-                <div class="code-box">
-                    <button class="copy-btn" onclick="copyCode(this)">
-                        Copy
-                    </button>
-                    <pre><code id="reactCode">
+                <div class="content-box">
+                    <h2>what is Understand useEffect?</h2>
+                    <p>
+                        The useEffect hook in React allows you to perform side effects in function components. It can be
+                        used for tasks such as data fetching, subscriptions, or manually changing the DOM. The useEffect
+                        hook runs after the component renders and can be configured to run only when certain
+                        dependencies
+                        change.
+                    </p>
+                    <div class="code-box">
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            Copy
+                        </button>
+                        <pre><code id="reactCode">
                         // Example of using useEffect in a React component
 
                         import React, { useState, useEffect } from 'react';
@@ -1499,25 +1709,25 @@
 
                         export default DataFetcher;</code>
                     </pre>
+                    </div>
                 </div>
-            </div>
 
-            <div class="content-box">
-                <h2>what is Store data into localstorage help of useEffect?</h2>
-                <p>
-                    In React, the <strong>useEffect</strong> hook can be used to store data
-                    in the browser's <strong>localStorage</strong>. LocalStorage keeps data
-                    even after the page is refreshed or the browser is closed. Whenever the
-                    state value changes, useEffect can automatically save the updated data
-                    into localStorage.
-                </p>
+                <div class="content-box">
+                    <h2>what is Store data into localstorage help of useEffect?</h2>
+                    <p>
+                        In React, the <strong>useEffect</strong> hook can be used to store data
+                        in the browser's <strong>localStorage</strong>. LocalStorage keeps data
+                        even after the page is refreshed or the browser is closed. Whenever the
+                        state value changes, useEffect can automatically save the updated data
+                        into localStorage.
+                    </p>
 
-                <div class="code-box">
-                    <button class="copy-btn" onclick="copyCode(this)">
-                        Copy
-                    </button>
+                    <div class="code-box">
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            Copy
+                        </button>
 
-                    <pre><code id="reactCode">
+                        <pre><code id="reactCode">
                         // Example: Store data into LocalStorage using useEffect
 
                         import React, { useState, useEffect } from 'react';
@@ -1545,54 +1755,54 @@
 
                         export default App;</code>
                     </pre>
+                    </div>
                 </div>
+
+
+
             </div>
 
+        </div>
 
+        <!-- ADD BUTTON -->
+        <button class="add-button" onclick="openAddForm()">
+            + Add
+        </button>
+
+        <!-- ADD FORM MODAL -->
+        <div class="add-modal" id="addModal">
+
+            <div class="add-form">
+
+                <button class="close-btn" onclick="closeAddForm()">×</button>
+
+                <h2>Add New React Note</h2>
+
+                <label>Heading</label>
+                <input type="text" id="newHeading" placeholder="Example: What is useState?">
+
+                <label>Paragraph</label>
+                <textarea id="newParagraph" placeholder="Enter explanation..."></textarea>
+
+                <label>List Items</label>
+                <textarea id="newList"
+                    placeholder="Enter items separated by comma&#10;Example: Easy, Fast, Reusable"></textarea>
+
+                <label>Code</label>
+                <textarea id="newCode" placeholder="Enter your code..."></textarea>
+
+                <button class="submit-add" onclick="addNewNote()">
+                    Submit
+                </button>
+
+            </div>
 
         </div>
 
-    </div>
-
-    <!-- ADD BUTTON -->
-    <button class="add-button" onclick="openAddForm()">
-        + Add
-    </button>
-
-    <!-- ADD FORM MODAL -->
-    <div class="add-modal" id="addModal">
-
-        <div class="add-form">
-
-            <button class="close-btn" onclick="closeAddForm()">×</button>
-
-            <h2>Add New React Note</h2>
-
-            <label>Heading</label>
-            <input type="text" id="newHeading" placeholder="Example: What is useState?">
-
-            <label>Paragraph</label>
-            <textarea id="newParagraph" placeholder="Enter explanation..."></textarea>
-
-            <label>List Items</label>
-            <textarea id="newList"
-                placeholder="Enter items separated by comma&#10;Example: Easy, Fast, Reusable"></textarea>
-
-            <label>Code</label>
-            <textarea id="newCode" placeholder="Enter your code..."></textarea>
-
-            <button class="submit-add" onclick="addNewNote()">
-                Submit
-            </button>
-
-        </div>
-
-    </div>
-
-    <!-- AI BUTTON -->
-    <button class="ai-button" onclick="openAI()">
-        <img src="https://img.icons8.com/color/1200/chatgpt.jpg" alt="OpenAI">
-    </button>
+        <!-- AI BUTTON -->
+        <button class="ai-button" onclick="openAI()">
+            <img src="https://img.icons8.com/color/1200/chatgpt.jpg" alt="OpenAI">
+        </button>
 
     </div>
     <!-- =========================
@@ -1616,6 +1826,33 @@
         }
 
         window.addEventListener("DOMContentLoaded", checkLoginStatus);
+        window.addEventListener("DOMContentLoaded", loadSavedNotes);
+        window.addEventListener("DOMContentLoaded", loadTheme);
+
+        function updateThemeButton() {
+            const button = document.getElementById("themeButton");
+            const darkModeEnabled = document.body.classList.contains("dark-mode");
+
+            button.innerHTML = darkModeEnabled
+                ? '<i class="bi sun bi-sun-fill" aria-hidden="true"></i>'
+                : '<i class="bi bi-moon-stars-fill" aria-hidden="true"></i>';
+            button.setAttribute("aria-label", darkModeEnabled ? "Switch to light mode" : "Switch to dark mode");
+        }
+
+        function loadTheme() {
+            if (localStorage.getItem("noteInRectTheme") === "dark") {
+                document.body.classList.add("dark-mode");
+            }
+
+            updateThemeButton();
+        }
+
+        function toggleTheme() {
+            const darkModeEnabled = document.body.classList.toggle("dark-mode");
+
+            localStorage.setItem("noteInRectTheme", darkModeEnabled ? "dark" : "light");
+            updateThemeButton();
+        }
 
         function loginWithGoogle() {
             document.getElementById("googleChooser").classList.add("open");
@@ -1732,6 +1969,37 @@
             document.getElementById("addModal").style.display = "none";
         }
 
+        function toggleAppsMenu(event) {
+            event.stopPropagation();
+
+            const panel = document.getElementById("appsPanel");
+            const button = event.currentTarget;
+            const isOpen = panel.classList.toggle("open");
+
+            button.setAttribute("aria-expanded", isOpen);
+        }
+
+        document.addEventListener("click", function (event) {
+            const launcher = document.querySelector(".apps-launcher");
+            const panel = document.getElementById("appsPanel");
+
+            if (launcher && panel && !launcher.contains(event.target)) {
+                panel.classList.remove("open");
+                document.querySelector(".apps-button").setAttribute("aria-expanded", "false");
+            }
+        });
+
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "Escape") {
+                const panel = document.getElementById("appsPanel");
+
+                if (panel) {
+                    panel.classList.remove("open");
+                    document.querySelector(".apps-button").setAttribute("aria-expanded", "false");
+                }
+            }
+        });
+
         function toggleAccountMenu() {
             const menu = document.getElementById("accountMenu");
             const button = document.querySelector(".account-button");
@@ -1744,6 +2012,84 @@
         // =========================
         // ADD NEW NOTE
         // =========================
+
+        function getSavedNotes() {
+            try {
+                return JSON.parse(localStorage.getItem("noteInRectNotes")) || [];
+            } catch (error) {
+                return [];
+            }
+        }
+
+        function saveNotes(notes) {
+            localStorage.setItem("noteInRectNotes", JSON.stringify(notes));
+        }
+
+        function renderNote(note) {
+            const contentBox = document.createElement("div");
+            contentBox.className = "content-box";
+
+            const h2 = document.createElement("h2");
+            h2.textContent = note.heading;
+
+            const deleteButton = document.createElement("button");
+            deleteButton.className = "delete-btn";
+            deleteButton.textContent = "Delete";
+            deleteButton.onclick = function () {
+                contentBox.remove();
+                saveNotes(getSavedNotes().filter(savedNote => savedNote.id !== note.id));
+            };
+
+            h2.appendChild(deleteButton);
+            contentBox.appendChild(h2);
+
+            if (note.paragraph !== "") {
+                const paragraph = document.createElement("p");
+                paragraph.textContent = note.paragraph;
+                contentBox.appendChild(paragraph);
+            }
+
+            if (note.listText !== "") {
+                const list = document.createElement("ul");
+                note.listText
+                    .split(",")
+                    .map(item => item.trim())
+                    .filter(item => item !== "")
+                    .forEach(item => {
+                        const listItem = document.createElement("li");
+                        listItem.textContent = item;
+                        list.appendChild(listItem);
+                    });
+                contentBox.appendChild(list);
+            }
+
+            if (note.code !== "") {
+                const codeBox = document.createElement("div");
+                codeBox.className = "code-box";
+
+                const copyButton = document.createElement("button");
+                copyButton.className = "copy-btn";
+                copyButton.textContent = "Copy";
+                copyButton.onclick = function () {
+                    copyCode(this);
+                };
+
+                const pre = document.createElement("pre");
+                const codeElement = document.createElement("code");
+                codeElement.textContent = note.code;
+                pre.appendChild(codeElement);
+                codeBox.appendChild(copyButton);
+                codeBox.appendChild(pre);
+                contentBox.appendChild(codeBox);
+            }
+
+            document.querySelector(".note-box").appendChild(contentBox);
+            return contentBox;
+        }
+
+        function loadSavedNotes() {
+            getSavedNotes().forEach(renderNote);
+        }
 
         function addNewNote() {
 
@@ -1767,102 +2113,19 @@
             }
 
 
-            // Create content box
-            const contentBox = document.createElement("div");
-
-            contentBox.className = "content-box";
-
-
-            const h2 = document.createElement("h2");
-
-            h2.textContent = heading;
-
-
-            // Delete Button
-            const deleteButton = document.createElement("button");
-
-            deleteButton.className = "delete-btn";
-
-            deleteButton.textContent = "Delete";
-
-            deleteButton.onclick = function () {
-
-                if (confirm("Are you sure you want to delete this note?")) {
-
-                    contentBox.remove();
-
-                }
-
+            const note = {
+                id: Date.now(),
+                heading,
+                paragraph,
+                listText,
+                code
             };
-
-
-            // Heading ke andar button
-            h2.appendChild(deleteButton);
-
-            contentBox.appendChild(h2);
-
-            // Paragraph
-            if (paragraph !== "") {
-
-                const p = document.createElement("p");
-
-                p.textContent = paragraph;
-
-                contentBox.appendChild(p);
-            }
-
-
-            // List
-            if (listText !== "") {
-
-                const ul = document.createElement("ul");
-
-                const items = listText
-                    .split(",")
-                    .map(item => item.trim())
-                    .filter(item => item !== "");
-
-
-                items.forEach(item => {
-
-                    const li = document.createElement("li");
-
-                    li.textContent = item;
-
-                    ul.appendChild(li);
-
-                });
-
-
-                contentBox.appendChild(ul);
-            }
-
-
-            // Code
-            if (code !== "") {
-                const codeBox = document.createElement("div");
-                codeBox.className = "code-box";
-
-                const copyButton = document.createElement("button");
-                copyButton.className = "copy-btn";
-                copyButton.textContent = "Copy";
-                copyButton.onclick = function () {
-                    copyCode(this);
-                };
-
-                const pre = document.createElement("pre");
-                const codeElement = document.createElement("code");
-                codeElement.textContent = code;
-
-                pre.appendChild(codeElement);
-                codeBox.appendChild(copyButton);
-                codeBox.appendChild(pre);
-                contentBox.appendChild(codeBox);
-            }
-
+            const savedNotes = getSavedNotes();
+            savedNotes.push(note);
+            saveNotes(savedNotes);
 
             // Add the new note at the bottom and scroll to it
-            document.querySelector(".note-box").appendChild(contentBox);
+            const contentBox = renderNote(note);
 
 
             // Clear form
