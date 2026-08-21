@@ -126,8 +126,164 @@
             color: #f9fafb;
         }
 
+        body.dark-mode .add-form label {
+            color: #ffffff;
+        }
+
         body.dark-mode .app-tile i {
             color: #111827;
+        }
+
+        .study-toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px;
+            margin: 0 auto 18px;
+            max-width: 1200px;
+        }
+
+        .study-toolbar input,
+        .study-toolbar select,
+        .study-toolbar button,
+        .import-label {
+            min-height: 40px;
+            padding: 8px 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            background: #fff;
+            color: #263238;
+            font-size: 13px;
+        }
+
+        .study-toolbar input {
+            flex: 1 1 220px;
+        }
+
+        .study-toolbar button,
+        .import-label {
+            cursor: pointer;
+        }
+
+        .study-toolbar button:hover,
+        .import-label:hover {
+            background: #eef9fc;
+        }
+
+        .progress-text {
+            color: #52616b;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .note-tools {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 14px;
+        }
+
+        .note-tools button,
+        .note-tools label {
+            padding: 5px 9px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            background: #fff;
+            color: #52616b;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .note-tools .favorite-button.active {
+            border-color: #f59e0b;
+            background: #fff7ed;
+            color: #b45309;
+        }
+
+        .note-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 12px;
+        }
+
+        .note-tag {
+            padding: 3px 8px;
+            border-radius: 999px;
+            background: #dbeafe;
+            color: #1d4ed8;
+            font-size: 11px;
+        }
+
+        body.dark-mode .note-tag {
+            background: #164e63;
+            color: #bae6fd;
+        }
+
+        .note-card-hidden {
+            display: none !important;
+        }
+
+        .quiz-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 10001;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+        .quiz-modal.open {
+            display: flex;
+        }
+
+        .quiz-card {
+            width: min(560px, 100%);
+            padding: 28px;
+            border-radius: 16px;
+            background: #fff;
+        }
+
+        .quiz-options {
+            display: grid;
+            gap: 8px;
+            margin: 20px 0;
+        }
+
+        .quiz-options button {
+            padding: 10px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            background: #f8fafc;
+            text-align: left;
+            cursor: pointer;
+        }
+
+        body.dark-mode .study-toolbar input,
+        body.dark-mode .study-toolbar select,
+        body.dark-mode .study-toolbar button,
+        body.dark-mode .import-label,
+        body.dark-mode .note-tools button,
+        body.dark-mode .note-tools label,
+        body.dark-mode .quiz-card,
+        body.dark-mode .quiz-options button {
+            border-color: #4b5563;
+            background: #202b3d;
+            color: #e5e7eb;
+        }
+
+        body.reading-large .note-box p,
+        body.reading-large .note-box li,
+        body.reading-large .note-box pre {
+            font-size: 18px;
+        }
+
+        body.reading-small .note-box p,
+        body.reading-small .note-box li,
+        body.reading-small .note-box pre {
+            font-size: 14px;
         }
 
         /* =========================
@@ -801,6 +957,64 @@
             background: #0ea5e9;
         }
 
+        body {
+            scrollbar-color: #38bdf8 #ffffff;
+            scrollbar-width: thin;
+        }
+
+        body.dark-mode {
+            scrollbar-color: #38bdf8 #111827;
+        }
+
+        body.dark-mode::-webkit-scrollbar-track {
+            background: #111827;
+        }
+
+        body.dark-mode::-webkit-scrollbar-thumb {
+            background: #38bdf8;
+            border-color: #111827;
+        }
+
+        body.dark-mode::-webkit-scrollbar-thumb:hover {
+            background: #7dd3fc;
+        }
+
+        html {
+            scrollbar-color: #38bdf8 #ffffff;
+            scrollbar-width: thin;
+        }
+
+        html::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        html::-webkit-scrollbar-track {
+            background: #ffffff;
+        }
+
+        html::-webkit-scrollbar-thumb {
+            background: #38bdf8;
+            border: 2px solid #ffffff;
+            border-radius: 10px;
+        }
+
+        html.dark-mode {
+            scrollbar-color: #38bdf8 #111827;
+        }
+
+        html.dark-mode::-webkit-scrollbar-track {
+            background: #111827;
+        }
+
+        html.dark-mode::-webkit-scrollbar-thumb {
+            background: #38bdf8;
+            border-color: #111827;
+        }
+
+        html.dark-mode::-webkit-scrollbar-thumb:hover {
+            background: #7dd3fc;
+        }
+
         /* =========================
         FIXED AI BUTTON
         ========================= */
@@ -1144,7 +1358,7 @@
             transform: scale(1.05);
         }
 
-        .bi{
+        .moon{
             color:black;
         }
 
@@ -1248,7 +1462,7 @@
         <div class="top-bar">
             <button class="theme-button" id="themeButton" type="button" aria-label="Switch to dark mode"
                 title="Switch theme" onclick="toggleTheme()">
-                <i class="bi bi-moon-stars-fill" aria-hidden="true"></i>
+                <i class="bi moon bi-moon-stars-fill" aria-hidden="true"></i>
             </button>
             <div class="apps-launcher">
                 <button class="apps-button" type="button" aria-label="Google apps" title="Google apps"
@@ -1290,6 +1504,26 @@
             <div class="container">
                 <div class="note-box">
                     <h1>Note in React</h1>
+                    <div class="study-toolbar" aria-label="Study tools">
+                        <input id="noteSearch" type="search" placeholder="Search notes..." oninput="filterNotes()">
+                        <select id="categoryFilter" onchange="filterNotes()" aria-label="Filter by category">
+                            <option value="all">All categories</option>
+                            <option value="basics">Basics</option>
+                            <option value="hooks">Hooks</option>
+                            <option value="javascript">JavaScript</option>
+                            <option value="nextjs">Next.js</option>
+                            <option value="custom">My notes</option>
+                        </select>
+                        <button type="button" onclick="toggleFavorites()"><i class="bi bi-star"></i> Favorites</button>
+                        <button type="button" onclick="toggleRecent()"><i class="bi bi-clock-history"></i> Recent</button>
+                        <button type="button" onclick="changeFontSize(-1)">A-</button>
+                        <button type="button" onclick="changeFontSize(1)">A+</button>
+                        <button type="button" onclick="openQuiz()"><i class="bi bi-patch-question"></i> Quiz</button>
+                        <button type="button" onclick="exportNotes()"><i class="bi bi-download"></i> Export</button>
+                        <label class="import-label" for="importNotes"><i class="bi bi-upload"></i> Import</label>
+                        <input id="importNotes" type="file" accept="application/json" hidden onchange="importNotes(event)">
+                        <span class="progress-text" id="progressText">0% read</span>
+                    </div>
                 <div class="content-box">
                     <h2>Notes:</h2>
                 </div>
@@ -1769,6 +2003,16 @@
             + Add
         </button>
 
+        <div class="quiz-modal" id="quizModal" role="dialog" aria-modal="true" aria-labelledby="quizTitle">
+            <section class="quiz-card">
+                <button class="close-btn" type="button" onclick="closeQuiz()">×</button>
+                <h2 id="quizTitle">React Quick Quiz</h2>
+                <p id="quizQuestion">What does JSX allow you to write?</p>
+                <div class="quiz-options" id="quizOptions"></div>
+                <p id="quizResult" aria-live="polite"></p>
+            </section>
+        </div>
+
         <!-- ADD FORM MODAL -->
         <div class="add-modal" id="addModal">
 
@@ -1780,6 +2024,9 @@
 
                 <label>Heading</label>
                 <input type="text" id="newHeading" placeholder="Example: What is useState?">
+
+                <label>Tags</label>
+                <input type="text" id="newTags" placeholder="hooks, beginner, react">
 
                 <label>Paragraph</label>
                 <textarea id="newParagraph" placeholder="Enter explanation..."></textarea>
@@ -1828,10 +2075,14 @@
         window.addEventListener("DOMContentLoaded", checkLoginStatus);
         window.addEventListener("DOMContentLoaded", loadSavedNotes);
         window.addEventListener("DOMContentLoaded", loadTheme);
+        window.addEventListener("DOMContentLoaded", enhanceNotes);
+        window.addEventListener("DOMContentLoaded", updateProgress);
 
         function updateThemeButton() {
             const button = document.getElementById("themeButton");
             const darkModeEnabled = document.body.classList.contains("dark-mode");
+
+            document.documentElement.classList.toggle("dark-mode", darkModeEnabled);
 
             button.innerHTML = darkModeEnabled
                 ? '<i class="bi sun bi-sun-fill" aria-hidden="true"></i>'
@@ -1844,6 +2095,10 @@
                 document.body.classList.add("dark-mode");
             }
 
+            const savedFont = localStorage.getItem("noteInRectFont");
+            document.body.classList.toggle("reading-large", savedFont === "large");
+            document.body.classList.toggle("reading-small", savedFont === "small");
+
             updateThemeButton();
         }
 
@@ -1852,6 +2107,199 @@
 
             localStorage.setItem("noteInRectTheme", darkModeEnabled ? "dark" : "light");
             updateThemeButton();
+        }
+
+        function getNoteId(title) {
+            return "static-" + title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+        }
+
+        function getFavoriteNotes() {
+            return JSON.parse(localStorage.getItem("noteInRectFavorites") || "[]");
+        }
+
+        function setFavorite(noteId, button) {
+            const favorites = getFavoriteNotes();
+            const index = favorites.indexOf(noteId);
+
+            if (index === -1) {
+                favorites.push(noteId);
+            } else {
+                favorites.splice(index, 1);
+            }
+
+            localStorage.setItem("noteInRectFavorites", JSON.stringify(favorites));
+            button.classList.toggle("active", index === -1);
+            button.innerHTML = index === -1 ? '<i class="bi bi-star-fill"></i> Favorite' : '<i class="bi bi-star"></i> Favorite';
+        }
+
+        function markNoteRead(noteId, checked) {
+            const readNotes = JSON.parse(localStorage.getItem("noteInRectRead") || "[]");
+
+            if (checked && !readNotes.includes(noteId)) {
+                readNotes.push(noteId);
+            } else if (!checked) {
+                readNotes.splice(readNotes.indexOf(noteId), 1);
+            }
+
+            localStorage.setItem("noteInRectRead", JSON.stringify(readNotes));
+            updateProgress();
+        }
+
+        function addNoteTools(noteCard, noteId, customNote) {
+            if (noteCard.querySelector(".note-tools")) {
+                return;
+            }
+
+            noteCard.dataset.noteId = noteId;
+            noteCard.dataset.category = customNote ? "custom" : getCategory(noteCard.textContent);
+            noteCard.classList.add("study-note");
+            noteCard.addEventListener("click", function (event) {
+                if (!event.target.closest("button, input, label")) {
+                    markRecent(noteId);
+                }
+            });
+
+            const favorites = getFavoriteNotes();
+            const readNotes = JSON.parse(localStorage.getItem("noteInRectRead") || "[]");
+            const tools = document.createElement("div");
+            tools.className = "note-tools";
+
+            const favoriteButton = document.createElement("button");
+            favoriteButton.className = "favorite-button" + (favorites.includes(noteId) ? " active" : "");
+            favoriteButton.innerHTML = favorites.includes(noteId) ? '<i class="bi bi-star-fill"></i> Favorite' : '<i class="bi bi-star"></i> Favorite';
+            favoriteButton.onclick = function () {
+                setFavorite(noteId, favoriteButton);
+            };
+
+            const readLabel = document.createElement("label");
+            const readCheckbox = document.createElement("input");
+            readCheckbox.type = "checkbox";
+            readCheckbox.checked = readNotes.includes(noteId);
+            readCheckbox.onchange = function () {
+                markNoteRead(noteId, readCheckbox.checked);
+            };
+            readLabel.append(readCheckbox, " Read");
+            tools.append(favoriteButton, readLabel);
+
+            if (customNote) {
+                const editButton = document.createElement("button");
+                editButton.innerHTML = '<i class="bi bi-pencil"></i> Edit';
+                editButton.onclick = function () {
+                    editNote(noteId, noteCard);
+                };
+                tools.appendChild(editButton);
+            }
+
+            noteCard.appendChild(tools);
+        }
+
+        function markRecent(noteId) {
+            const recent = JSON.parse(localStorage.getItem("noteInRectRecent") || "[]").filter(id => id !== noteId);
+            recent.unshift(noteId);
+            localStorage.setItem("noteInRectRecent", JSON.stringify(recent.slice(0, 10)));
+        }
+
+        function getCategory(text) {
+            const value = text.toLowerCase();
+            if (value.includes("next.js")) return "nextjs";
+            if (value.includes("useeffect") || value.includes("usestate")) return "hooks";
+            if (value.includes("operator") || value.includes("array") || value.includes("javascript")) return "javascript";
+            return "basics";
+        }
+
+        function enhanceNotes() {
+            document.querySelectorAll(".note-box > .content-box").forEach(noteCard => {
+                const heading = noteCard.querySelector("h2");
+                if (heading) {
+                    addNoteTools(noteCard, getNoteId(heading.textContent), false);
+                }
+            });
+            updateProgress();
+        }
+
+        function filterNotes() {
+            const query = document.getElementById("noteSearch").value.toLowerCase().trim();
+            const category = document.getElementById("categoryFilter").value;
+            const favoritesOnly = document.getElementById("noteSearch").dataset.favorites === "true";
+            const recentOnly = document.getElementById("noteSearch").dataset.recent === "true";
+            const favorites = getFavoriteNotes();
+            const recent = JSON.parse(localStorage.getItem("noteInRectRecent") || "[]");
+
+            document.querySelectorAll(".study-note").forEach(noteCard => {
+                const matchesText = noteCard.textContent.toLowerCase().includes(query);
+                const matchesCategory = category === "all" || noteCard.dataset.category === category;
+                const matchesFavorite = !favoritesOnly || favorites.includes(noteCard.dataset.noteId);
+                const matchesRecent = !recentOnly || recent.includes(noteCard.dataset.noteId);
+                noteCard.classList.toggle("note-card-hidden", !(matchesText && matchesCategory && matchesFavorite && matchesRecent));
+            });
+        }
+
+        function toggleFavorites() {
+            const search = document.getElementById("noteSearch");
+            search.dataset.favorites = search.dataset.favorites === "true" ? "false" : "true";
+            filterNotes();
+        }
+
+        function toggleRecent() {
+            const search = document.getElementById("noteSearch");
+            search.dataset.recent = search.dataset.recent === "true" ? "false" : "true";
+            filterNotes();
+        }
+
+        function updateProgress() {
+            const notes = document.querySelectorAll(".study-note");
+            const readNotes = JSON.parse(localStorage.getItem("noteInRectRead") || "[]");
+            const percent = notes.length ? Math.round((readNotes.filter(id => document.querySelector(`[data-note-id="${id}"]`)).length / notes.length) * 100) : 0;
+            const progress = document.getElementById("progressText");
+            if (progress) progress.textContent = percent + "% read";
+        }
+
+        function changeFontSize(direction) {
+            document.body.classList.toggle("reading-large", direction > 0);
+            document.body.classList.toggle("reading-small", direction < 0);
+            localStorage.setItem("noteInRectFont", direction > 0 ? "large" : "small");
+        }
+
+        function exportNotes() {
+            const data = JSON.stringify(getSavedNotes(), null, 2);
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(new Blob([data], { type: "application/json" }));
+            link.download = "react-notes.json";
+            link.click();
+            URL.revokeObjectURL(link.href);
+        }
+
+        function importNotes(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function () {
+                try {
+                    const imported = JSON.parse(reader.result);
+                    if (!Array.isArray(imported)) throw new Error("Invalid notes");
+                    saveNotes(imported.map(note => ({ ...note, id: note.id || Date.now() + Math.random() })));
+                    location.reload();
+                } catch (error) {
+                    alert("Invalid notes file.");
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        function openQuiz() {
+            const options = ["Writing HTML-like UI inside JavaScript", "Only styling CSS", "Managing databases", "Creating server routes"];
+            document.getElementById("quizOptions").innerHTML = options.map((option, index) => `<button type="button" onclick="answerQuiz(${index})">${option}</button>`).join("");
+            document.getElementById("quizResult").textContent = "";
+            document.getElementById("quizModal").classList.add("open");
+        }
+
+        function answerQuiz(index) {
+            document.getElementById("quizResult").textContent = index === 0 ? "Correct! JSX lets you write UI with HTML-like syntax." : "Try again. JSX is used to write UI in JavaScript.";
+        }
+
+        function closeQuiz() {
+            document.getElementById("quizModal").classList.remove("open");
         }
 
         function loginWithGoogle() {
@@ -2043,6 +2491,18 @@
             h2.appendChild(deleteButton);
             contentBox.appendChild(h2);
 
+            if (note.tags) {
+                const tags = document.createElement("div");
+                tags.className = "note-tags";
+                note.tags.split(",").map(tag => tag.trim()).filter(Boolean).forEach(tag => {
+                    const tagElement = document.createElement("span");
+                    tagElement.className = "note-tag";
+                    tagElement.textContent = tag;
+                    tags.appendChild(tagElement);
+                });
+                contentBox.appendChild(tags);
+            }
+
             if (note.paragraph !== "") {
                 const paragraph = document.createElement("p");
                 paragraph.textContent = note.paragraph;
@@ -2084,7 +2544,22 @@
             }
 
             document.querySelector(".note-box").appendChild(contentBox);
+            addNoteTools(contentBox, String(note.id), true);
             return contentBox;
+        }
+
+        function editNote(noteId, contentBox) {
+            const notes = getSavedNotes();
+            const note = notes.find(savedNote => String(savedNote.id) === String(noteId));
+            if (!note) return;
+
+            const heading = prompt("Edit heading", note.heading);
+            if (heading === null || heading.trim() === "") return;
+
+            note.heading = heading.trim();
+            saveNotes(notes);
+            const headingElement = contentBox.querySelector("h2");
+            headingElement.firstChild.textContent = note.heading;
         }
 
         function loadSavedNotes() {
@@ -2095,6 +2570,9 @@
 
             const heading =
                 document.getElementById("newHeading").value.trim();
+
+            const tags =
+                document.getElementById("newTags").value.trim();
 
             const paragraph =
                 document.getElementById("newParagraph").value.trim();
@@ -2116,6 +2594,7 @@
             const note = {
                 id: Date.now(),
                 heading,
+                tags,
                 paragraph,
                 listText,
                 code
@@ -2130,6 +2609,7 @@
 
             // Clear form
             document.getElementById("newHeading").value = "";
+            document.getElementById("newTags").value = "";
             document.getElementById("newParagraph").value = "";
             document.getElementById("newList").value = "";
             document.getElementById("newCode").value = "";
