@@ -460,6 +460,76 @@
 
         .app-content {
             display: none;
+            min-height: calc(100vh - 80px);
+            color: #263238;
+            margin: -40px -20px;
+            padding: 40px 20px;
+            background: #ffffff;
+        }
+
+        .app-content .top-bar {
+            color: #263238;
+        }
+
+        body.dark-mode .app-content {
+            color: #e5e7eb;
+            background: #111827;
+        }
+
+        body.dark-mode .app-content .top-bar,
+        body.dark-mode .app-content .progress-text {
+            color: #d1d5db;
+        }
+
+        body.dark-mode .app-content .apps-button,
+        body.dark-mode .app-content .account-button,
+        body.dark-mode .app-content .theme-button {
+            border-color: #4b5563;
+            background: #273244;
+            color: #f9fafb;
+        }
+
+        body.dark-mode .app-content .apps-button:hover,
+        body.dark-mode .app-content .theme-button:hover {
+            background: #36445a;
+        }
+
+        body.dark-mode .app-content .apps-panel {
+            border-color: #4b5563;
+            background: #172033;
+        }
+
+        body.dark-mode .app-content .app-tile {
+            color: #e5e7eb;
+        }
+
+        body.dark-mode .app-content .app-tile:hover {
+            background: #26364c;
+        }
+
+        body.dark-mode .app-content .note-box {
+            background: #172033;
+            border-color: #374151;
+        }
+
+        body.dark-mode .app-content .content-box {
+            background: #202b3d;
+            color: #e5e7eb;
+        }
+
+        body.dark-mode .app-content .content-box:hover {
+            background: #26364c;
+        }
+
+        body.dark-mode .app-content p,
+        body.dark-mode .app-content li,
+        body.dark-mode .app-content .intro {
+            color: #d1d5db;
+        }
+
+        body.dark-mode .app-content h1,
+        body.dark-mode .app-content h2 {
+            color: #67d4ff;
         }
 
         .google-chooser {
@@ -607,7 +677,7 @@
             padding: 18px;
             border: 1px solid #3c4043;
             border-radius: 24px;
-            background: #202124;
+            background: white;
             box-shadow: 0 12px 35px rgba(0, 0, 0, 0.35);
         }
 
@@ -626,7 +696,7 @@
             gap: 8px;
             padding: 8px 4px;
             border-radius: 14px;
-            color: #e8eaed;
+            color: black;
             font-size: 12px;
             text-align: center;
             text-decoration: none;
@@ -1358,6 +1428,211 @@
             transform: scale(1.05);
         }
 
+        .sticky-note-button {
+            position: fixed;
+            left: 28px;
+            bottom: 28px;
+            z-index: 9999;
+            width: 54px;
+            height: 54px;
+            border: 0;
+            border-radius: 50%;
+            background: #087ea4;
+            color: #fff;
+            font-size: 22px;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(8, 126, 164, 0.35);
+        }
+
+        .sticky-note-button:hover {
+            background: #066681;
+            transform: translateY(-2px);
+        }
+
+        .quick-note-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 10002;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: rgba(15, 23, 42, 0.55);
+            backdrop-filter: blur(4px);
+        }
+
+        .quick-note-modal.open {
+            display: flex;
+        }
+
+        .quick-note-sheet {
+            position: relative;
+            width: min(680px, 100%);
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 32px;
+            border-radius: 12px;
+            background: #fff;
+            box-shadow: 0 24px 70px rgba(0, 0, 0, 0.3);
+        }
+
+        .quick-note-sheet h2 {
+            margin-bottom: 6px;
+        }
+
+        .quick-note-sheet p {
+            color: #667781;
+            font-size: 14px;
+        }
+
+        .quick-note-sheet textarea {
+            width: 100%;
+            min-height: 210px;
+            margin: 18px 0 12px;
+            padding: 16px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            resize: vertical;
+            color: #263238;
+            font: inherit;
+        }
+
+        .quick-note-toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 18px;
+            padding: 8px;
+            border: 1px solid #dbe3ea;
+            border-radius: 8px;
+            background: #f8fafc;
+        }
+
+        .quick-note-tool {
+            width: 36px;
+            height: 36px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            background: #fff;
+            color: #263238;
+            cursor: pointer;
+        }
+
+        .quick-note-tool:hover,
+        .quick-note-tool.active {
+            border-color: #087ea4;
+            background: #e6f7fb;
+            color: #087ea4;
+        }
+
+        .quick-note-color {
+            width: 36px;
+            height: 36px;
+            padding: 4px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            background: #fff;
+            cursor: pointer;
+        }
+
+        .quick-note-canvas-wrap {
+            overflow: auto;
+            margin: 12px;
+            border: 1px solid #dbe3ea;
+            border-radius: 8px;
+            background: #fff;
+        }
+
+        #quickNoteCanvas {
+            display: block;
+            width: 100%;
+            min-width: 560px;
+            height: 300px;
+            cursor: crosshair;
+        }
+
+        .quick-note-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        .quick-note-actions button {
+            padding: 9px 16px;
+            border: 1px solid #cbd5e1;
+            border-radius: 7px;
+            background: #fff;
+            color: #263238;
+            cursor: pointer;
+        }
+
+        .quick-note-actions .save-quick-note {
+            border-color: #087ea4;
+            background: #087ea4;
+            color: #fff;
+        }
+
+        .saved-quick-notes {
+            display: grid;
+            gap: 10px;
+            margin-top: 24px;
+        }
+
+        .saved-quick-note {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 14px;
+            padding: 12px 14px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            background: #f8fafc;
+        }
+
+        .saved-quick-note p {
+            margin: 0;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        .saved-quick-note button {
+            flex: 0 0 auto;
+            border: 0;
+            background: transparent;
+            color: #dc3545;
+            cursor: pointer;
+        }
+
+        body.dark-mode .quick-note-sheet {
+            background: #172033;
+            color: #e5e7eb;
+        }
+
+        body.dark-mode .quick-note-sheet p,
+        body.dark-mode .quick-note-sheet textarea {
+            color: #d1d5db;
+        }
+
+        body.dark-mode .quick-note-sheet textarea,
+        body.dark-mode .quick-note-actions button {
+            border-color: #4b5563;
+            background: #202b3d;
+            color: #f9fafb;
+        }
+
+        body.dark-mode .saved-quick-note {
+            border-color: #374151;
+            background: #202b3d;
+        }
+
+        body.dark-mode .quick-note-toolbar,
+        body.dark-mode .quick-note-tool,
+        body.dark-mode .quick-note-color {
+            border-color: #4b5563;
+            background: #202b3d;
+            color: #f9fafb;
+        }
+
         .moon{
             color:black;
         }
@@ -1988,9 +2263,11 @@
                         }
 
                         export default App;</code>
-                    </pre>
+                        </pre>
                     </div>
                 </div>
+
+                
 
 
 
@@ -2052,6 +2329,45 @@
         </button>
 
     </div>
+
+    <button class="sticky-note-button" type="button" onclick="openQuickNote()"
+        aria-label="Open sticky note" title="Write a sticky note">
+        <i class="bi bi-pencil-fill" aria-hidden="true"></i>
+    </button>
+
+    <div class="quick-note-modal" id="quickNoteModal" role="dialog" aria-modal="true"
+        aria-labelledby="quickNoteTitle">
+        <section class="quick-note-sheet">
+            <button class="close-btn" type="button" onclick="closeQuickNote()" aria-label="Close">×</button>
+            <h2 id="quickNoteTitle">Sticky note</h2>
+            <p>Write something here. It will stay saved after refresh.</p>
+                <div class="quick-note-toolbar" aria-label="Screenshot tools">
+                    <button class="quick-note-tool active" type="button" data-tool="pen" onclick="selectQuickTool('pen', this)" title="Ballpoint pen" aria-label="Ballpoint pen"><i class="bi bi-pen"></i></button>
+                    <button class="quick-note-tool" type="button" data-tool="highlighter" onclick="selectQuickTool('highlighter', this)" title="Highlighter" aria-label="Highlighter"><i class="bi bi-brush"></i></button>
+                    <button class="quick-note-tool" type="button" data-tool="eraser" onclick="selectQuickTool('eraser', this)" title="Eraser" aria-label="Eraser"><i class="bi bi-eraser"></i></button>
+                    <button class="quick-note-tool" type="button" data-tool="rectangle" onclick="selectQuickTool('rectangle', this)" title="Rectangle shape" aria-label="Rectangle shape"><i class="bi bi-square"></i></button>
+                    <button class="quick-note-tool" type="button" data-tool="circle" onclick="selectQuickTool('circle', this)" title="Circle shape" aria-label="Circle shape"><i class="bi bi-circle"></i></button>
+                    <button class="quick-note-tool" type="button" data-tool="line" onclick="selectQuickTool('line', this)" title="Line shape" aria-label="Line shape"><i class="bi bi-dash-lg"></i></button>
+                    <button class="quick-note-tool" type="button" onclick="undoQuickDrawing()" title="Undo" aria-label="Undo"><i class="bi bi-arrow-counterclockwise"></i></button>
+                    <button class="quick-note-tool" type="button" onclick="redoQuickDrawing()" title="Redo" aria-label="Redo"><i class="bi bi-arrow-clockwise"></i></button>
+                    <button class="quick-note-tool" type="button" onclick="document.getElementById('quickNoteImage').click()" title="Add image" aria-label="Add image"><i class="bi bi-image"></i></button>
+                    <button class="quick-note-tool" type="button" onclick="cropQuickImage()" title="Crop image" aria-label="Crop image"><i class="bi bi-crop"></i></button>
+                    <button class="quick-note-tool" type="button" onclick="scanQuickText()" title="Scan text" aria-label="Scan text"><i class="bi bi-textarea-t"></i></button>
+                    <input id="quickNoteImage" type="file" accept="image/*" hidden onchange="loadQuickImage(event)">
+                    <input class="quick-note-color" id="quickNoteColor" type="color" value="#087ea4" title="Pen color" aria-label="Pen color">
+                </div>
+                <div class="quick-note-canvas-wrap">
+                    <canvas id="quickNoteCanvas" width="900" height="300"></canvas>
+                </div>
+                
+            <div class="quick-note-actions">
+                <button type="button" onclick="closeQuickNote()">Close</button>
+                <button class="save-quick-note" type="button" onclick="saveQuickNote()">Save note</button>
+            </div>
+            <div class="saved-quick-notes" id="savedQuickNotes"></div>
+        </section>
+    </div>
+
     <!-- =========================
          JAVASCRIPT
     ========================= -->
@@ -2471,6 +2787,239 @@
 
         function saveNotes(notes) {
             localStorage.setItem("noteInRectNotes", JSON.stringify(notes));
+        }
+
+        function getQuickNotes() {
+            try {
+                return JSON.parse(localStorage.getItem("noteInRectQuickNotes")) || [];
+            } catch (error) {
+                return [];
+            }
+        }
+
+        function saveQuickNotes(notes) {
+            localStorage.setItem("noteInRectQuickNotes", JSON.stringify(notes));
+        }
+
+        function openQuickNote() {
+            document.getElementById("quickNoteModal").classList.add("open");
+            setupQuickCanvas();
+            renderQuickNotes();
+            document.getElementById("quickNoteText").focus();
+        }
+
+        function closeQuickNote() {
+            document.getElementById("quickNoteModal").classList.remove("open");
+        }
+
+        function saveQuickNote() {
+            const textField = document.getElementById("quickNoteText");
+            const text = textField.value.trim();
+
+            if (text === "") {
+                alert("Please write something first.");
+                textField.focus();
+                return;
+            }
+
+            const notes = getQuickNotes();
+            notes.unshift({ id: Date.now(), text, drawing: document.getElementById("quickNoteCanvas").toDataURL() });
+            saveQuickNotes(notes);
+            textField.value = "";
+            clearQuickCanvas();
+            renderQuickNotes();
+        }
+
+        let quickCanvasReady = false;
+        let quickDrawing = false;
+        let quickStartPoint = null;
+        let quickHistory = [];
+        let quickHistoryIndex = -1;
+        let quickTool = "pen";
+
+        function setupQuickCanvas() {
+            if (quickCanvasReady) return;
+
+            const canvas = document.getElementById("quickNoteCanvas");
+            const context = canvas.getContext("2d");
+            context.fillStyle = "#ffffff";
+            context.fillRect(0, 0, canvas.width, canvas.height);
+            saveQuickDrawingState();
+
+            canvas.addEventListener("pointerdown", startQuickDrawing);
+            canvas.addEventListener("pointermove", drawQuickStroke);
+            canvas.addEventListener("pointerup", finishQuickDrawing);
+            canvas.addEventListener("pointerleave", finishQuickDrawing);
+            quickCanvasReady = true;
+        }
+
+        function getQuickCanvasPoint(event) {
+            const canvas = document.getElementById("quickNoteCanvas");
+            const bounds = canvas.getBoundingClientRect();
+            return {
+                x: (event.clientX - bounds.left) * canvas.width / bounds.width,
+                y: (event.clientY - bounds.top) * canvas.height / bounds.height
+            };
+        }
+
+        function startQuickDrawing(event) {
+            quickDrawing = true;
+            quickStartPoint = getQuickCanvasPoint(event);
+            document.getElementById("quickNoteCanvas").setPointerCapture(event.pointerId);
+        }
+
+        function drawQuickStroke(event) {
+            if (!quickDrawing || ["rectangle", "circle", "line"].includes(quickTool)) return;
+
+            const canvas = document.getElementById("quickNoteCanvas");
+            const context = canvas.getContext("2d");
+            const point = getQuickCanvasPoint(event);
+            context.beginPath();
+            context.moveTo(quickStartPoint.x, quickStartPoint.y);
+            context.lineTo(point.x, point.y);
+            context.lineWidth = quickTool === "highlighter" ? 20 : quickTool === "eraser" ? 28 : 3;
+            context.lineCap = "round";
+            context.strokeStyle = quickTool === "eraser" ? "#ffffff" : document.getElementById("quickNoteColor").value;
+            context.globalAlpha = quickTool === "highlighter" ? 0.35 : 1;
+            context.stroke();
+            context.globalAlpha = 1;
+            quickStartPoint = point;
+        }
+
+        function finishQuickDrawing(event) {
+            if (!quickDrawing) return;
+
+            if (["rectangle", "circle", "line"].includes(quickTool)) {
+                const canvas = document.getElementById("quickNoteCanvas");
+                const context = canvas.getContext("2d");
+                const point = getQuickCanvasPoint(event);
+                context.beginPath();
+                context.strokeStyle = document.getElementById("quickNoteColor").value;
+                context.lineWidth = 3;
+                if (quickTool === "rectangle") context.rect(quickStartPoint.x, quickStartPoint.y, point.x - quickStartPoint.x, point.y - quickStartPoint.y);
+                if (quickTool === "circle") {
+                    const radius = Math.hypot(point.x - quickStartPoint.x, point.y - quickStartPoint.y);
+                    context.arc(quickStartPoint.x, quickStartPoint.y, radius, 0, Math.PI * 2);
+                }
+                if (quickTool === "line") {
+                    context.moveTo(quickStartPoint.x, quickStartPoint.y);
+                    context.lineTo(point.x, point.y);
+                }
+                context.stroke();
+            }
+
+            quickDrawing = false;
+            saveQuickDrawingState();
+        }
+
+        function saveQuickDrawingState() {
+            const canvas = document.getElementById("quickNoteCanvas");
+            quickHistory = quickHistory.slice(0, quickHistoryIndex + 1);
+            quickHistory.push(canvas.toDataURL());
+            quickHistoryIndex++;
+        }
+
+        function restoreQuickDrawingState(data) {
+            const image = new Image();
+            image.onload = function () {
+                const canvas = document.getElementById("quickNoteCanvas");
+                canvas.getContext("2d").drawImage(image, 0, 0);
+            };
+            image.src = data;
+        }
+
+        function undoQuickDrawing() {
+            if (quickHistoryIndex <= 0) return;
+            quickHistoryIndex--;
+            restoreQuickDrawingState(quickHistory[quickHistoryIndex]);
+        }
+
+        function redoQuickDrawing() {
+            if (quickHistoryIndex >= quickHistory.length - 1) return;
+            quickHistoryIndex++;
+            restoreQuickDrawingState(quickHistory[quickHistoryIndex]);
+        }
+
+        function selectQuickTool(tool, button) {
+            quickTool = tool;
+            document.querySelectorAll(".quick-note-tool[data-tool]").forEach(toolButton => toolButton.classList.remove("active"));
+            button.classList.add("active");
+        }
+
+        function clearQuickCanvas() {
+            const canvas = document.getElementById("quickNoteCanvas");
+            const context = canvas.getContext("2d");
+            context.globalAlpha = 1;
+            context.fillStyle = "#ffffff";
+            context.fillRect(0, 0, canvas.width, canvas.height);
+            quickHistory = [];
+            quickHistoryIndex = -1;
+            saveQuickDrawingState();
+        }
+
+        function loadQuickImage(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const image = new Image();
+            image.onload = function () {
+                const canvas = document.getElementById("quickNoteCanvas");
+                const context = canvas.getContext("2d");
+                const scale = Math.min(canvas.width / image.width, canvas.height / image.height);
+                const width = image.width * scale;
+                const height = image.height * scale;
+                context.drawImage(image, (canvas.width - width) / 2, (canvas.height - height) / 2, width, height);
+                saveQuickDrawingState();
+            };
+            image.src = URL.createObjectURL(file);
+            event.target.value = "";
+        }
+
+        function cropQuickImage() {
+            alert("Crop ke liye canvas par image select karke crop area drag karein. Full crop mode next update me add kiya ja sakta hai.");
+        }
+
+        function scanQuickText() {
+            alert("Scan text feature ke liye OCR library/connectivity chahiye. Abhi screenshot ko image ke roop me save kiya ja sakta hai.");
+        }
+
+        function renderQuickNotes() {
+            const notesContainer = document.getElementById("savedQuickNotes");
+            notesContainer.innerHTML = "";
+
+            getQuickNotes().forEach(note => {
+                const noteElement = document.createElement("div");
+                noteElement.className = "saved-quick-note";
+
+                const textElement = document.createElement("p");
+                textElement.textContent = note.text;
+
+                if (note.drawing && note.drawing.length > 100) {
+                    const drawing = document.createElement("img");
+                    drawing.src = note.drawing;
+                    drawing.alt = "Saved note drawing";
+                    drawing.style.width = "180px";
+                    drawing.style.display = "block";
+                    drawing.style.marginTop = "8px";
+                    textElement.appendChild(drawing);
+                }
+
+                const deleteButton = document.createElement("button");
+                deleteButton.type = "button";
+                deleteButton.setAttribute("aria-label", "Delete note");
+                deleteButton.title = "Delete note";
+                deleteButton.innerHTML = '<i class="bi bi-trash3-fill" aria-hidden="true"></i>';
+                deleteButton.onclick = function () {
+                    if (!confirm("Delete this note?")) return;
+
+                    saveQuickNotes(getQuickNotes().filter(savedNote => savedNote.id !== note.id));
+                    renderQuickNotes();
+                };
+
+                noteElement.appendChild(textElement);
+                noteElement.appendChild(deleteButton);
+                notesContainer.appendChild(noteElement);
+            });
         }
 
         function renderNote(note) {
