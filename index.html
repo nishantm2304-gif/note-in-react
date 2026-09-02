@@ -21,6 +21,9 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
     <style>
         /* =========================
@@ -141,6 +144,7 @@
             gap: 10px;
             margin: 0 auto 18px;
             max-width: 1200px;
+            position: relative;
         }
 
         .study-toolbar input,
@@ -156,6 +160,25 @@
             font-size: 13px;
         }
 
+        .toolbar-menu-btn {
+            display: none;
+            background: #fff;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 8px 12px;
+            cursor: pointer;
+            font-size: 20px;
+            color: #263238;
+        }
+
+        .toolbar-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+            width: 100%;
+        }
+
         .study-toolbar input {
             flex: 1 1 220px;
         }
@@ -168,6 +191,78 @@
         .study-toolbar button:hover,
         .import-label:hover {
             background: #eef9fc;
+        }
+
+        @media (max-width: 768px) {
+            .study-toolbar {
+                gap: 8px;
+            }
+
+            .study-toolbar input,
+            .study-toolbar select,
+            .study-toolbar button,
+            .import-label {
+                min-height: 38px;
+                padding: 7px 10px;
+                font-size: 12px;
+            }
+
+            .study-toolbar input {
+                flex: 1 1 180px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .study-toolbar {
+                gap: 6px;
+                flex-wrap: nowrap;
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                margin: 0;
+                width: auto;
+                max-width: none;
+            }
+
+            .toolbar-menu-btn {
+                display: block;
+                flex-shrink: 0;
+            }
+
+            .toolbar-items {
+                display: none;
+                position: absolute;
+                top: 45px;
+                right: 0;
+                background: #fff;
+                border: 1px solid #cbd5e1;
+                border-radius: 8px;
+                padding: 10px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+                z-index: 1000;
+                flex-direction: column;
+                min-width: 200px;
+                gap: 8px;
+                left: auto;
+            }
+
+            .toolbar-items.open {
+                display: flex;
+            }
+
+            .toolbar-items input,
+            .toolbar-items select,
+            .toolbar-items button,
+            .toolbar-items .import-label {
+                width: 100%;
+                min-height: 36px;
+                padding: 8px 10px;
+                font-size: 12px;
+            }
+
+            .progress-text {
+                display: none;
+            }
         }
 
         .progress-text {
@@ -272,6 +367,17 @@
             border-color: #4b5563;
             background: #202b3d;
             color: #e5e7eb;
+        }
+
+        body.dark-mode .toolbar-menu-btn {
+            border-color: #4b5563;
+            background: #202b3d;
+            color: #e5e7eb;
+        }
+
+        body.dark-mode .toolbar-items {
+            background: #202b3d;
+            border-color: #4b5563;
         }
 
         body.reading-large .note-box p,
@@ -755,6 +861,205 @@
             line-height: 1.2;
         }
 
+        /* =========================
+           LOGIN NOTIFICATION
+        ========================= */
+        .login-notification {
+            display: none;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 10000;
+            background: #fff;
+            border: 1px solid #34a853;
+            border-radius: 8px;
+            padding: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            max-width: 320px;
+            animation: slideIn 0.3s ease;
+        }
+
+        .login-notification.show {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .login-notification-icon {
+            width: 24px;
+            height: 24px;
+            background: #34a853;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        .login-notification-content {
+            flex: 1;
+        }
+
+        .login-notification-title {
+            font-weight: 600;
+            font-size: 14px;
+            color: #202124;
+            margin-bottom: 4px;
+        }
+
+        .login-notification-text {
+            font-size: 13px;
+            color: #5f6368;
+        }
+
+        .login-notification-close {
+            background: none;
+            border: none;
+            color: #9aa0a6;
+            cursor: pointer;
+            font-size: 18px;
+            padding: 0;
+            flex-shrink: 0;
+        }
+
+        .login-notification-close:hover {
+            color: #5f6368;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        body.dark-mode .login-notification {
+            background: #202b3d;
+            border-color: #34a853;
+        }
+
+        body.dark-mode .login-notification-title {
+            color: #e5e7eb;
+        }
+
+        body.dark-mode .login-notification-text {
+            color: #9ca3af;
+        }
+
+        body.dark-mode .login-notification-close {
+            color: #6b7280;
+        }
+
+        body.dark-mode .login-notification-close:hover {
+            color: #d1d5db;
+        }
+
+        /* =========================
+           ACCOUNT MENU
+        ========================= */
+        .account-wrap {
+            position: relative;
+        }
+
+        .account-menu {
+            display: none;
+            position: absolute;
+            top: 52px;
+            right: 0;
+            z-index: 1000;
+            width: 280px;
+            background: #fff;
+            border: 1px solid #dadce0;
+            border-radius: 12px;
+            padding: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .account-menu.open {
+            display: block;
+        }
+
+        .account-menu-header {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #e8e8e8;
+        }
+
+        .account-menu-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .account-menu-info {
+            flex: 1;
+        }
+
+        .account-menu-name {
+            font-weight: 600;
+            font-size: 14px;
+            color: #202124;
+            margin-bottom: 4px;
+        }
+
+        .account-menu-email {
+            font-size: 12px;
+            color: #5f6368;
+        }
+
+        .account-menu-logout {
+            width: 100%;
+            padding: 10px;
+            margin-top: 12px;
+            border: 1px solid #dadce0;
+            border-radius: 6px;
+            background: #f8f9fa;
+            color: #3c4043;
+            font-size: 13px;
+            cursor: pointer;
+            transition: 0.2s ease;
+        }
+
+        .account-menu-logout:hover {
+            background: #f1f3f4;
+            border-color: #c6c6c6;
+        }
+
+        body.dark-mode .account-menu {
+            background: #202b3d;
+            border-color: #4b5563;
+        }
+
+        body.dark-mode .account-menu-header {
+            border-bottom-color: #4b5563;
+        }
+
+        body.dark-mode .account-menu-name {
+            color: #e5e7eb;
+        }
+
+        body.dark-mode .account-menu-email {
+            color: #9ca3af;
+        }
+
+        body.dark-mode .account-menu-logout {
+            background: #1a2332;
+            border-color: #4b5563;
+            color: #e5e7eb;
+        }
+
+        body.dark-mode .account-menu-logout:hover {
+            background: #212d3d;
+        }
 
 
         /* =========================
@@ -774,6 +1079,12 @@
         .note-box:hover {
             transform: translateY(-5px);
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.18);
+        }
+
+        @media (max-width: 480px) {
+            .note-box {
+                position: relative;
+            }
         }
 
         /* =========================
@@ -903,30 +1214,75 @@
             color: white;
         }
 
+        .run-btn {
+            position: absolute;
+            top: 12px;
+            right: 92px;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 8px;
+            background: #087ea4;
+            color: #fff;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .run-btn:hover {
+            background: #065d7a;
+        }
+
+        .code-output {
+            display: none;
+            margin: 0 25px 25px;
+            padding: 14px 16px;
+            border: 1px solid rgba(8, 126, 164, 0.35);
+            border-radius: 8px;
+            background: #f8fafc;
+            color: #263238;
+            font-family: "Monaco", "Menlo", "Courier New", monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+        }
+
+        .code-output.visible {
+            display: block;
+        }
+
+        .react-preview {
+            min-height: 24px;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid rgba(8, 126, 164, 0.2);
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body.dark-mode .code-output {
+            border-color: #38bdf8;
+            background: #172033;
+            color: #e5e7eb;
+        }
+
         /* =========================
            PRE
         ========================= */
 
         pre {
             margin: 0;
-
             padding: 55px 25px 25px;
-
             overflow-x: auto;
-
             color: black;
-
-            font-family: "Courier New", monospace;
-
-            font-size: 15px;
-
+            font-family: "Monaco", "Menlo", "Courier New", monospace;
+            font-size: 14px;
             line-height: 1.6;
-
             white-space: pre;
+            letter-spacing: 0.3px;
         }
 
         code {
-            font-family: "Courier New", monospace;
+            font-family: "Monaco", "Menlo", "Courier New", monospace;
         }
 
         /* =========================
@@ -959,6 +1315,27 @@
             .content-box {
                 padding: 20px;
             }
+
+            .code-box {
+                margin-top: 15px;
+                display: flex;
+                justify-content: center;
+            }
+
+            pre {
+                padding: 45px 15px 15px;
+                font-size: 13px;
+                line-height: 1.6;
+                white-space: pre;
+                overflow-x: auto;
+            }
+
+            .code-output {
+                margin: 0 15px 15px;
+                padding: 10px 12px;
+                font-size: 12px;
+                line-height: 1.6;
+            }
         }
 
         /* =========================
@@ -972,16 +1349,19 @@
             }
 
             .note-box {
-                padding: 18px;
+                position: relative;
+                padding: 50px 15px 15px;
                 border-radius: 12px;
             }
 
             h1 {
                 font-size: 28px;
+                margin-bottom: 12px;
             }
 
             h2 {
                 font-size: 20px;
+                margin-bottom: 10px;
             }
 
             p,
@@ -990,22 +1370,58 @@
             }
 
             .content-box {
-                padding: 15px;
-                border-left-width: 4px;
+                padding: 12px;
+                border-left-width: 3px;
+                margin-top: 12px;
             }
 
             pre {
-                padding: 55px 15px 15px;
+                padding: 40px 12px 12px;
                 font-size: 12px;
+                font-weight: 400;
+                line-height: 1.6;
+                white-space: pre;
+                overflow-x: auto;
+                letter-spacing: 0.2px;
             }
 
             .copy-btn {
                 top: 10px;
                 right: 10px;
+                padding: 5px 10px;
+                font-size: 11px;
+            }
 
-                padding: 6px 12px;
+            .run-btn {
+                top: 10px;
+                right: 60px;
+                padding: 5px 10px;
+                font-size: 11px;
+            }
 
+            .code-box {
+                margin-top: 12px;
+                border-radius: 10px;
+                box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+                display: flex;
+                justify-content: center;
+            }
+
+            .code-output {
+                margin: 0 12px 12px;
+                padding: 10px 12px;
                 font-size: 12px;
+                line-height: 1.6;
+            }
+
+            .intro {
+                font-size: 15px;
+                margin-bottom: 20px;
+            }
+
+            ul {
+                margin-top: 10px;
+                padding-left: 18px;
             }
         }
 
@@ -1645,6 +2061,15 @@
 
 <body>
 
+    <div class="login-notification" id="loginNotification">
+        <div class="login-notification-icon">✓</div>
+        <div class="login-notification-content">
+            <div class="login-notification-title">Login Successful</div>
+            <div class="login-notification-text" id="loginNotificationText">Welcome!</div>
+        </div>
+        <button class="login-notification-close" type="button" onclick="closeLoginNotification()">×</button>
+    </div>
+
     <main class="login-screen" id="loginScreen">
         <section class="login-card" aria-labelledby="loginTitle">
             <img class="login-logo" src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
@@ -1768,11 +2193,21 @@
                                 src="https://lh3.googleusercontent.com/ogw/AF2bZyhMJ8MaLOB4Ev2szETIl8GhqY7nUmUyTXqFUpWLGICmxXc=s32-c-mo"
                                 srcset="https://lh3.googleusercontent.com/ogw/AF2bZyhMJ8MaLOB4Ev2szETIl8GhqY7nUmUyTXqFUpWLGICmxXc=s32-c-mo 1x, https://lh3.googleusercontent.com/ogw/AF2bZyhMJ8MaLOB4Ev2szETIl8GhqY7nUmUyTXqFUpWLGICmxXc=s64-c-mo 2x "
                                 alt="" aria-hidden="true" data-noaft=""></span>
-
                     </a>
-
                 </button>
 
+                <div class="account-menu" id="accountMenu">
+                    <div class="account-menu-header">
+                        <img id="accountMenuImage" class="account-menu-avatar" 
+                            src="https://lh3.googleusercontent.com/ogw/AF2bZyhMJ8MaLOB4Ev2szETIl8GhqY7nUmUyTXqFUpWLGICmxXc=s64-c-mo" 
+                            alt="Account">
+                        <div class="account-menu-info">
+                            <div id="accountMenuName" class="account-menu-name">Nishant Mehta</div>
+                            <div id="accountMenuEmail" class="account-menu-email">nishantm2304@gmail.com</div>
+                        </div>
+                    </div>
+                    <button type="button" class="account-menu-logout" onclick="logout()">Logout</button>
+                </div>
                 </div>
             </div>
 
@@ -1780,24 +2215,27 @@
                 <div class="note-box">
                     <h1>Note in React</h1>
                     <div class="study-toolbar" aria-label="Study tools">
-                        <input id="noteSearch" type="search" placeholder="Search notes..." oninput="filterNotes()">
-                        <select id="categoryFilter" onchange="filterNotes()" aria-label="Filter by category">
-                            <option value="all">All categories</option>
-                            <option value="basics">Basics</option>
-                            <option value="hooks">Hooks</option>
-                            <option value="javascript">JavaScript</option>
-                            <option value="nextjs">Next.js</option>
-                            <option value="custom">My notes</option>
-                        </select>
-                        <button type="button" onclick="toggleFavorites()"><i class="bi bi-star"></i> Favorites</button>
-                        <button type="button" onclick="toggleRecent()"><i class="bi bi-clock-history"></i> Recent</button>
-                        <button type="button" onclick="changeFontSize(-1)">A-</button>
-                        <button type="button" onclick="changeFontSize(1)">A+</button>
-                        <button type="button" onclick="openQuiz()"><i class="bi bi-patch-question"></i> Quiz</button>
-                        <button type="button" onclick="exportNotes()"><i class="bi bi-download"></i> Export</button>
-                        <label class="import-label" for="importNotes"><i class="bi bi-upload"></i> Import</label>
-                        <input id="importNotes" type="file" accept="application/json" hidden onchange="importNotes(event)">
-                        <span class="progress-text" id="progressText">0% read</span>
+                        <button type="button" class="toolbar-menu-btn" id="toolbarMenuBtn" onclick="toggleToolbarMenu()">⋯</button>
+                        <div class="toolbar-items" id="toolbarItems">
+                            <input id="noteSearch" type="search" placeholder="Search notes..." oninput="filterNotes()">
+                            <select id="categoryFilter" onchange="filterNotes()" aria-label="Filter by category">
+                                <option value="all">All categories</option>
+                                <option value="basics">Basics</option>
+                                <option value="hooks">Hooks</option>
+                                <option value="javascript">JavaScript</option>
+                                <option value="nextjs">Next.js</option>
+                                <option value="custom">My notes</option>
+                            </select>
+                            <button type="button" onclick="toggleFavorites(); closeToolbarMenu();"><i class="bi bi-star"></i> Favorites</button>
+                            <button type="button" onclick="toggleRecent(); closeToolbarMenu();"><i class="bi bi-clock-history"></i> Recent</button>
+                            <button type="button" onclick="changeFontSize(-1); closeToolbarMenu();">A-</button>
+                            <button type="button" onclick="changeFontSize(1); closeToolbarMenu();">A+</button>
+                            <button type="button" onclick="openQuiz(); closeToolbarMenu();"><i class="bi bi-patch-question"></i> Quiz</button>
+                            <button type="button" onclick="exportNotes(); closeToolbarMenu();"><i class="bi bi-download"></i> Export</button>
+                            <label class="import-label" for="importNotes" onclick="closeToolbarMenu();"><i class="bi bi-upload"></i> Import</label>
+                            <input id="importNotes" type="file" accept="application/json" hidden onchange="importNotes(event); closeToolbarMenu();">
+                            <span class="progress-text" id="progressText">0% read</span>
+                        </div>
                     </div>
                 <div class="content-box">
                     <h2>Notes:</h2>
@@ -1897,6 +2335,7 @@
                     </p>
                 </div>
 
+                
                 <div class="content-box">
                     <h2>What are the Features of Next.JS?with example.</h2>
                     <p>
@@ -2266,6 +2705,40 @@
                         </pre>
                     </div>
                 </div>
+ 
+                <div class="content-box">
+                    <h2>What is attaching CSS in 3 different ways? with example.</h2>
+                    <p>CSS can be attached to an HTML document in three ways:</p>
+                    <ol>
+                        <li><strong>Inline CSS:</strong> CSS is written directly inside an HTML element using the <code>style</code> attribute.</li>
+                        <li><strong>Internal CSS:</strong> CSS is written inside a <code>&lt;style&gt;</code> tag in the HTML document's <code>&lt;head&gt;</code>.</li>
+                        <li><strong>External CSS:</strong> CSS is written in a separate <code>.css</code> file and linked with a <code>&lt;link&gt;</code> tag.</li>
+                    </ol>
+                    <div class="code-box">
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            Copy
+                        </button>
+                        <pre><code>
+                            &lt;!-- 1. Inline CSS --&gt;
+                            &lt;h1 style="color: blue;"&gt;Inline CSS&lt;/h1&gt;
+
+                            &lt;!-- 2. Internal CSS --&gt;
+                            &lt;style&gt;
+                                h2 { color: green; }
+                            &lt;/style&gt;
+                            &lt;h2&gt;Internal CSS&lt;/h2&gt;
+
+                            &lt;!-- 3. External CSS --&gt;
+                            &lt;link rel="stylesheet" href="styles.css"&gt;
+                            &lt;p&gt;External CSS&lt;/p&gt;
+
+                            /* styles.css */
+                            p { color: red; }
+                        </code>
+                        </pre>
+                    </div>
+                </div>
+
 
                 
 
@@ -2384,6 +2857,31 @@
 
         function checkLoginStatus() {
             if (localStorage.getItem("noteInRectLoggedIn") === "true") {
+                // Restore account data if available
+                const savedAccount = localStorage.getItem("currentAccount");
+                if (savedAccount) {
+                    const account = JSON.parse(savedAccount);
+                    const accountAvatars = document.querySelectorAll("img.account-avatar");
+                    accountAvatars.forEach(img => {
+                        img.src = account.image;
+                        img.srcset = account.image + " 1x, " + account.image + " 2x";
+                    });
+
+                    // Update account menu
+                    document.getElementById("accountMenuImage").src = account.image;
+                    document.getElementById("accountMenuName").textContent = account.name;
+                    document.getElementById("accountMenuEmail").textContent = account.email;
+
+                    const accountButton = document.querySelector(".account-button");
+                    if (accountButton) {
+                        accountButton.setAttribute("aria-label", "Google Account: " + account.name + " (" + account.email + ")");
+                    }
+
+                    // Show notification on page load
+                    setTimeout(() => {
+                        showLoginNotification(account.name, account.email);
+                    }, 500);
+                }
                 showApp();
             }
         }
@@ -2393,6 +2891,12 @@
         window.addEventListener("DOMContentLoaded", loadTheme);
         window.addEventListener("DOMContentLoaded", enhanceNotes);
         window.addEventListener("DOMContentLoaded", updateProgress);
+        document.addEventListener("click", function (event) {
+            if (event.target.closest(".run-btn, .code-output")) return;
+            document.querySelectorAll(".code-output.visible").forEach(output => {
+                output.classList.remove("visible");
+            });
+        });
 
         function updateThemeButton() {
             const button = document.getElementById("themeButton");
@@ -2530,8 +3034,107 @@
                     addNoteTools(noteCard, getNoteId(heading.textContent), false);
                 }
             });
+            enhanceCodeRunners();
             updateProgress();
         }
+
+        function enhanceCodeRunners() {
+            document.querySelectorAll(".code-box").forEach(codeBox => {
+                if (codeBox.querySelector(".run-btn")) return;
+
+                const runButton = document.createElement("button");
+                runButton.className = "run-btn";
+                runButton.type = "button";
+                runButton.textContent = "Run";
+                runButton.onclick = function () {
+                    runCode(this);
+                };
+                codeBox.appendChild(runButton);
+
+                const output = document.createElement("div");
+                output.className = "code-output";
+                output.setAttribute("role", "status");
+                output.innerHTML = "Output will appear here.";
+                codeBox.appendChild(output);
+            });
+        }
+
+        function runCode(button) {
+            const codeBox = button.closest(".code-box");
+            const code = codeBox.querySelector("code").textContent;
+            const output = codeBox.querySelector(".code-output");
+            const messages = [];
+            const originalLog = console.log;
+            const componentMatch = code.match(/export\s+default\s+(?:function\s+)?([A-Za-z_$][\w$]*)/);
+            const hasJsx = /<\/?[A-Za-z][^>]*>/.test(code);
+            const isTerminalCode = /(^|\n)\s*(npm|yarn|npx|node)\s+/.test(code);
+            const isMarkupExample = /<!--|styles\.css|<style>/.test(code);
+
+            if (isTerminalCode) {
+                output.textContent = "This is a terminal command. Run it in the VS Code terminal.";
+                output.classList.add("visible");
+                return;
+            }
+
+            if (isMarkupExample) {
+                output.textContent = "This is an HTML/CSS example. Use it in an HTML file to see the styled output.";
+                output.classList.add("visible");
+                return;
+            }
+
+            console.log = function (...values) {
+                messages.push(values.map(value => typeof value === "string" ? value : JSON.stringify(value)).join(" "));
+            };
+
+            try {
+                const importsRemoved = code
+                    .replace(/import[\s\S]*?;\s*/g, "")
+                    .replace(/export\s+default\s+/g, "");
+                const executableCode = hasJsx
+                    ? Babel.transform(importsRemoved, { presets: [["react", { runtime: "classic" }]] }).code
+                    : importsRemoved;
+                const result = Function("React", "useState", "useEffect", executableCode + "\nreturn " + (componentMatch ? componentMatch[1] : "undefined"))(React, React.useState, React.useEffect);
+                output.innerHTML = "";
+
+                if (hasJsx && componentMatch && typeof result === "function") {
+                    const preview = document.createElement("div");
+                    preview.className = "react-preview";
+                    output.appendChild(preview);
+                    ReactDOM.createRoot(preview).render(React.createElement(result));
+                    if (messages.length) {
+                        const consoleOutput = document.createElement("pre");
+                        consoleOutput.textContent = messages.join("\n");
+                        output.insertBefore(consoleOutput, preview);
+                    }
+                } else {
+                    if (messages.length) output.textContent = messages.join("\n");
+                    else output.textContent = "Code ran successfully. No output.";
+                }
+            } catch (error) {
+                output.textContent = "Error: " + error.message;
+            } finally {
+                console.log = originalLog;
+            }
+
+            output.classList.add("visible");
+        }
+
+        function toggleToolbarMenu() {
+            const toolbarItems = document.getElementById("toolbarItems");
+            toolbarItems.classList.toggle("open");
+        }
+
+        function closeToolbarMenu() {
+            const toolbarItems = document.getElementById("toolbarItems");
+            toolbarItems.classList.remove("open");
+        }
+
+        document.addEventListener("click", function(event) {
+            const toolbar = document.querySelector(".study-toolbar");
+            if (!toolbar.contains(event.target)) {
+                closeToolbarMenu();
+            }
+        });
 
         function filterNotes() {
             const query = document.getElementById("noteSearch").value.toLowerCase().trim();
@@ -2623,7 +3226,55 @@
         }
 
         function chooseGoogleAccount() {
+            // Get the account info from the chooser
+            const accountName = document.querySelector(".chooser-account-name").textContent;
+            const accountEmail = document.querySelector(".chooser-account-email").textContent;
+            const accountImage = document.querySelector(".google-account-option img.chooser-avatar").src;
+
+            // Update the account button in the top bar
+            const accountAvatars = document.querySelectorAll("img.account-avatar");
+            accountAvatars.forEach(img => {
+                img.src = accountImage;
+                img.srcset = accountImage + " 1x, " + accountImage + " 2x";
+            });
+
+            // Update account menu
+            document.getElementById("accountMenuImage").src = accountImage;
+            document.getElementById("accountMenuName").textContent = accountName;
+            document.getElementById("accountMenuEmail").textContent = accountEmail;
+
+            // Update account button aria-label
+            const accountButton = document.querySelector(".account-button");
+            accountButton.setAttribute("aria-label", "Google Account: " + accountName + " (" + accountEmail + ")");
+
+            // Store account data in localStorage
+            localStorage.setItem("currentAccount", JSON.stringify({
+                name: accountName,
+                email: accountEmail,
+                image: accountImage
+            }));
+
+            // Show login notification
+            showLoginNotification(accountName, accountEmail);
+
+            // Auto-login and show the app
             showApp();
+        }
+
+        function showLoginNotification(name, email) {
+            const notification = document.getElementById("loginNotification");
+            const notificationText = document.getElementById("loginNotificationText");
+            notificationText.textContent = "Logged in as " + name + " (" + email + ")";
+            notification.classList.add("show");
+
+            // Auto-hide after 4 seconds
+            setTimeout(() => {
+                notification.classList.remove("show");
+            }, 4000);
+        }
+
+        function closeLoginNotification() {
+            document.getElementById("loginNotification").classList.remove("show");
         }
 
         function useAnotherGoogleAccount() {
@@ -2636,6 +3287,9 @@
 
         function loginWithEmail(event) {
             event.preventDefault();
+            const email = document.getElementById("loginEmail").value;
+            const name = email.split("@")[0];
+            showLoginNotification(name, email);
             showApp();
         }
 
@@ -2772,9 +3426,44 @@
             button.setAttribute("aria-expanded", isOpen);
         }
 
+        function logout() {
+            // Clear login data
+            localStorage.removeItem("noteInRectLoggedIn");
+            localStorage.removeItem("currentAccount");
 
-        // =========================
-        // ADD NEW NOTE
+            // Hide app and show login screen
+            document.getElementById("appContent").style.display = "none";
+            document.getElementById("loginScreen").style.display = "flex";
+            document.getElementById("accountMenu").classList.remove("open");
+
+            // Reset to default account info
+            document.getElementById("accountMenuName").textContent = "Nishant Mehta";
+            document.getElementById("accountMenuEmail").textContent = "nishantm2304@gmail.com";
+            document.getElementById("accountMenuImage").src = "https://lh3.googleusercontent.com/ogw/AF2bZyhMJ8MaLOB4Ev2szETIl8GhqY7nUmUyTXqFUpWLGICmxXc=s64-c-mo";
+
+            const accountAvatars = document.querySelectorAll("img.account-avatar");
+            accountAvatars.forEach(img => {
+                img.src = "https://lh3.googleusercontent.com/ogw/AF2bZyhMJ8MaLOB4Ev2szETIl8GhqY7nUmUyTXqFUpWLGICmxXc=s32-c-mo";
+                img.srcset = "https://lh3.googleusercontent.com/ogw/AF2bZyhMJ8MaLOB4Ev2szETIl8GhqY7nUmUyTXqFUpWLGICmxXc=s32-c-mo 1x, https://lh3.googleusercontent.com/ogw/AF2bZyhMJ8MaLOB4Ev2szETIl8GhqY7nUmUyTXqFUpWLGICmxXc=s64-c-mo 2x";
+            });
+
+            alert("You have been logged out.");
+        }
+
+        // Close account menu when clicking outside
+        document.addEventListener("click", function(event) {
+            const accountWrap = document.querySelector(".account-wrap");
+            const accountMenu = document.getElementById("accountMenu");
+            if (accountWrap && !accountWrap.contains(event.target) && accountMenu) {
+                accountMenu.classList.remove("open");
+                const button = document.querySelector(".account-button");
+                if (button) {
+                    button.setAttribute("aria-expanded", "false");
+                }
+            }
+        });
+
+
         // =========================
 
         function getSavedNotes() {
@@ -3090,6 +3779,7 @@
                 codeBox.appendChild(copyButton);
                 codeBox.appendChild(pre);
                 contentBox.appendChild(codeBox);
+                enhanceCodeRunners();
             }
 
             document.querySelector(".note-box").appendChild(contentBox);
