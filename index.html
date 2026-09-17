@@ -24,6 +24,7 @@
     <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
 
     <style>
         /* =========================
@@ -52,22 +53,31 @@
         }
 
         .theme-button {
-            display: grid;
-            width: 42px;
-            height: 42px;
-            place-items: center;
-            border: 1px solid #d7e0e6;
+            position: fixed;
+            left: 28px;
+            bottom: 100px;
+            z-index: 9999;
+            width: 60px;
+            height: 60px;
+            border: 0;
             border-radius: 50%;
-            background: #fff;
-            color: #263238;
+            background: linear-gradient(135deg, #087ea4, #38bdf8);
+            color: #fff;
+            font-size: 22px;
             cursor: pointer;
-            font-size: 19px;
-            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
         }
 
         .theme-button:hover {
-            background: #eef3f6;
+            transform: scale(1.1);
+            box-shadow: 0 12px 30px rgba(8, 126, 164, 0.4);
         }
+
+        body.dark-mode .theme-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 30px rgba(8, 126, 164, 0.4);
+        }
+
 
         body.dark-mode .theme-button,
         body.dark-mode .apps-button,
@@ -86,7 +96,7 @@
         body.dark-mode .content-box {
             background: #202b3d;
             border-left-color: #38bdf8;
-            color:white;
+            color: white;
         }
 
         body.dark-mode .content-box:hover {
@@ -749,7 +759,7 @@
             gap: 12px;
             justify-content: flex-end;
             width: 100%;
-            
+
             margin: 0 auto 18px;
         }
 
@@ -809,7 +819,7 @@
         }
 
         .app-tile:hover {
-            background: #303134;
+            background: #d4d3d3;
         }
 
         .app-tile img {
@@ -818,6 +828,10 @@
             border-radius: 12px;
             object-fit: contain;
             background: #fff;
+        }
+
+        body.dark-mode .app-tile img {
+            background: #172033;
         }
 
         .apps-button:hover {
@@ -933,6 +947,7 @@
                 transform: translateX(400px);
                 opacity: 0;
             }
+
             to {
                 transform: translateX(0);
                 opacity: 1;
@@ -1578,28 +1593,32 @@
         }
 
         body.dark-mode .sticky-note-button {
-            background-color: #172033;
+            background: #172033 !important;
+            color: #ffffff !important;
         }
 
-        body.dark-mode .close-btn{
+
+
+
+
+        body.dark-mode .close-btn {
             background: #172050;
+            color: white;
         }
 
-        
-        
+
+
         .ai-button img {
             width: 32px;
             height: 32px;
             filter: brightness(0) invert(1);
         }
 
-        body.dark-mode .ai-button{
-            background:#172033;
+        body.dark-mode .ai-button {
+            background: #172033;
         }
 
-        body.dark-mode .ai-button img{
-            filter: brightness(0) invert(1);
-        }
+
 
         body.dark-mode .ai-chat-panel {
             background: #17232a;
@@ -1681,7 +1700,7 @@
             position: fixed;
             right: 90px;
             bottom: 15px;
-            width:90%;
+            width: 90%;
             height: 90%;
             display: none;
             flex-direction: column;
@@ -1716,13 +1735,13 @@
             border-bottom: 1px solid #eeeeee;
         }
 
-        .ai-chat-header.dark-mode{
+        .ai-chat-header.dark-mode {
             display: flex;
             align-items: center;
             justify-content: space-between;
             padding: 14px 16px;
             color: #fff;
-            background:#202b3d;
+            background: #202b3d;
             border-bottom: 1px solid #eeeeee;
         }
 
@@ -1745,10 +1764,10 @@
             width: 28px;
             height: 28px;
             border-radius: 50%;
-            
+
         }
 
-        body.dark-mode .ai-chat-heading img{
+        body.dark-mode .ai-chat-heading img {
             width: 28px;
             height: 28px;
             border-radius: 50%;
@@ -1864,8 +1883,15 @@
         }
 
         @keyframes aiChatIn {
-            from { opacity: 0; transform: translateY(10px) scale(0.98); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
+            from {
+                opacity: 0;
+                transform: translateY(10px) scale(0.98);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
         }
 
         @media (max-width: 480px) {
@@ -2140,15 +2166,15 @@
             left: 28px;
             bottom: 28px;
             z-index: 9999;
-            width: 54px;
-            height: 54px;
+            width: 60px;
+            height: 60px;
             border: 0;
             border-radius: 50%;
-            background: #087ea4;
+            background: linear-gradient(135deg, #087ea4, #38bdf8);
             color: #fff;
             font-size: 22px;
             cursor: pointer;
-                box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
         }
 
         .sticky-note-button:hover {
@@ -2340,12 +2366,128 @@
             color: #f9fafb;
         }
 
-        .moon{
-            color:black;
+        .moon {
+            color: black;
         }
 
-        .sun{
-            color:yellow;
+        .sun {
+            color: yellow;
+        }
+
+        .quick-ocr-text {
+            width: 100%;
+            min-height: 110px;
+            margin: 12px 0;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            resize: vertical;
+            font: inherit;
+        }
+
+        .ai-chat-form {
+            display: flex;
+            gap: 8px;
+            padding: 10px;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .ai-chat-form input {
+            flex: 1;
+            padding: 11px 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            outline: none;
+        }
+
+        .ai-chat-form button {
+            width: 44px;
+            border: 0;
+            border-radius: 10px;
+            background: #087ea4;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .quiz-options button:disabled {
+            opacity: .65;
+            cursor: not-allowed;
+        }
+
+        body.dark-mode .quick-ocr-text,
+        body.dark-mode .ai-chat-form input {
+            background: #202b3d;
+            color: #e5e7eb;
+            border-color: #4b5563;
+        }
+
+        body.dark-mode .ai-chat-form {
+            border-color: #374151;
+        }
+
+        
+
+         .scroll-title {
+            display: none;
+            font-size: 22px;
+            font-weight: 700;
+            margin-right: auto;
+            color:#087ea4;
+        }
+
+        /* Header only after scrolling */
+        body.scrolled .top-bar {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            width: 100% !important;
+            height: 64px;
+            padding: 0 25px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            z-index: 99999;
+
+            background: transparent;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+
+            border-bottom: 1px solid #e5e7eb;
+            box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+        }
+
+        /* SHOW TITLE IN HEADER */
+        body.scrolled .scroll-title {
+            display: block;
+        }
+
+        /* Dark mode */
+        body.dark-mode.scrolled .top-bar {
+            background: rgba(17, 24, 39, 0.96);
+            border-bottom-color: #374151;
+        }
+
+        body.dark-mode.scrolled .scroll-title {
+            color: #67d4ff;
+        }
+
+        /* Original title */
+        .note-box > h1 {
+            transition: opacity 0.2s ease;
+        }
+
+        /* Hide original title after scrolling */
+        body.scrolled .note-box > h1 {
+            opacity: 0;
+        } 
+
+        /* Note-box ka title hide karo */
+        body.scrolled .note-box h1{
+            opacity: 0;
+            visibility: hidden;
+            height: 0;
+            margin: 0;
         }
     </style>
 </head>
@@ -2451,46 +2593,49 @@
 
     <div class="app-content" id="appContent">
         <div class="top-bar">
-            <button class="theme-button" id="themeButton" type="button" aria-label="Switch to dark mode"
-                title="Switch theme" onclick="toggleTheme()">
-                <i class="bi moon bi-moon-stars-fill" aria-hidden="true"></i>
-            </button>
+            <div class="scroll-title">Note in React</div>
+
             <div class="apps-launcher">
                 <button class="apps-button" type="button" aria-label="Google apps" title="Google apps"
                     aria-expanded="false" onclick="toggleAppsMenu(event)">
-                <svg class="apps-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24">
-                    <path fill="currentColor"
-                        d="M6 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm6 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm6 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4ZM6 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm6 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm6 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4ZM6 20a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm6 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm6 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z" />
-                </svg>
+                    <svg class="apps-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24">
+                        <path fill="currentColor"
+                            d="M6 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm6 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm6 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4ZM6 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm6 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm6 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4ZM6 20a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm6 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm6 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z" />
+                    </svg>
                 </button>
                 <div class="apps-panel" id="appsPanel" aria-label="Apps menu">
-                    <a class="app-tile" href="https://drive.google.com" target="_blank"><img src="https://cdn.simpleicons.org/googledrive" alt="Drive"><span>Drive</span></a>
-                    <a class="app-tile" href="https://mail.google.com" target="_blank"><img src="https://cdn.simpleicons.org/gmail" alt="Gmail"><span>Gmail</span></a>
-                    <a class="app-tile" href="https://www.youtube.com" target="_blank"><img src="https://cdn.simpleicons.org/youtube" alt="YouTube"><span>YouTube</span></a>
-                    <a class="app-tile" href="https://gemini.google.com" target="_blank"><img src="https://cdn.simpleicons.org/googlegemini" alt="Gemini"><span>Gemini</span></a>
-                    <a class="app-tile" href="https://maps.google.com" target="_blank"><img src="https://cdn.simpleicons.org/googlemaps" alt="Maps"><span>Maps</span></a>
-                    <a class="app-tile" href="https://calendar.google.com" target="_blank"><img src="https://cdn.simpleicons.org/googlecalendar" alt="Calendar"><span>Calendar</span></a>
-                    <a class="app-tile" href="https://photos.google.com" target="_blank"><img src="https://cdn.simpleicons.org/googlephotos" alt="Photos"><span>Photos</span></a>
-                    <a class="app-tile" href="https://meet.google.com" target="_blank"><img src="https://cdn.simpleicons.org/googlemeet" alt="Meet"><span>Meet</span></a>
-                    <a class="app-tile" href="https://news.google.com" target="_blank"><img src="https://cdn.simpleicons.org/googlenews" alt="News"><span>News</span></a>
+                    <a class="app-tile" href="https://drive.google.com" target="_blank"><img
+                            src="https://cdn.simpleicons.org/googledrive" alt="Drive"><span>Drive</span></a>
+                    <a class="app-tile" href="https://mail.google.com" target="_blank"><img
+                            src="https://cdn.simpleicons.org/gmail" alt="Gmail"><span>Gmail</span></a>
+                    <a class="app-tile" href="https://www.youtube.com" target="_blank"><img
+                            src="https://cdn.simpleicons.org/youtube" alt="YouTube"><span>YouTube</span></a>
+                    <a class="app-tile" href="https://gemini.google.com" target="_blank"><img
+                            src="https://cdn.simpleicons.org/googlegemini" alt="Gemini"><span>Gemini</span></a>
+                    <a class="app-tile" href="https://maps.google.com" target="_blank"><img
+                            src="https://cdn.simpleicons.org/googlemaps" alt="Maps"><span>Maps</span></a>
+                    <a class="app-tile" href="https://calendar.google.com" target="_blank"><img
+                            src="https://cdn.simpleicons.org/googlecalendar" alt="Calendar"><span>Calendar</span></a>
+                    <a class="app-tile" href="https://photos.google.com" target="_blank"><img
+                            src="https://cdn.simpleicons.org/googlephotos" alt="Photos"><span>Photos</span></a>
+                    <a class="app-tile" href="https://meet.google.com" target="_blank"><img
+                            src="https://cdn.simpleicons.org/googlemeet" alt="Meet"><span>Meet</span></a>
+                    <a class="app-tile" href="https://news.google.com" target="_blank"><img
+                            src="https://cdn.simpleicons.org/googlenews" alt="News"><span>News</span></a>
                 </div>
             </div>
             <div class="account-wrap">
-                <button class="account-button" type="button" onclick="toggleAccountMenu()" aria-expanded="false">
-                    <a class="account-avatar" aria-expanded="false"
-                        aria-label="Google Account: Nishant Mehta  (nishantm2304@gmail.com)"
-                        href="https://accounts.google.com/SignOutOptions?hl=en&amp;continue=https://www.google.com%3Fhl%3Den-US&amp;ec=GBRA8wE"
-                        tabindex="0" role="button" target="_top"><span class="gb_ke"><img class="account-avatar"
-                                src="https://lh3.googleusercontent.com/ogw/AF2bZyhMJ8MaLOB4Ev2szETIl8GhqY7nUmUyTXqFUpWLGICmxXc=s32-c-mo"
-                                srcset="https://lh3.googleusercontent.com/ogw/AF2bZyhMJ8MaLOB4Ev2szETIl8GhqY7nUmUyTXqFUpWLGICmxXc=s32-c-mo 1x, https://lh3.googleusercontent.com/ogw/AF2bZyhMJ8MaLOB4Ev2szETIl8GhqY7nUmUyTXqFUpWLGICmxXc=s64-c-mo 2x "
-                                alt="" aria-hidden="true" data-noaft=""></span>
-                    </a>
+                <button class="account-button" type="button" onclick="toggleAccountMenu()" aria-expanded="false"
+                    aria-label="Open account menu">
+                    <img class="account-avatar"
+                        src="https://lh3.googleusercontent.com/ogw/AF2bZyhMJ8MaLOB4Ev2szETIl8GhqY7nUmUyTXqFUpWLGICmxXc=s32-c-mo"
+                        alt="Account avatar">
                 </button>
 
                 <div class="account-menu" id="accountMenu">
                     <div class="account-menu-header">
-                        <img id="accountMenuImage" class="account-menu-avatar" 
-                            src="https://lh3.googleusercontent.com/ogw/AF2bZyhMJ8MaLOB4Ev2szETIl8GhqY7nUmUyTXqFUpWLGICmxXc=s64-c-mo" 
+                        <img id="accountMenuImage" class="account-menu-avatar"
+                            src="https://lh3.googleusercontent.com/ogw/AF2bZyhMJ8MaLOB4Ev2szETIl8GhqY7nUmUyTXqFUpWLGICmxXc=s64-c-mo"
                             alt="Account">
                         <div class="account-menu-info">
                             <div id="accountMenuName" class="account-menu-name">Nishant Mehta</div>
@@ -2499,35 +2644,42 @@
                     </div>
                     <button type="button" class="account-menu-logout" onclick="logout()">Logout</button>
                 </div>
-                </div>
             </div>
+        </div>
 
-            <div class="container">
-                <div class="note-box">
-                    <h1>Note in React</h1>
-                    <div class="study-toolbar" aria-label="Study tools">
-                        <button type="button" class="toolbar-menu-btn" id="toolbarMenuBtn" onclick="toggleToolbarMenu()">⋯</button>
-                        <div class="toolbar-items" id="toolbarItems">
-                            <input id="noteSearch" type="search" placeholder="Search notes..." oninput="filterNotes()">
-                            <select id="categoryFilter" onchange="filterNotes()" aria-label="Filter by category">
-                                <option value="all">All categories</option>
-                                <option value="basics">Basics</option>
-                                <option value="hooks">Hooks</option>
-                                <option value="javascript">JavaScript</option>
-                                <option value="nextjs">Next.js</option>
-                                <option value="custom">My notes</option>
-                            </select>
-                            <button type="button" onclick="toggleFavorites(); closeToolbarMenu();"><i class="bi bi-star"></i> Favorites</button>
-                            <button type="button" onclick="toggleRecent(); closeToolbarMenu();"><i class="bi bi-clock-history"></i> Recent</button>
-                            <button type="button" onclick="changeFontSize(-1); closeToolbarMenu();">A-</button>
-                            <button type="button" onclick="changeFontSize(1); closeToolbarMenu();">A+</button>
-                            <button type="button" onclick="openQuiz(); closeToolbarMenu();"><i class="bi bi-patch-question"></i> Quiz</button>
-                            <button type="button" onclick="exportNotes(); closeToolbarMenu();"><i class="bi bi-download"></i> Export</button>
-                            <label class="import-label" for="importNotes" onclick="closeToolbarMenu();"><i class="bi bi-upload"></i> Import</label>
-                            <input id="importNotes" type="file" accept="application/json" hidden onchange="importNotes(event); closeToolbarMenu();">
-                            <span class="progress-text" id="progressText">0% read</span>
-                        </div>
+        <div class="container">
+            <div class="note-box">
+                <h1>Note in React</h1>
+                <div class="study-toolbar" aria-label="Study tools">
+                    <button type="button" class="toolbar-menu-btn" id="toolbarMenuBtn"
+                        onclick="toggleToolbarMenu()">⋯</button>
+                    <div class="toolbar-items" id="toolbarItems">
+                        <input id="noteSearch" type="search" placeholder="Search notes..." oninput="filterNotes()">
+                        <select id="categoryFilter" onchange="filterNotes()" aria-label="Filter by category">
+                            <option value="all">All categories</option>
+                            <option value="basics">Basics</option>
+                            <option value="hooks">Hooks</option>
+                            <option value="javascript">JavaScript</option>
+                            <option value="nextjs">Next.js</option>
+                            <option value="custom">My notes</option>
+                        </select>
+                        <button type="button" onclick="toggleFavorites(); closeToolbarMenu();"><i
+                                class="bi bi-star"></i> Favorites</button>
+                        <button type="button" onclick="toggleRecent(); closeToolbarMenu();"><i
+                                class="bi bi-clock-history"></i> Recent</button>
+                        <button type="button" onclick="changeFontSize(-1); closeToolbarMenu();">A-</button>
+                        <button type="button" onclick="changeFontSize(1); closeToolbarMenu();">A+</button>
+                        <button type="button" onclick="openQuiz(); closeToolbarMenu();"><i
+                                class="bi bi-patch-question"></i> Quiz</button>
+                        <button type="button" onclick="exportNotes(); closeToolbarMenu();"><i
+                                class="bi bi-download"></i> Export</button>
+                        <label class="import-label" for="importNotes" onclick="closeToolbarMenu();"><i
+                                class="bi bi-upload"></i> Import</label>
+                        <input id="importNotes" type="file" accept="application/json" hidden
+                            onchange="importNotes(event); closeToolbarMenu();">
+                        <span class="progress-text" id="progressText">0% read</span>
                     </div>
+                </div>
                 <div class="content-box">
                     <h2>Notes:</h2>
                 </div>
@@ -2569,7 +2721,7 @@
                             Copy
                         </button>
 
-                        <pre><code id="reactCode">
+                        <pre><code>
                         // Example of a simple React component
 
                         import React from 'react';
@@ -2603,7 +2755,7 @@
                             Copy
                         </button>
 
-                        <pre><code id="reactCode">
+                        <pre><code>
                         // Example of a reusable React component
 
                         import React from 'react';
@@ -2626,7 +2778,7 @@
                     </p>
                 </div>
 
-                
+
                 <div class="content-box">
                     <h2>What are the Features of Next.JS?with example.</h2>
                     <p>
@@ -2645,7 +2797,7 @@
                             Copy
                         </button>
 
-                        <pre><code id="reactCode">
+                        <pre><code>
                         // Example of a Next.js page component
 
                         import React from 'react';
@@ -2678,7 +2830,7 @@
                             Copy
                         </button>
 
-                        <pre><code id="reactCode">
+                        <pre><code>
                         // Example of a Next.js API route
 
                         export default function handler(req, res) {
@@ -2704,7 +2856,7 @@
                             Copy
                         </button>
 
-                        <pre><code id="reactCode">
+                        <pre><code>
                         // Example of using npm, yarn, and npx
 
                         // Using npm to install a package
@@ -2728,7 +2880,7 @@
                         <button class="copy-btn" onclick="copyCode(this)">
                             Copy
                         </button>
-                        <pre><code id="reactCode">npx create-react-app my-app</code></pre>
+                        <pre><code>npx create-react-app my-app</code></pre>
                     </div>
                 </div>
 
@@ -2750,7 +2902,7 @@
                         <button class="copy-btn" onclick="copyCode(this)">
                             Copy
                         </button>
-                        <pre><code id="reactCode">
+                        <pre><code>
                         // Example of checking Node.js and npm versions
 
                         node -v
@@ -2771,7 +2923,7 @@
                         <button class="copy-btn" onclick="copyCode(this)">
                             Copy
                         </button>
-                        <pre><code id="reactCode">npx create-react-app my-first-app</code></pre>
+                        <pre><code>npx create-react-app my-first-app</code></pre>
                     </div>
                 </div>
 
@@ -2786,7 +2938,7 @@
                         <button class="copy-btn" onclick="copyCode(this)">
                             Copy
                         </button>
-                        <pre><code id="reactCode">
+                        <pre><code>
                         // Example of rest operator
                         function sum(...numbers) {
                             return numbers.reduce((acc, curr) => acc + curr, 0);
@@ -2808,7 +2960,7 @@
                         <button class="copy-btn" onclick="copyCode(this)">
                             Copy
                         </button>
-                        <pre><code id="reactCode">
+                        <pre><code>
                         // Example of array operators
                         const arr = [1, 2, 3];
                         const newArr = [...arr, 4, 5]; // Spread operator
@@ -2832,7 +2984,7 @@
                         <button class="copy-btn" onclick="copyCode(this)">
                             Copy
                         </button>
-                        <pre><code id="reactCode">
+                        <pre><code>
                         // Example of using state in a React component
 
                         import React, { useState } from 'react';
@@ -2867,7 +3019,7 @@
                         <button class="copy-btn" onclick="copyCode(this)">
                             Copy
                         </button>
-                        <pre><code id="reactCode">
+                        <pre><code>
                         // Example of using props in a React component
 
                         import React from 'react';
@@ -2894,7 +3046,7 @@
                         <button class="copy-btn" onclick="copyCode(this)">
                             Copy
                         </button>
-                        <pre><code id="reactCode">
+                        <pre><code>
                         // Example of using props for location information
 
                         import React from 'react';
@@ -2925,7 +3077,7 @@
                         <button class="copy-btn" onclick="copyCode(this)">
                             Copy
                         </button>
-                        <pre><code id="reactCode">
+                        <pre><code>
                         // Example of using useEffect in a React component
 
                         import React, { useState, useEffect } from 'react';
@@ -2966,7 +3118,7 @@
                             Copy
                         </button>
 
-                        <pre><code id="reactCode">
+                        <pre><code>
                         // Example: Store data into LocalStorage using useEffect
 
                         import React, { useState, useEffect } from 'react';
@@ -2996,14 +3148,17 @@
                         </pre>
                     </div>
                 </div>
- 
+
                 <div class="content-box">
                     <h2>What is attaching CSS in 3 different ways? with example.</h2>
                     <p>CSS can be attached to an HTML document in three ways:</p>
                     <ol>
-                        <li><strong>Inline CSS:</strong> CSS is written directly inside an HTML element using the <code>style</code> attribute.</li>
-                        <li><strong>Internal CSS:</strong> CSS is written inside a <code>&lt;style&gt;</code> tag in the HTML document's <code>&lt;head&gt;</code>.</li>
-                        <li><strong>External CSS:</strong> CSS is written in a separate <code>.css</code> file and linked with a <code>&lt;link&gt;</code> tag.</li>
+                        <li><strong>Inline CSS:</strong> CSS is written directly inside an HTML element using the
+                            <code>style</code> attribute.</li>
+                        <li><strong>Internal CSS:</strong> CSS is written inside a <code>&lt;style&gt;</code> tag in the
+                            HTML document's <code>&lt;head&gt;</code>.</li>
+                        <li><strong>External CSS:</strong> CSS is written in a separate <code>.css</code> file and
+                            linked with a <code>&lt;link&gt;</code> tag.</li>
                     </ol>
                     <div class="code-box">
                         <button class="copy-btn" onclick="copyCode(this)">
@@ -3031,7 +3186,7 @@
                 </div>
 
 
-                
+
 
 
 
@@ -3089,15 +3244,16 @@
 
         <!-- AI BUTTON -->
         <button class="ai-button" onclick="openAI()">
-            <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/6/66/OpenAI_logo_2025_%28symbol%29.svg/250px-OpenAI_logo_2025_%28symbol%29.svg.png?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=thumbnail" alt="Open AI chat">
+            <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/6/66/OpenAI_logo_2025_%28symbol%29.svg/250px-OpenAI_logo_2025_%28symbol%29.svg.png?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=thumbnail"
+                alt="Open AI chat">
         </button>
-        
 
-        <section class="ai-chat-panel" id="aiChatPanel" role="dialog" aria-modal="false"
-            aria-labelledby="aiChatTitle">
+
+        <section class="ai-chat-panel" id="aiChatPanel" role="dialog" aria-modal="false" aria-labelledby="aiChatTitle">
             <header class="ai-chat-header">
                 <div class="ai-chat-heading">
-                    <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/6/66/OpenAI_logo_2025_%28symbol%29.svg/250px-OpenAI_logo_2025_%28symbol%29.svg.png?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=thumbnail" alt="">
+                    <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/6/66/OpenAI_logo_2025_%28symbol%29.svg/250px-OpenAI_logo_2025_%28symbol%29.svg.png?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=thumbnail"
+                        alt="">
                     <div>
                         <span id="aiChatTitle">ChatGPT</span>
                         <small>AI assistant</small>
@@ -3108,46 +3264,70 @@
                     <button class="ai-chat-close" type="button" onclick="closeAI()" aria-label="Close chat">×</button>
                 </div>
             </header>
-            <iframe
-                class="ai-chat-embed"
-                src="http://localhost:4028"
-                title="ChatGPT website"
-                allow="clipboard-read; clipboard-write">
+            <iframe class="ai-chat-embed" title="AI Chat" allow="clipboard-read; clipboard-write">
             </iframe>
+            <!-- <div class="ai-chat-messages" id="aiChatMessages" aria-live="polite">
+                <div class="ai-chat-message">Hi! Ask me anything about your ReactJS notes.</div>
+            </div>
+            <form class="ai-chat-form" onsubmit="sendAIMessage(event)">
+                <input id="aiChatInput" type="text" autocomplete="off" placeholder="Ask about ReactJS..." aria-label="Ask AI">
+                <button type="submit" aria-label="Send message"><i class="bi bi-send-fill"></i></button>
+            </form> -->
         </section>
 
     </div>
+    <button class="theme-button" id="themeButton" type="button" aria-label="Switch to dark mode" title="Switch theme"
+        onclick="toggleTheme()">
+        <i class="bi moon bi-moon-stars-fill" aria-hidden="true"></i>
+    </button>
 
-    <button class="sticky-note-button" type="button" onclick="openQuickNote()"
-        aria-label="Open sticky note" title="Write a sticky note">
+    <button class="sticky-note-button" type="button" onclick="openQuickNote()" aria-label="Open sticky note"
+        title="Write a sticky note">
         <i class="bi bi-pencil-fill" aria-hidden="true"></i>
     </button>
 
-    <div class="quick-note-modal" id="quickNoteModal" role="dialog" aria-modal="true"
-        aria-labelledby="quickNoteTitle">
+    <div class="quick-note-modal" id="quickNoteModal" role="dialog" aria-modal="true" aria-labelledby="quickNoteTitle">
         <section class="quick-note-sheet">
             <button class="close-btn" type="button" onclick="closeQuickNote()" aria-label="Close">×</button>
             <h2 id="quickNoteTitle">Sticky note</h2>
             <p>Write something here. It will stay saved after refresh.</p>
-                <div class="quick-note-toolbar" aria-label="Screenshot tools">
-                    <button class="quick-note-tool active" type="button" data-tool="pen" onclick="selectQuickTool('pen', this)" title="Ballpoint pen" aria-label="Ballpoint pen"><i class="bi bi-pen"></i></button>
-                    <button class="quick-note-tool" type="button" data-tool="highlighter" onclick="selectQuickTool('highlighter', this)" title="Highlighter" aria-label="Highlighter"><i class="bi bi-brush"></i></button>
-                    <button class="quick-note-tool" type="button" data-tool="eraser" onclick="selectQuickTool('eraser', this)" title="Eraser" aria-label="Eraser"><i class="bi bi-eraser"></i></button>
-                    <button class="quick-note-tool" type="button" data-tool="rectangle" onclick="selectQuickTool('rectangle', this)" title="Rectangle shape" aria-label="Rectangle shape"><i class="bi bi-square"></i></button>
-                    <button class="quick-note-tool" type="button" data-tool="circle" onclick="selectQuickTool('circle', this)" title="Circle shape" aria-label="Circle shape"><i class="bi bi-circle"></i></button>
-                    <button class="quick-note-tool" type="button" data-tool="line" onclick="selectQuickTool('line', this)" title="Line shape" aria-label="Line shape"><i class="bi bi-dash-lg"></i></button>
-                    <button class="quick-note-tool" type="button" onclick="undoQuickDrawing()" title="Undo" aria-label="Undo"><i class="bi bi-arrow-counterclockwise"></i></button>
-                    <button class="quick-note-tool" type="button" onclick="redoQuickDrawing()" title="Redo" aria-label="Redo"><i class="bi bi-arrow-clockwise"></i></button>
-                    <button class="quick-note-tool" type="button" onclick="document.getElementById('quickNoteImage').click()" title="Add image" aria-label="Add image"><i class="bi bi-image"></i></button>
-                    <button class="quick-note-tool" type="button" onclick="cropQuickImage()" title="Crop image" aria-label="Crop image"><i class="bi bi-crop"></i></button>
-                    <button class="quick-note-tool" type="button" onclick="scanQuickText()" title="Scan text" aria-label="Scan text"><i class="bi bi-textarea-t"></i></button>
-                    <input id="quickNoteImage" type="file" accept="image/*" hidden onchange="loadQuickImage(event)">
-                    <input class="quick-note-color" id="quickNoteColor" type="color" value="#087ea4" title="Pen color" aria-label="Pen color">
-                </div>
-                <div class="quick-note-canvas-wrap">
-                    <canvas id="quickNoteCanvas" width="900" height="300"></canvas>
-                </div>
-                
+            <div class="quick-note-toolbar" aria-label="Screenshot tools">
+                <button class="quick-note-tool active" type="button" data-tool="pen"
+                    onclick="selectQuickTool('pen', this)" title="Ballpoint pen" aria-label="Ballpoint pen"><i
+                        class="bi bi-pen"></i></button>
+                <button class="quick-note-tool" type="button" data-tool="highlighter"
+                    onclick="selectQuickTool('highlighter', this)" title="Highlighter" aria-label="Highlighter"><i
+                        class="bi bi-brush"></i></button>
+                <button class="quick-note-tool" type="button" data-tool="eraser"
+                    onclick="selectQuickTool('eraser', this)" title="Eraser" aria-label="Eraser"><i
+                        class="bi bi-eraser"></i></button>
+                <button class="quick-note-tool" type="button" data-tool="rectangle"
+                    onclick="selectQuickTool('rectangle', this)" title="Rectangle shape" aria-label="Rectangle shape"><i
+                        class="bi bi-square"></i></button>
+                <button class="quick-note-tool" type="button" data-tool="circle"
+                    onclick="selectQuickTool('circle', this)" title="Circle shape" aria-label="Circle shape"><i
+                        class="bi bi-circle"></i></button>
+                <button class="quick-note-tool" type="button" data-tool="line" onclick="selectQuickTool('line', this)"
+                    title="Line shape" aria-label="Line shape"><i class="bi bi-dash-lg"></i></button>
+                <button class="quick-note-tool" type="button" onclick="undoQuickDrawing()" title="Undo"
+                    aria-label="Undo"><i class="bi bi-arrow-counterclockwise"></i></button>
+                <button class="quick-note-tool" type="button" onclick="redoQuickDrawing()" title="Redo"
+                    aria-label="Redo"><i class="bi bi-arrow-clockwise"></i></button>
+                <button class="quick-note-tool" type="button"
+                    onclick="document.getElementById('quickNoteImage').click()" title="Add image"
+                    aria-label="Add image"><i class="bi bi-image"></i></button>
+                <button class="quick-note-tool" type="button" onclick="cropQuickImage()" title="Crop image"
+                    aria-label="Crop image"><i class="bi bi-crop"></i></button>
+                <button class="quick-note-tool" type="button" onclick="scanQuickText()" title="Scan text"
+                    aria-label="Scan text"><i class="bi bi-textarea-t"></i></button>
+                <input id="quickNoteImage" type="file" accept="image/*" hidden onchange="loadQuickImage(event)">
+                <input class="quick-note-color" id="quickNoteColor" type="color" value="#087ea4" title="Pen color"
+                    aria-label="Pen color">
+            </div>
+            <div class="quick-note-canvas-wrap">
+                <canvas id="quickNoteCanvas" width="900" height="300"></canvas>
+            </div>
+
             <div class="quick-note-actions">
                 <button type="button" onclick="closeQuickNote()">Close</button>
                 <button class="save-quick-note" type="button" onclick="saveQuickNote()">Save note</button>
@@ -3156,11 +3336,24 @@
         </section>
     </div>
 
+
+
     <!-- =========================
          JAVASCRIPT
     ========================= -->
 
     <script>
+        const GOOGLE_CLIENT_ID = "YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com";
+
+        window.addEventListener("scroll", function () {
+
+            if (window.scrollY > 100) {
+                document.body.classList.add("scrolled");
+            } else {
+                document.body.classList.remove("scrolled");
+            }
+
+        });
 
         function showApp() {
             localStorage.setItem("noteInRectLoggedIn", "true");
@@ -3444,7 +3637,7 @@
             toolbarItems.classList.remove("open");
         }
 
-        document.addEventListener("click", function(event) {
+        document.addEventListener("click", function (event) {
             const toolbar = document.querySelector(".study-toolbar");
             if (!toolbar.contains(event.target)) {
                 closeToolbarMenu();
@@ -3697,43 +3890,81 @@
             document.getElementById("aiChatInput").focus();
         }
 
-        async function sendAIMessage(event) {
-            event.preventDefault();
+        // async function sendAIMessage(event) {
+        //     event.preventDefault();
 
-            const input = document.getElementById("aiChatInput");
-            const message = input.value.trim();
-            if (!message) return;
+        //     const input = document.getElementById("aiChatInput");
+        //     const message = input.value.trim();
+        //     if (!message) return;
 
-            const messages = document.getElementById("aiChatMessages");
-            messages.insertAdjacentHTML("beforeend", `<div class="ai-chat-message user"></div>`);
-            messages.lastElementChild.textContent = message;
-            input.value = "";
-            const assistantMessage = document.createElement("div");
-            assistantMessage.className = "ai-chat-message";
-            assistantMessage.textContent = "Thinking...";
-            messages.appendChild(assistantMessage);
-            messages.scrollTop = messages.scrollHeight;
+        //     const messages = document.getElementById("aiChatMessages");
+        //     messages.insertAdjacentHTML("beforeend", `<div class="ai-chat-message user"></div>`);
+        //     messages.lastElementChild.textContent = message;
+        //     input.value = "";
+        //     const assistantMessage = document.createElement("div");
+        //     assistantMessage.className = "ai-chat-message";
+        //     assistantMessage.textContent = "Thinking...";
+        //     messages.appendChild(assistantMessage);
+        //     messages.scrollTop = messages.scrollHeight;
 
-            try {
-                const response = await fetch("http://localhost:5000/api/chat", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({
-                        messages: [{ role: "user", content: message }]
-                    })
-                });
-                const data = await response.json();
+        //     try {
+        //         const response = await fetch("http://localhost:4028/", {
+        //             method: "POST",
+        //             headers: { "Content-Type": "application/json" },
+        //             body: JSON.stringify({
+        //                 messages: [{ role: "user", content: message }]
+        //             })
+        //         });
+        //         const data = await response.json();
 
-                if (!response.ok) {
-                    throw new Error(data.error || "AI response failed");
-                }
+        //         if (!response.ok) {
+        //             throw new Error(data.error || "AI response failed");
+        //         }
 
-                assistantMessage.textContent = data.answer || "No answer received.";
-            } catch (error) {
-                assistantMessage.textContent = "AI connection failed. Backend server start karein.";
+        //         assistantMessage.textContent = data.answer || "No answer received.";
+        //     } catch (error) {
+        //         assistantMessage.textContent = "AI connection failed. Backend server start karein.";
+        //     }
+
+        //     messages.scrollTop = messages.scrollHeight;
+        // }
+
+        function openAI() {
+            const panel = document.getElementById("aiChatPanel");
+
+            if (!panel) return;
+
+            panel.classList.add("open");
+            panel.setAttribute("aria-modal", "true");
+
+            const iframe = panel.querySelector(".ai-chat-embed");
+
+            // iframe ko JavaScript se load karo
+            if (iframe && !iframe.dataset.loaded) {
+                iframe.src = "http://localhost:4028";
+                iframe.dataset.loaded = "true";
             }
+        }
 
-            messages.scrollTop = messages.scrollHeight;
+        function closeAI() {
+            const panel = document.getElementById("aiChatPanel");
+
+            if (!panel) return;
+
+            panel.classList.remove("open");
+            panel.setAttribute("aria-modal", "false");
+        }
+
+        function toggleAI() {
+            const panel = document.getElementById("aiChatPanel");
+
+            if (!panel) return;
+
+            if (panel.classList.contains("open")) {
+                closeAI();
+            } else {
+                openAI();
+            }
         }
 
         // =========================
@@ -3817,7 +4048,7 @@
         }
 
         // Close account menu when clicking outside
-        document.addEventListener("click", function(event) {
+        document.addEventListener("click", function (event) {
             const accountWrap = document.querySelector(".account-wrap");
             const accountMenu = document.getElementById("accountMenu");
             if (accountWrap && !accountWrap.contains(event.target) && accountMenu) {
@@ -4228,6 +4459,9 @@
 
             alert("New note added successfully!");
         }
+
+
+
 
 
 
