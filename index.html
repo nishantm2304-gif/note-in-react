@@ -40,33 +40,38 @@
            BODY
         ========================= */
         body {
-            font-family: Arial, Helvetica, sans-serif;
-           
-            background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjoV23lWPFP-QIGTnXjnnbHfleOCobg3NT5RGFmGLl_pS8tqo-HuNhsRU&s=10');
-            background-repeat: no-repeat; /* Image repeat nahi hogi */
-            background-size: cover;       /* Optional: Image ko poore screen par fit karne ke liye */
-            background-position: center; 
-             background-attachment: fixed;
-             filter: none !important;
-            backdrop-filter: none !important;
-            opacity: 1 !important;
-
+            min-height: 100vh;
+            font-family: "Outfit", Arial, Helvetica, sans-serif;
+            background-color: #dbeafe;
+            background-image:
+                linear-gradient(135deg, rgba(239, 246, 255, 0.78), rgba(224, 242, 254, 0.58)),
+                url("https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=2400&q=85");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
             color: #222;
             line-height: 1.7;
             padding: 40px 20px;
         }
 
         body.dark-mode {
-            
-            background-image: url('https://cdn.naturettl.com/wp-content/uploads/2023/11/25005603/dark-and-moody-photography-11-800x534.jpg');
-            background-repeat: no-repeat; /* Image repeat nahi hogi */
-            background-size: cover;       /* Optional: Image ko poore screen par fit karne ke liye */
-            background-position: center; 
-             background-attachment: fixed;
-             filter: none !important;
-            backdrop-filter: none !important;
-            opacity: 1 !important;
+            background-color: #0f172a;
+            background-image:
+                linear-gradient(135deg, rgba(8, 15, 30, 0.84), rgba(15, 23, 42, 0.68)),
+                url("https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=2400&q=85");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
             color: #e5e7eb;
+        }
+
+        @media (max-width: 768px) {
+            body,
+            body.dark-mode {
+                background-attachment: scroll;
+            }
         }
 
         .theme-button {
@@ -85,18 +90,16 @@
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
         }
 
-        .theme-button:hover {
-            transform: scale(1.1);
-            box-shadow: 0 12px 30px #00bfff;
+
+
+
+        body.dark-mode .theme-button{
+            background: linear-gradient(135deg, #0f172a, #164e63);
+            color: #7dd3fc;
+            border: 1px solid #38bdf8;
+            box-shadow: 0 8px 25px rgba(56, 189, 248, 0.25);
         }
 
-        body.dark-mode .theme-button:hover {
-            transform: scale(1.1);
-            box-shadow: 0 12px 30px rgba(8, 126, 164, 0.4);
-        }
-
-
-        body.dark-mode .theme-button,
         body.dark-mode .apps-button,
         body.dark-mode .account-button {
             border-color: #4b5563;
@@ -111,9 +114,11 @@
         }
 
         body.dark-mode .content-box {
-            background: #202b3d;
+            background: rgba(15, 23, 42, 0.78);
             border-left-color: #38bdf8;
-            color: white;
+            color: #ffffff;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
         }
 
        
@@ -404,18 +409,6 @@
             border-color: #4b5563;
         }
 
-        body.reading-large .note-box p,
-        body.reading-large .note-box li,
-        body.reading-large .note-box pre {
-            font-size: 18px;
-        }
-
-        body.reading-small .note-box p,
-        body.reading-small .note-box li,
-        body.reading-small .note-box pre {
-            font-size: 14px;
-        }
-
         /* =========================
            MAIN CONTAINER
         ========================= */
@@ -612,15 +605,14 @@
         }
 
         body.dark-mode .app-content .apps-button,
-        body.dark-mode .app-content .account-button,
-        body.dark-mode .app-content .theme-button {
+        body.dark-mode .app-content .account-button{
             border-color: #4b5563;
-            background: transparent;
+            background: #273244;
             color: #f9fafb;
         }
 
-        body.dark-mode .app-content .apps-button:hover,
-        body.dark-mode .app-content .theme-button:hover {
+        body.dark-mode .app-content .apps-button:hover
+        {
             background: #36445a;
         }
 
@@ -1145,7 +1137,7 @@
         }
 
         p {
-            color: #fff;
+            color: black;
             font-size: 16px;
         }
 
@@ -1154,24 +1146,33 @@
         ========================= */
 
         .content-box {
-            background: #8f8f8f96;
+            background:rgba(255, 255, 255, 0.65);
+
+           backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
 
             border-left: 6px solid #087ea4;
-
             border-radius: 12px;
-
             padding: 25px;
-
             margin-top: 25px;
 
-            transition: 0.3s ease;
+            transition: all 0.3s ease;backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+
+            border-left: 6px solid #087ea4;
+            border-radius: 12px;
+            padding: 25px;
+            margin-top: 25px;
+
+            transition: all 0.3s ease;
 
 
         }
 
         .content-box:hover {
-            background: #69deffa2;
+           background: linear-gradient(135deg, #087da473, #38bff871);
             transform: translateX(5px);
+            color: #ffffff;
             
         }
 
@@ -1186,7 +1187,7 @@
 
         li {
             margin-bottom: 8px;
-            color: #fff;
+            color: black;
         }
 
         li::marker {
@@ -1567,10 +1568,6 @@
             transition: all 0.3s ease;
         }
 
-        .ai-button:hover {
-            transform: scale(1.1);
-            box-shadow: 0 12px 30px #00bfff;
-        }
 
         .ai-button:active {
             transform: scale(0.95);
@@ -1600,9 +1597,10 @@
         }
 
         body.dark-mode .add-button {
-            background: #172033 !important;
+           background: linear-gradient(135deg, #0f172a, #164e63) !important;
             color: #ffffff !important;
-            border-color: #4b5563;
+            border: 1px solid #38bdf8;
+            box-shadow: 0 8px 25px rgba(56, 189, 248, 0.25);
         }
 
         body.dark-mode .add-button img {
@@ -1614,8 +1612,10 @@
         }
 
         body.dark-mode .sticky-note-button {
-            background: #172033 !important;
+             background: linear-gradient(135deg, #0f172a, #164e63) !important;
             color: #ffffff !important;
+            border: 1px solid #38bdf8;
+            box-shadow: 0 8px 25px rgba(56, 189, 248, 0.25);
         }
 
 
@@ -1636,7 +1636,10 @@
         }
 
         body.dark-mode .ai-button {
-            background: #172033;
+            background: linear-gradient(135deg, #0f172a, #164e63) !important;
+            color: #ffffff !important;
+            border: 1px solid #38bdf8;
+            box-shadow: 0 8px 25px rgba(56, 189, 248, 0.25);
         }
 
 
@@ -1953,10 +1956,6 @@
             transition: all 0.3s ease;
         }
 
-        .add-button:hover {
-            transform: scale(1.1);
-            box-shadow: 0 12px 30px #00bfff;
-        }
 
 
 
@@ -2198,10 +2197,6 @@
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
         }
 
-        .sticky-note-button:hover {
-            transform: scale(1.1);
-            box-shadow: 0 12px 30px #00bfff;
-        }
 
         .quick-note-modal {
             display: none;
@@ -2235,7 +2230,7 @@
         }
 
         .quick-note-sheet p {
-            color: #667781;
+            color: #fff;
             font-size: 14px;
         }
 
@@ -2445,7 +2440,6 @@
         body.dark-mode .ai-chat-form {
             border-color: #374151;
         }
-
         
 
          .scroll-title {
@@ -2453,7 +2447,7 @@
             font-size: 22px;
             font-weight: 700;
             margin-right: auto;
-            color:#087ea4;
+            color:#00bfff;
         }
 
         /* Header only after scrolling */
@@ -2490,8 +2484,15 @@
         }
 
         body.dark-mode .content-box:hover{
-                background: #26364c;
-                transform: translateX(5px);
+            background: linear-gradient(
+                135deg,
+                rgba(8, 126, 164, 0.92),
+                rgba(56, 189, 248, 0.85)
+            );
+            color: #ffffff;
+            border-left-color: #ffffff;
+            transform: translateX(5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
         }
 
         body.dark-mode.scrolled .scroll-title {
@@ -2516,7 +2517,477 @@
             margin: 0;
         }
 
-        
+        pre code {
+            font-size: inherit;
+            color: black;
+            word-break: normal;
+        }
+
+        .theme-button,
+        .sticky-note-button,
+        .add-button,
+        .ai-button {
+            border: 1px solid rgba(255, 255, 255, 0.72);
+            background: linear-gradient(135deg, #0e7490, #0284c7 58%, #38bdf8);
+            color: #ffffff;
+            box-shadow: 0 10px 28px rgba(3, 105, 161, 0.32), inset 0 1px 0 rgba(255, 255, 255, 0.28);
+            transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+        }
+
+        .theme-button:hover,
+        .sticky-note-button:hover,
+        .add-button:hover,
+        .ai-button:hover {
+            background: linear-gradient(135deg, #0369a1, #0284c7 55%, #0ea5e9);
+            color: #ffffff;
+            transform: translateY(-2px) scale(1.06);
+            box-shadow: 0 14px 32px rgba(3, 105, 161, 0.42), 0 0 18px rgba(56, 189, 248, 0.3);
+        }
+
+        .theme-button:focus-visible,
+        .sticky-note-button:focus-visible,
+        .add-button:focus-visible,
+        .ai-button:focus-visible {
+            outline: 3px solid #0ea5e9;
+            outline-offset: 4px;
+        }
+
+        body.dark-mode .theme-button,
+        body.dark-mode .sticky-note-button,
+        body.dark-mode .add-button,
+        body.dark-mode .ai-button {
+            border: 1px solid rgba(125, 211, 252, 0.78);
+            background: linear-gradient(135deg, #0b1f36, #075985 58%, #0284c7) !important;
+            color: #f0f9ff !important;
+            box-shadow: 0 10px 30px rgba(2, 132, 199, 0.36), inset 0 1px 0 rgba(186, 230, 253, 0.2);
+        }
+
+        body.dark-mode .theme-button:hover,
+        body.dark-mode .sticky-note-button:hover,
+        body.dark-mode .add-button:hover,
+        body.dark-mode .ai-button:hover {
+            background: linear-gradient(135deg, #075985, #0284c7 55%, #38bdf8) !important;
+            color: #ffffff !important;
+            transform: translateY(-2px) scale(1.06);
+            box-shadow: 0 14px 34px rgba(2, 132, 199, 0.48), 0 0 20px rgba(56, 189, 248, 0.38);
+        }
+
+        body.dark-mode .theme-button:focus-visible,
+        body.dark-mode .sticky-note-button:focus-visible,
+        body.dark-mode .add-button:focus-visible,
+        body.dark-mode .ai-button:focus-visible {
+            outline-color: #7dd3fc;
+        }
+
+        :root {
+            --image-ink: #17364c;
+            --image-muted: #587286;
+            --image-blue: #087ea4;
+            --image-sky: #38bdf8;
+            --image-frost: rgba(240, 249, 255, 0.88);
+            --image-edge: rgba(8, 126, 164, 0.22);
+            --image-night: #0b1b2d;
+            --image-night-surface: rgba(9, 27, 46, 0.9);
+            --image-night-edge: rgba(56, 189, 248, 0.26);
+            --image-night-text: #e0f2fe;
+        }
+
+        body {
+            color: var(--image-ink);
+        }
+
+        h1,
+        h2,
+        li::marker,
+        .scroll-title {
+            color: var(--image-blue);
+        }
+
+        p,
+        li,
+        .intro,
+        .progress-text {
+            color: var(--image-ink);
+        }
+
+        .note-box,
+        .login-card,
+        .chooser-card,
+        .quiz-card,
+        .add-form,
+        .apps-panel,
+        .account-menu,
+        .ai-chat-panel,
+        .quick-note-sheet,
+        .saved-quick-note {
+            border-color: var(--image-edge);
+            background-color: var(--image-frost);
+            color: var(--image-ink);
+            box-shadow: 0 16px 42px rgba(15, 55, 82, 0.16);
+        }
+
+        .content-box {
+            background: rgba(240, 249, 255, 0.74);
+            border-left-color: var(--image-blue);
+        }
+
+        .content-box:hover {
+            background: linear-gradient(135deg, rgba(8, 126, 164, 0.82), rgba(56, 189, 248, 0.72));
+        }
+
+        .study-toolbar input,
+        .study-toolbar select,
+        .study-toolbar button,
+        .toolbar-menu-btn,
+        .note-tools button,
+        .note-tools label,
+        .quiz-options button,
+        .login-form input,
+        .add-form input,
+        .add-form textarea,
+        .ai-chat-form input,
+        .quick-ocr-text,
+        .quick-note-actions button {
+            border-color: var(--image-edge);
+            background-color: rgba(248, 252, 255, 0.96);
+            color: var(--image-ink);
+        }
+
+        .study-toolbar button:hover,
+        .import-label:hover,
+        .note-tools button:hover,
+        .note-tools label:hover,
+        .quiz-options button:hover,
+        .quick-note-actions button:hover {
+            background-color: #e0f2fe;
+            border-color: rgba(8, 126, 164, 0.48);
+        }
+
+        .note-tools .favorite-button.active,
+        .note-tag {
+            border-color: rgba(8, 126, 164, 0.24);
+            background: #dff3ff;
+            color: #075985;
+        }
+
+        .login-form input:focus,
+        .ai-chat-form input:focus,
+        .quick-ocr-text:focus {
+            border-color: var(--image-blue);
+            box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+        }
+
+        .login-submit,
+        .run-btn,
+        .copy-btn:not(.copied),
+        .ai-chat-form button,
+        .quick-note-actions .save-quick-note {
+            border-color: transparent;
+            background: linear-gradient(135deg, #0e7490, #0284c7 58%, #38bdf8);
+            color: #ffffff;
+            box-shadow: 0 6px 18px rgba(3, 105, 161, 0.2);
+        }
+
+        .forgot-password,
+        .signup-button,
+        .chooser-cancel {
+            color: var(--image-blue);
+        }
+
+        body.dark-mode {
+            color: var(--image-night-text);
+        }
+
+        body.dark-mode h1,
+        body.dark-mode h2,
+        body.dark-mode .scroll-title {
+            color: #7dd3fc;
+        }
+
+        body.dark-mode p,
+        body.dark-mode li,
+        body.dark-mode .intro,
+        body.dark-mode .progress-text {
+            color: #d4e7f3;
+        }
+
+        body.dark-mode .note-box,
+        body.dark-mode .app-content .note-box,
+        body.dark-mode .login-card,
+        body.dark-mode .chooser-card,
+        body.dark-mode .quiz-card,
+        body.dark-mode .add-form,
+        body.dark-mode .apps-panel,
+        body.dark-mode .account-menu,
+        body.dark-mode .ai-chat-panel,
+        body.dark-mode .quick-note-sheet,
+        body.dark-mode .saved-quick-note {
+            border-color: var(--image-night-edge);
+            background: var(--image-night-surface);
+            color: var(--image-night-text);
+            box-shadow: 0 18px 44px rgba(0, 8, 18, 0.34);
+        }
+
+        body.dark-mode .content-box,
+        body.dark-mode .app-content .content-box {
+            border-left-color: #38bdf8;
+            background: rgba(8, 27, 46, 0.78);
+            color: var(--image-night-text);
+        }
+
+        body.dark-mode .content-box:hover,
+        body.dark-mode .app-content .content-box:hover {
+            background: linear-gradient(135deg, rgba(8, 72, 105, 0.94), rgba(14, 116, 144, 0.88));
+        }
+
+        body.dark-mode .study-toolbar input,
+        body.dark-mode .study-toolbar select,
+        body.dark-mode .study-toolbar button,
+        body.dark-mode .toolbar-menu-btn,
+        body.dark-mode .note-tools button,
+        body.dark-mode .note-tools label,
+        body.dark-mode .quiz-options button,
+        body.dark-mode .login-form input,
+        body.dark-mode .add-form input,
+        body.dark-mode .add-form textarea,
+        body.dark-mode .ai-chat-form input,
+        body.dark-mode .quick-ocr-text,
+        body.dark-mode .quick-note-actions button {
+            border-color: var(--image-night-edge);
+            background-color: rgba(13, 39, 62, 0.94);
+            color: var(--image-night-text);
+        }
+
+        body.dark-mode .study-toolbar button:hover,
+        body.dark-mode .import-label:hover,
+        body.dark-mode .note-tools button:hover,
+        body.dark-mode .note-tools label:hover,
+        body.dark-mode .quiz-options button:hover,
+        body.dark-mode .quick-note-actions button:hover {
+            background-color: #164e6b;
+            border-color: #38bdf8;
+        }
+
+        body.dark-mode .note-tools .favorite-button.active,
+        body.dark-mode .note-tag {
+            border-color: rgba(125, 211, 252, 0.35);
+            background: #123e5b;
+            color: #bae6fd;
+        }
+
+        body.dark-mode .login-form input:focus,
+        body.dark-mode .ai-chat-form input:focus,
+        body.dark-mode .quick-ocr-text:focus {
+            border-color: #38bdf8;
+            box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+        }
+
+        body.dark-mode .forgot-password,
+        body.dark-mode .signup-button,
+        body.dark-mode .chooser-cancel {
+            color: #7dd3fc;
+        }
+
+        .note-box {
+            background: rgba(240, 249, 255, 0.42);
+            border-color: rgba(8, 126, 164, 0.28);
+            box-shadow: 0 16px 42px rgba(15, 55, 82, 0.18);
+        }
+
+        .login-card,
+        .chooser-card,
+        .quiz-card,
+        .add-form,
+        .account-menu,
+        .ai-chat-panel,
+        .quick-note-sheet {
+            background: rgba(240, 249, 255, 0.92);
+        }
+
+        .apps-button,
+        .account-button {
+            border-color: rgba(8, 126, 164, 0.22);
+            background: rgba(240, 249, 255, 0.94);
+            color: #075985;
+            box-shadow: 0 5px 16px rgba(15, 55, 82, 0.14);
+        }
+
+        .apps-button:hover,
+        .account-button:hover,
+        .google-account-option:hover,
+        .another-account-option:hover,
+        .app-tile:hover {
+            border-color: rgba(8, 126, 164, 0.3);
+            background: #e0f2fe;
+        }
+
+        .chooser-card h2,
+        .login-form label,
+        .account-menu-name {
+            color: var(--image-ink);
+        }
+
+        .login-card p,
+        .chooser-card p,
+        .chooser-account-email,
+        .account-menu-email {
+            color: var(--image-muted);
+        }
+
+        .copy-btn.copied {
+            background: #0e7490;
+            color: #ffffff;
+        }
+
+        .moon {
+            color: #e0f2fe;
+        }
+
+        .sun {
+            color: #dbeafe;
+        }
+
+        body.dark-mode .note-box,
+        body.dark-mode .app-content .note-box {
+            background: rgba(9, 27, 46, 0.62);
+            border-color: var(--image-night-edge);
+        }
+
+        body.dark-mode .login-card,
+        body.dark-mode .chooser-card,
+        body.dark-mode .quiz-card,
+        body.dark-mode .add-form,
+        body.dark-mode .account-menu,
+        body.dark-mode .ai-chat-panel,
+        body.dark-mode .quick-note-sheet {
+            background: rgba(9, 27, 46, 0.92);
+        }
+
+        body.dark-mode .apps-button,
+        body.dark-mode .account-button,
+        body.dark-mode .app-content .apps-button,
+        body.dark-mode .app-content .account-button {
+            border-color: var(--image-night-edge);
+            background: rgba(13, 39, 62, 0.92);
+            color: #dff5ff;
+            box-shadow: 0 6px 18px rgba(0, 8, 18, 0.26);
+        }
+
+        body.dark-mode .apps-button:hover,
+        body.dark-mode .account-button:hover,
+        body.dark-mode .app-content .apps-button:hover,
+        body.dark-mode .app-content .account-button:hover,
+        body.dark-mode .google-account-option:hover,
+        body.dark-mode .another-account-option:hover,
+        body.dark-mode .app-tile:hover,
+        body.dark-mode .app-content .app-tile:hover {
+            border-color: rgba(125, 211, 252, 0.42);
+            background: #164e6b;
+            color: #f0f9ff;
+        }
+
+        body.dark-mode .app-content .apps-panel {
+            border-color: var(--image-night-edge);
+            background: rgba(9, 27, 46, 0.94);
+        }
+
+        body.dark-mode .chooser-card h2,
+        body.dark-mode .login-form label,
+        body.dark-mode .account-menu-name {
+            color: #e0f2fe;
+        }
+
+        body.dark-mode .login-card p,
+        body.dark-mode .chooser-card p,
+        body.dark-mode .chooser-account-email,
+        body.dark-mode .account-menu-email {
+            color: #b7d4e5;
+        }
+
+        body {
+            --note-font-scale: 1;
+        }
+
+        body .note-box > h1,
+        body .note-box .content-box h1 {
+            font-size: calc(2.625rem * var(--note-font-scale));
+        }
+
+        body .note-box h2 {
+            font-size: calc(1.625rem * var(--note-font-scale));
+        }
+
+        body .note-box h3 {
+            font-size: calc(1.25rem * var(--note-font-scale));
+        }
+
+        body .note-box p,
+        body .note-box li,
+        body .note-box .intro {
+            font-size: calc(1rem * var(--note-font-scale));
+        }
+
+        body .note-box .intro {
+            font-size: calc(1.125rem * var(--note-font-scale));
+        }
+
+        body .note-box pre,
+        body .note-box code {
+            font-size: calc(0.875rem * var(--note-font-scale));
+        }
+
+        body .note-box pre code {
+            font-size: inherit;
+        }
+
+        body .note-box .note-tag {
+            font-size: calc(0.6875rem * var(--note-font-scale));
+        }
+
+        .study-toolbar button:disabled {
+            cursor: not-allowed;
+            opacity: 0.55;
+        }
+
+        @media (max-width: 768px) {
+            body .note-box > h1,
+            body .note-box .content-box h1 {
+                font-size: calc(2.125rem * var(--note-font-scale));
+            }
+
+            body .note-box h2 {
+                font-size: calc(1.4375rem * var(--note-font-scale));
+            }
+
+            body .note-box .intro {
+                font-size: calc(1rem * var(--note-font-scale));
+            }
+        }
+
+        @media (max-width: 480px) {
+            body .note-box > h1,
+            body .note-box .content-box h1 {
+                font-size: calc(1.75rem * var(--note-font-scale));
+            }
+
+            body .note-box h2 {
+                font-size: calc(1.25rem * var(--note-font-scale));
+            }
+
+            body .note-box p,
+            body .note-box li {
+                font-size: calc(0.875rem * var(--note-font-scale));
+            }
+
+            body .note-box .intro {
+                font-size: calc(0.9375rem * var(--note-font-scale));
+            }
+
+            body .note-box pre,
+            body .note-box code {
+                font-size: calc(0.75rem * var(--note-font-scale));
+            }
+        }
     </style>
 </head>
 
@@ -2695,8 +3166,10 @@
                                 class="bi bi-star"></i> Favorites</button>
                         <button type="button" onclick="toggleRecent(); closeToolbarMenu();"><i
                                 class="bi bi-clock-history"></i> Recent</button>
-                        <button type="button" onclick="changeFontSize(-1); closeToolbarMenu();">A-</button>
-                        <button type="button" onclick="changeFontSize(1); closeToolbarMenu();">A+</button>
+                        <button type="button" id="fontSizeDecrease" aria-label="Decrease note text size"
+                            title="Decrease note text size" onclick="changeFontSize(-1); closeToolbarMenu();">A-</button>
+                        <button type="button" id="fontSizeIncrease" aria-label="Increase note text size"
+                            title="Increase note text size" onclick="changeFontSize(1); closeToolbarMenu();">A+</button>
                         <button type="button" onclick="openQuiz(); closeToolbarMenu();"><i
                                 class="bi bi-patch-question"></i> Quiz</button>
                         <button type="button" onclick="exportNotes(); closeToolbarMenu();"><i
@@ -3213,6 +3686,900 @@
                     </div>
                 </div>
 
+                <div class="content-box">
+                    <h2>what is Make Some Section?with example.</h2>
+                    <p>
+                        In React, you can create different sections of your application by using components. Each section can
+                        be represented by a separate component, which can be reused and organized as needed.</p>
+                    <div class="code-box">
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            Copy
+                        </button>
+                        <pre><code>
+                        // Example of creating sections using React components
+
+                        import React from 'react';
+
+                        function Header() {
+                            return &lt;header&gt;&lt;h1&gt;Header Section&lt;/h1&gt;&lt;/header&gt;;
+                        }
+
+                        function MainContent() {
+                            return &lt;main&gt;&lt;p&gt;This is the main content section.&lt;/p&gt;&lt;/main&gt;;
+                        }
+
+                        function Footer() {
+                            return &lt;footer&gt;&lt;p&gt;Footer Section&lt;/p&gt;&lt;/footer&gt;;
+                        }
+
+                        function App() {
+                            return (
+                                &lt;div&gt;
+                                    &lt;Header /&gt;
+                                    &lt;MainContent /&gt;
+                                    &lt;Footer /&gt;
+                                &lt;/div&gt;
+                            );
+                        }
+
+                        export default App;</code>
+                        </pre>
+                    </div>
+
+                </div>
+
+                <div class="content-box">
+                    <h2>How to attach image-make some section?with example.</h2>
+                    <p>
+                        To attach an image in React, you can use the &lt;img&gt; tag and specify the source of the image using the `src` attribute.
+                    </p>
+                    <div class="code-box">
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            Copy
+                        </button>
+                        <pre><code>
+                            &lt;img src="path/to/image.jpg" alt="Description of the image" /&gt;
+                        </code>
+                        </pre>
+                    </div>
+                </div>
+
+                <div class="content-box">
+                    <h2>what is Header , slider, footer, sections?with example.</h2>
+                    <p>
+                        In React, a Header is a component that typically contains the title and navigation links for a webpage. A Slider is a component that allows users to select a value from a range of options. A Footer is a component that contains information about the webpage, such as copyright information or links to related pages. Sections are used to organize content on the page.
+                    </p>
+                    <div class="code-box">
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            Copy
+                        </button>
+                        <pre><code>
+                        // Example of Header, Slider, Footer, and Sections in React
+
+                        import React from 'react';
+
+                        function Header() {
+                            return &lt;header&gt;&lt;h1&gt;My Website&lt;/h1&gt;&lt;/header&gt;;
+                        }
+
+                        function Slider() {
+                            return &lt;input type="range" min="1" max="100" /&gt;;
+                        }
+
+                        function Footer() {
+                            return &lt;footer&gt;&lt;p&gt;© 2024 My Website&lt;/p&gt;&lt;/footer&gt;;
+                        }
+
+                        function Section({ title, content }) {
+                            return (
+                                &lt;section&gt;
+                                    &lt;h2&gt;{title}&lt;/h2&gt;
+                                    &lt;p&gt;{content}&lt;/p&gt;
+                                &lt;/section&gt;
+                            );
+                        }
+
+                        function App() {
+                            return (
+                                &lt;div&gt;
+                                    &lt;Header /&gt;
+                                    &lt;Slider /&gt;
+                                    &lt;Section title="About Us" content="This is the about section." /&gt;
+                                    &lt;Section title="Services" content="This is the services section." /&gt;
+                                    &lt;Footer /&gt;
+                                &lt;/div&gt;
+                            );
+                        }
+
+                        export default App;</code></pre>
+                    </div>
+                </div>
+
+                <div class="content-box">
+                    <h2>Installation of Bootstrap?with examples</h2>
+                    <p>
+                        To install Bootstrap in a React project, you can use npm or yarn. After installation, you can import the Bootstrap CSS into your React component to use its styles.
+                    </p>
+                    <div class="code-box">
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            Copy
+                        </button>
+                        <pre><code>
+                        // Example of installing Bootstrap in a React project
+
+                        // Using npm
+                        npm install bootstrap
+
+                        // Using yarn
+                        yarn add bootstrap
+
+                        // Importing Bootstrap CSS in your React component
+                        import 'bootstrap/dist/css/bootstrap.min.css';
+                        </code></pre>
+                    </div>
+                </div>
+
+                <div class="content-box">
+                    <h2>Bootstrap use different Components</h2>
+                    <p>
+                        Bootstrap provides a variety of pre-designed components that you can use to build your React application. These components include buttons, cards, forms, navigation bars, and more.
+                    </p>
+                </div>
+
+                <div class="content-box">
+                    <h2>what is Make a form using BT ( Name, email, Password, Phone)?with examples.</h2>
+                    <p>
+                        You can create a form in React using Bootstrap components. Below is an example of a simple form that includes fields for Name, Email, Password, and Phone.
+                    </p>
+                    <div class="code-box">
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            Copy
+                        </button>
+                        <pre><code>
+                        // Example of a form using Bootstrap in React
+
+                        import React from 'react';
+                        import 'bootstrap/dist/css/bootstrap.min.css';
+
+                        function MyForm() {
+                            return (
+                                &lt;form className="p-3"&gt;
+                                    &lt;div className="mb-3"&gt;
+                                        &lt;label htmlFor="name" className="form-label"&gt;Name&lt;/label&gt;
+                                        &lt;input type="text" className="form-control" id="name" placeholder="Enter your name" /&gt;
+                                    &lt;/div&gt;
+                                    &lt;div className="mb-3"&gt;
+                                        &lt;label htmlFor="email" className="form-label"&gt;Email&lt;/label&gt;
+                                        &lt;input type="email" className="form-control" id="email" placeholder="Enter your email" /&gt;
+                                    &lt;/div&gt;
+                                    &lt;div className="mb-3"&gt;
+                                        &lt;label htmlFor="password" className="form-label"&gt;Password&lt;/label&gt;
+                                        &lt;input type="password" className="form-control" id="password" placeholder="Enter your password" /&gt;
+                                    &lt;/div&gt;
+                                    &lt;div className="mb-3"&gt;
+                                        &lt;label htmlFor="phone" className="form-label"&gt;Phone&lt;/label&gt;
+                                        &lt;input type="tel" className="form-control" id="phone" placeholder="Enter your phone number" /&gt;
+                                    &lt;/div&gt;
+                                    &lt;button type="submit" className="btn btn-primary"&gt;Submit&lt;/button&gt;
+                                &lt;/form&gt;
+                            );
+                        }
+
+                        export default MyForm;</code></pre>
+                    </div>
+                </div>
+
+                <div class="content-box">
+                    <h2>what is Controlled and Uncontrolled Form?with examples.</h2>
+                    <p>
+                        In React, a controlled form is one where the form data is handled by the component's state. The input values are set through state and updated via event handlers. An uncontrolled form, on the other hand, uses the DOM to handle form data, and you access the values using refs.
+
+                    </p>
+                    <div class="code-box">
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            Copy
+                        </button>
+                        <pre><code>
+                        // Example of a controlled form in React
+
+                        import React, { useState } from 'react';
+
+                        function ControlledForm() {
+                            const [name, setName] = useState('');
+
+                            const handleSubmit = (e) => {
+                                e.preventDefault();
+                                alert(`Name: ${name}`);
+                            };
+
+                            return (
+                                &lt;form onSubmit={handleSubmit}&gt;
+                                    &lt;input
+                                        type="text"
+                                        value={name}
+                                        onChange={(e) =&gt; setName(e.target.value)}
+                                        placeholder="Enter your name"
+                                    /&gt;
+                                    &lt;button type="submit"&gt;Submit&lt;/button&gt;
+                                &lt;/form&gt;
+                            );
+                        }
+
+                        export default ControlledForm;</code></pre>
+                    </div>
+                </div>
+
+                <div class="content-box">
+                    <h2>how to  Insert data into Next.JS? with examples.</h2>
+                    <p>
+                        In Next.js, you can insert data into your application using various methods such as API routes, database connections, or external APIs. Here are some examples:
+                    </p>
+                    <div class="code-box">
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            Copy
+                        </button>
+                        <pre><code>
+                        // Example of inserting data using a Next.js API route
+
+                        // pages/api/insertData.js
+                        export default function handler(req, res) {
+                            if (req.method === 'POST') {
+                                const { name, email } = req.body;
+                                // Insert data into your database or perform other operations
+                                res.status(200).json({ message: 'Data inserted successfully' });
+                            } else {
+                                res.status(405).json({ message: 'Method not allowed' });
+                            }
+                        }</code></pre>
+                    </div>
+                </div>
+                
+                <div class="content-box">
+                    <h2>what is View using useEffect in Single Page?with examples.</h2>
+                    <p>
+                        In a single-page application (SPA) built with React, you can use the <strong>useEffect</strong> hook to manage side effects such as fetching data or updating the view when certain state variables change. This allows you to dynamically update the content displayed on the page without requiring a full page reload.
+                    </p>
+                    <div class="code-box">
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            Copy
+                        </button>
+                        <pre><code>
+                        // Example of using useEffect to update the view in a single-page application
+
+                        import React, { useState, useEffect } from 'react';
+
+                        function UserProfile({ userId }) {
+                            const [userData, setUserData] = useState(null);
+
+                            useEffect(() => {
+                                // Fetch user data when the component mounts or when userId changes
+                                fetch(`https://api.example.com/users/${userId}`)
+                                    .then(response => response.json())
+                                    .then(data => setUserData(data));
+                            }, [userId]); // Dependency array includes userId
+
+                            if (!userData) {
+                                return &lt;p&gt;Loading...&lt;/p&gt;;
+                            }
+
+                            return (
+                                &lt;div&gt;
+                                    &lt;h2&gt;{userData.name}&lt;/h2&gt;
+                                    &lt;p&gt;Email: {userData.email}&lt;/p&gt;
+                                    &lt;p&gt;Phone: {userData.phone}&lt;/p&gt;
+                                &lt;/div&gt;
+                            );
+                        }
+
+                        export default UserProfile;</code></pre>
+                    </div>
+                </div>
+
+                <div class="content-box">
+                    <h2>what is Delete Record from data?with examples.</h2>
+                    <p>
+                        In a React application, you can delete a record from your data by making an API call to your backend server or by updating the state in your component. Below is an example of how to delete a record using a button click event.
+                    </p>
+                    <div class="code-box">
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            Copy
+                        </button>
+                        <pre><code>
+                        // Example of deleting a record in a React component
+
+                        import React, { useState } from 'react';
+
+                        function RecordList() {
+                            const [records, setRecords] = useState([
+                                { id: 1, name: 'Record 1' },
+                                { id: 2, name: 'Record 2' },
+                                { id: 3, name: 'Record 3' },
+                            ]);
+
+                            const deleteRecord = (id) => {
+                                // Make an API call to delete the record from the backend
+                                fetch(`https://api.example.com/records/${id}`, {
+                                    method: 'DELETE',
+                                })
+                                    .then(response => response.json())
+                                    .then(() => {
+                                        // Update the state to remove the deleted record
+                                        setRecords(records.filter(record => record.id !== id));
+                                    });
+                            };
+
+                            return (
+                                &lt;div&gt;
+                                    &lt;h2&gt;Record List&lt;/h2&gt;
+                                    &lt;ul&gt;
+                                        {records.map(record =&gt; (
+                                            &lt;li key={record.id}&gt;
+                                                {record.name}
+                                                &lt;button onClick={() =&gt; deleteRecord(record.id)}&gt;Delete&lt;/button&gt;
+                                            &lt;/li&gt;
+                                        ))}
+                                    &lt;/ul&gt;
+                                &lt;/div&gt;
+                            );
+                        }
+
+                        export default RecordList;</code></pre>
+                    </div>
+                </div>
+
+                <div class="content-box">
+                    <h2>what is Update Record From Data?with example.</h2>
+                    <p>
+                        In a React application, you can update a record in your data by making an API call to your backend server or by updating the state in your component. Below is an example of how to update a record using a button click event.
+                    </p>
+                    <div class="code-box">
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            Copy
+                        </button>
+                        <pre><code>
+                        // Example of updating a record in a React component
+
+                        import React, { useState } from 'react';
+
+                        function RecordList() {
+                            const [records, setRecords] = useState([
+                                { id: 1, name: 'Record 1' },
+                                { id: 2, name: 'Record 2' },
+                                { id: 3, name: 'Record 3' },
+                            ]);
+
+                            const updateRecord = (id, updatedData) => {
+                                // Make an API call to update the record on the backend
+                                fetch(`https://api.example.com/records/${id}`, {
+                                    method: 'PUT',
+                                    headers: {
+                                        'Content-Type': 'application/json'
+                                    },
+                                    body: JSON.stringify(updatedData)
+                                })
+                                    .then(response => response.json())
+                                    .then(() => {
+                                        // Update the state to reflect the changes
+                                        setRecords(records.map(record => record.id === id ? { ...record, ...updatedData } : record));
+                                    });
+                            };
+
+                            return (
+                                &lt;div&gt;
+                                    &lt;h2&gt;Record List&lt;/h2&gt;
+                                    &lt;ul&gt;
+                                        {records.map(record =&gt; (
+                                            &lt;li key={record.id}&gt;
+                                                {record.name}
+                                                &lt;button onClick={() =&gt; updateRecord(record.id, { name: 'Updated Record' })}&gt;Update&lt;/button&gt;
+                                            &lt;/li&gt;
+                                        ))}
+                                    &lt;/ul&gt;
+                                &lt;/div&gt;
+                            );
+                        }
+
+                        export default RecordList;</code></pre>
+                    </div>
+                </div>
+
+                <div class="content-box">
+                    <h2>what is Add Fields Like (Gender, Checkbox and Selection)?with example.</h2>
+                    <p>
+                        In a React form, you can add various input fields such as gender selection (radio buttons), checkboxes, and dropdown selections. Below is an example of how to implement these fields in a form.
+                    </p>
+                    <div class="code-box">
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            Copy
+                        </button>
+                        <pre><code>
+                        // Example of adding gender, checkbox, and selection fields in a React form
+
+                        import React, { useState } from 'react';
+
+                        function MyForm() {
+                            const [gender, setGender] = useState('');
+                            const [subscribe, setSubscribe] = useState(false);
+                            const [country, setCountry] = useState('');
+
+                            const handleSubmit = (e) => {
+                                e.preventDefault();
+                                alert(`Gender: ${gender}, Subscribe: ${subscribe}, Country: ${country}`);
+                            };
+
+                            return (
+                                &lt;form onSubmit={handleSubmit}&gt;
+                                    &lt;div&gt;
+                                        &lt;label&gt;Gender:&lt;/label&gt;
+                                        &lt;input type="radio" name="gender" value="Male" onChange={(e) =&gt; setGender(e.target.value)} /&gt; Male
+                                        &lt;input type="radio" name="gender" value="Female" onChange={(e) =&gt; setGender(e.target.value)} /&gt; Female
+                                    &lt;/div&gt;
+
+                                    &lt;div&gt;
+                                        &lt;label&gt;&lt;input type="checkbox" checked={subscribe} onChange={(e) =&gt; setSubscribe(e.target.checked)} /&gt; Subscribe to newsletter&lt;/label&gt;
+                                    &lt;/div&gt;
+
+                                    &lt;div&gt;
+                                        &lt;label&gt;Country:&lt;/label&gt;
+                                        &lt;select value={country} onChange={(e) =&gt; setCountry(e.target.value)}&gt;
+                                            &lt;option value=""&gt;Select Country&lt;/option&gt;
+                                            &lt;option value="USA"&gt;USA&lt;/option&gt;
+                                            &lt;option value="Canada"&gt;Canada&lt;/option&gt;
+                                            &lt;option value="UK"&gt;UK&lt;/option&gt;
+                                        &lt;/select&gt;
+                                    &lt;/div&gt;
+
+                                    &lt;button type="submit"&gt;Submit&lt;/button&gt;
+                                &lt;/form&gt;
+                            );
+                        }
+
+                        export default MyForm;</code></pre>
+                    </div>
+                </div>
+
+                <div class="content-box">
+                    <h2>what is Also Perform CRUD with Above fields?withe example.</h2>
+                    <p>
+                        In a React application, you can perform CRUD (Create, Read, Update, Delete) operations using the fields mentioned above (gender, checkbox, and selection). Below is an example of how to implement CRUD functionality in a simple form.
+                    </p>
+                    <div class="code-box">
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            Copy
+                        </button>
+                        <pre><code>
+                        // Example of performing CRUD operations with gender, checkbox, and selection fields in React
+
+                        import React, { useState } from 'react';
+
+                        function CRUDForm() {
+                            const [records, setRecords] = useState([]);
+                            const [gender, setGender] = useState('');
+                            const [subscribe, setSubscribe] = useState(false);
+                            const [country, setCountry] = useState('');
+
+                            const handleSubmit = (e) => {
+                                e.preventDefault();
+                                const newRecord = { gender, subscribe, country };
+                                setRecords([...records, newRecord]);
+                                setGender('');
+                                setSubscribe(false);
+                                setCountry('');
+                            };
+
+                            const handleDelete = (index) => {
+                                const updatedRecords = records.filter((_, i) => i !== index);
+                                setRecords(updatedRecords);
+                            };
+
+                            return (
+                                &lt;div&gt;
+                                    &lt;form onSubmit={handleSubmit}&gt;
+                                        &lt;div&gt;
+                                            &lt;label&gt;Gender:&lt;/label&gt;
+                                            &lt;input type="radio" name="gender" value="Male" onChange={(e) =&gt; setGender(e.target.value)} /&gt; Male
+                                            &lt;input type="radio" name="gender" value="Female" onChange={(e) =&gt; setGender(e.target.value)} /&gt; Female
+                                        &lt;/div&gt;
+
+                                        &lt;div&gt;
+                                            &lt;label&gt;&lt;input type="checkbox" checked={subscribe} onChange={(e) =&gt; setSubscribe(e.target.checked)} /&gt; Subscribe to newsletter&lt;/label&gt;
+                                        &lt;/div&gt;
+
+                                        &lt;div&gt;
+                                            &lt;label&gt;Country:&lt;/label&gt;
+                                            &lt;select value={country} onChange={(e) =&gt; setCountry(e.target.value)}&gt;
+                                                &lt;option value=""&gt;Select Country&lt;/option&gt;
+                                                &lt;option value="USA"&gt;USA&lt;/option&gt;
+                                                &lt;option value="Canada"&gt;Canada&lt;/option&gt;
+                                                &lt;option value="UK"&gt;UK&lt;/option&gt;
+                                            &lt;/select&gt;
+                                        &lt;/div&gt;
+                                    &lt;/form&gt;
+                                &lt;/div&gt;
+                            );
+                        }
+
+                        export default CRUDForm;
+                        </code></pre>
+                    </div>
+
+                </div>
+
+                <div class="content-box">
+                    <h2>what is Validate the all fields given in Form?with example.</h2>
+                    <p>
+                        In a React form, you can validate the input fields to ensure that the user provides the required information in the correct format. Below is an example of how to validate all fields in a form, including gender, checkbox, and selection fields.
+                    </p>
+                    <div class="code-box">
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            Copy
+                        </button>
+                        <pre><code>
+                        // Example of validating all fields in a React form
+
+                        import React, { useState } from 'react';
+
+                        function ValidatedForm() {
+                            const [gender, setGender] = useState('');
+                            const [subscribe, setSubscribe] = useState(false);
+                            const [country, setCountry] = useState('');
+                            const [errors, setErrors] = useState({});
+
+                            const validate = () => {
+                                const newErrors = {};
+                                if (!gender) newErrors.gender = 'Gender is required.';
+                                if (!country) newErrors.country = 'Country is required.';
+                                return newErrors;
+                            };
+
+                            const handleSubmit = (e) => {
+                                e.preventDefault();
+                                const validationErrors = validate();
+                                if (Object.keys(validationErrors).length > 0) {
+                                    setErrors(validationErrors);
+                                } else {
+                                    alert(`Gender: ${gender}, Subscribe: ${subscribe}, Country: ${country}`);
+                                    setGender('');
+                                    setSubscribe(false);
+                                    setCountry('');
+                                    setErrors({});
+                                }
+                            };
+
+                            return (
+                                &lt;form onSubmit={handleSubmit}&gt;
+                                    &lt;div&gt;
+                                        &lt;label&gt;Gender:&lt;/label&gt;
+                                        &lt;input type="radio" name="gender" value="Male" onChange={(e) =&gt; setGender(e.target.value)} /&gt; Male
+                                        &lt;input type="radio" name="gender" value="Female" onChange={(e) =&gt; setGender(e.target.value)} /&gt; Female
+                                        {errors.gender && &lt;p style={{ color: 'red' }}&gt;{errors.gender}&lt;/p&gt;}
+                                    &lt;/div&gt;
+
+                                    &lt;div&gt;
+                                        &lt;label&gt;&lt;input type="checkbox" checked={subscribe} onChange={(e) =&gt; setSubscribe(e.target.checked)} /&gt; Subscribe to newsletter&lt;/label&gt;
+                                    &lt;/div&gt;
+
+                                    &lt;div&gt;
+                                        &lt;label&gt;Country:&lt;/label&gt;
+                                        &lt;select value={country} onChange={(e) =&gt; setCountry(e.target.value)}&gt;
+
+                                            &lt;option value=""&gt;Select Country&lt;/option&gt;
+                                            &lt;option value="USA"&gt;USA&lt;/option&gt;
+                                            &lt;option value="Canada"&gt;Canada&lt;/option&gt;
+                                            &lt;option value="UK"&gt;UK&lt;/option&gt;
+                                        &lt;/select&gt;
+                                        {errors.country && &lt;p style={{ color: 'red' }}&gt;{errors.country}&lt;/p&gt;}
+                                    &lt;/div&gt;
+                                    &lt;button type="submit"&gt;Submit&lt;/button&gt;
+                                &lt;/form&gt;
+                            );
+                        }
+                        </code></pre>
+                    </div>
+                </div>
+
+                <div class="content-box">
+                    <h2>what is Searching and Sorting?with examples.</h2>
+                    <p>
+                        In a React application, you can implement searching and sorting functionality to allow users to filter and organize data. Below is an example of how to implement searching and sorting in a list of items.
+                    </p>
+                    <div class="code-box">
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            Copy
+                        </button>
+                        <pre><code>
+                        // Example of searching and sorting in a React component
+
+                        import React, { useState } from 'react';
+
+                        function SearchSortList() {
+                            const [items, setItems] = useState([
+                                { id: 1, name: 'Banana' },
+                                { id: 2, name: 'Apple' },
+                                { id: 3, name: 'Orange' },
+                                { id: 4, name: 'Mango' },
+                            ]);
+                            const [searchTerm, setSearchTerm] = useState('');
+                            const [sortOrder, setSortOrder] = useState('asc');
+
+                            const handleSearch = (e) => {
+                                setSearchTerm(e.target.value);
+                            };
+
+                            const handleSort = () => {
+                                const sortedItems = [...items].sort((a, b) => {
+                                    if (sortOrder === 'asc') {
+                                        return a.name.localeCompare(b.name);
+                                    } else {
+                                        return b.name.localeCompare(a.name);
+                                    }
+                                });
+                                setItems(sortedItems);
+                                setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
+                            };
+
+                            const filteredItems = items.filter(item =>
+                                item.name.toLowerCase().includes(searchTerm.toLowerCase())
+                            );
+
+                            return (
+                                &lt;div&gt;
+                                    &lt;input
+                                        type="text"
+                                        placeholder="Search..."
+                                        value={searchTerm}
+                                        onChange={handleSearch}
+                                    /&gt;
+                                    &lt;button onClick={handleSort}&gt;Sort ({sortOrder})&lt;/button&gt;
+                                    &lt;ul&gt;
+                                        {filteredItems.map(item =&gt; (
+                                            &lt;li key={item.id}&gt;{item.name}&lt;/li&gt;
+                                        ))}
+                                    &lt;/ul&gt;
+                                &lt;/div&gt;
+                            );
+                        }
+
+                        export default SearchSortList;</code></pre>
+                    </div>
+                </div>
+
+                <div class="content-box">
+                    <h2>what is peform Pagination?with examples.</h2>
+                    <p>
+                        Pagination is a technique used to divide content into discrete pages, making it easier for users to navigate through large datasets. In a React application, you can implement pagination by managing the current page state and displaying a subset of data based on that state.
+                    </p>
+                    <div class="code-box">
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            Copy
+                        </button>
+                        <pre><code>
+                        // Example of implementing pagination in a React component
+
+                        import React, { useState } from 'react';
+
+                        function PaginatedList() {
+                            const itemsPerPage = 5;
+                            const [currentPage, setCurrentPage] = useState(1);
+                            const items = Array.from({ length: 50 }, (_, i) => `Item ${i + 1}`);
+
+                            const indexOfLastItem = currentPage * itemsPerPage;
+                            const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+                            const currentItems = items.slice(indexOfFirstItem, indexOfLastItem);
+
+                            const totalPages = Math.ceil(items.length / itemsPerPage);
+
+                            const handleNextPage = () => {
+                                if (currentPage < totalPages) {
+                                    setCurrentPage(currentPage + 1);
+                                }
+                            };
+
+                            const handlePrevPage = () => {
+                                if (currentPage > 1) {
+                                    setCurrentPage(currentPage - 1);
+                                }
+                            };
+
+                            return (
+                                &lt;div&gt;
+                                    &lt;ul&gt;
+                                        {currentItems.map((item, index) =&gt; (
+                                            &lt;li key={index}&gt;{item}&lt;/li&gt;
+                                        ))}
+                                    &lt;/ul&gt;
+                                    &lt;button onClick={handlePrevPage} disabled={currentPage === 1}&gt;Previous&lt;/button&gt;
+                                    &lt;button onClick={handleNextPage} disabled={currentPage === totalPages}&gt;Next&lt;/button&gt;
+                                    &lt;p&gt;Page {currentPage} of {totalPages}&lt;/p&gt;
+                                &lt;/div&gt;
+                            );
+                        }
+
+                        export default PaginatedList;</code></pre>
+                    </div>
+                </div>
+
+                <div class="content-box">
+                    <h2>what is Make Form using BT with below fields (name, email, password, phone, gender, checkbox, selection)-validate the form?with examples.</h2>
+                    <p>
+                        In a React application, you can create a form using Bootstrap (BT) that includes fields for name, email, password, phone, gender, checkbox, and selection. You can also validate the form to ensure that all required fields are filled out correctly. Below is an example of how to implement this.
+                    </p>
+                    <div class="code-box">
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            Copy
+                        </button>
+                        <pre><code>
+                            // Example of a Bootstrap form with validation in React
+
+                            import React, { useState } from 'react';
+                            import 'bootstrap/dist/css/bootstrap.min.css';
+
+                            function BootstrapForm() {
+                            const [formData, setFormData] = useState({
+                                name: '',
+                                email: '',
+                                password: '',
+                                phone: '',
+                                gender: '',
+                                subscribe: false,
+                                country: ''
+                            });
+                            const [errors, setErrors] = useState({});
+
+                            const handleChange = (e) => {
+                                const { name, value, type, checked } = e.target;
+                                setFormData({
+                                    ...formData,
+                                    [name]: type === 'checkbox' ? checked : value
+                                });
+                            };
+
+                            const validate = () => {
+                                const newErrors = {};
+                                if (!formData.name) newErrors.name = 'Name is required.';
+                                if (!formData.email) newErrors.email = 'Email is required.';
+                                if (!formData.password) newErrors.password = 'Password is required.';
+                                if (!formData.phone) newErrors.phone = 'Phone number is required.';
+                                if (!formData.gender) newErrors.gender = 'Gender is required.';
+                                if (!formData.country) newErrors.country = 'Country is required.';
+                                return newErrors;
+                            };
+
+                            const handleSubmit = (e) => {
+                                e.preventDefault();
+                                const validationErrors = validate();
+                                if (Object.keys(validationErrors).length > 0) {
+                                    setErrors(validationErrors);
+                                } else {
+                                    alert('Form submitted successfully!');
+                                    setFormData({
+                                        name: '',
+                                        email: '',
+                                        password: '',
+                                        phone: '',
+                                        gender: '',
+                                        subscribe: false,
+                                        country: ''
+                                    });
+                                    setErrors({});
+                                }
+                            };
+
+                            return (
+                                &lt;form onSubmit={handleSubmit} className="p-3"&gt;
+                                    &lt;div className="mb-3"&gt;
+                                        &lt;label htmlFor="name" className="form-label"&gt;Name&lt;/label&gt;
+                                        &lt;input
+                                            type="text"
+                                            className={`form-control ${errors.name ? 'is-invalid' : ''}`}
+                                            id="name"
+                                            name="name"
+                                            value={formData.name}
+                                            onChange={handleChange}
+                                        />
+                                        {errors.name && &lt;div className="invalid-feedback">{errors.name}&lt;/div&gt;}
+                                    &lt;/div&gt;
+                                    &lt;div className="mb-3"&gt;
+                                        &lt;label htmlFor="email" className="form-label"&gt;Email&lt;/label&gt;
+                                        &lt;input
+                                            type="email"
+                                            className={`form-control ${errors.email ? 'is-invalid' : ''}`}
+                                            id="email"
+                                            name="email"
+                                            value={formData.email}
+                                            onChange={handleChange}
+                                        />
+                                        {errors.email && &lt;div className="invalid-feedback">{errors.email}&lt;/div&gt;}
+                                    &lt;/div&gt;
+                                    &lt;div className="mb-3"&gt;
+                                        &lt;label htmlFor="password" className="form-label"&gt;Password&lt;/label&gt;
+                                        &lt;input
+                                            type="password"
+                                            className={`form-control ${errors.password ? 'is-invalid' : ''}`}
+                                            id="password"
+                                            name="password"
+                                            value={formData.password}
+                                            onChange={handleChange}
+                                        />
+                                        {errors.password && &lt;div className="invalid-feedback">{errors.password}&lt;/div&gt;}
+                                    &lt;/div&gt;
+                                    &lt;div className="mb-3"&gt;
+                                        &lt;label htmlFor="phone" className="form-label"&gt;Phone&lt;/label&gt;
+                                        &lt;input
+                                            type="tel"
+                                            className={`form-control ${errors.phone ? 'is-invalid' : ''}`}
+                                            id="phone"
+                                            name="phone"
+                                            value={formData.phone}
+                                            onChange={handleChange}
+                                        />
+                                        {errors.phone && &lt;div&gt; className="invalid-feedback">{errors.phone}&lt;/div&gt;}
+                                    &lt;/div&gt;
+                                    &lt;div className="mb-3"&gt;
+                                        &lt;label className="form-label"&gt;Gender&lt;/label&gt;&lt;br /&gt;
+                                        &lt;div className="form-check form-check-inline"&gt;
+                                            &lt;input
+                                                className={`form-check-input ${errors.gender ? 'is-invalid' : ''}`}
+                                                type="radio"
+                                                name="gender"
+                                                id="male"
+                                                value="Male"
+                                                checked={formData.gender === 'Male'}
+                                                onChange={handleChange}
+                                            /&gt;
+                                            &lt;label className="form-check-label" htmlFor="male"&gt;Male&lt;/label&gt;
+                                        &lt;/div&gt;
+                                        &lt;div className="form-check form-check-inline"&gt;
+                                            &lt;input
+                                                className={`form-check-input ${errors.gender ? 'is-invalid' : ''}`}
+                                                type="radio"
+                                                name="gender"
+                                                id="female"
+                                                value="Female"
+                                                checked={formData.gender === 'Female'}
+                                                onChange={handleChange}
+                                            /&gt;
+                                            &lt;label className="form-check-label" htmlFor="female"&gt;Female&lt;/label&gt;
+                                        &lt;/div&gt;
+                                        {errors.gender && &lt;div&gt; className="invalid-feedback d-block">{errors.gender}&lt;/div&gt;}
+                                    &lt;/div&gt;
+                                    &lt;div className="mb-3"&gt;
+                                        &lt;div className="form-check"&gt;
+                                            &lt;input
+                                                className="form-check-input"
+                                                type="checkbox"
+                                                id="subscribe"
+                                                name="subscribe"
+                                                checked={formData.subscribe}
+                                                onChange={handleChange}
+                                            /&gt;
+                                            &lt;label className="form-check-label" htmlFor="subscribe"&gt;Subscribe to newsletter&lt;/label&gt;
+                                        &lt;/div&gt;
+                                    &lt;/div&gt;
+                                    &lt;div className="mb-3"&gt;
+                                        &lt;label htmlFor="country" className="form-label"&gt;Country&lt;/label&gt;
+                                        &lt;select
+                                            className={`form-select ${errors.country ? 'is-invalid' : ''}`}
+                                            id="country"
+                                            name="country"
+                                            value={formData.country}
+                                            onChange={handleChange}
+                                        &gt;
+                                            &lt;option value=""&gt;Select Country&lt;/option&gt;
+                                            &lt;option value="USA"&gt;USA&lt;/option&gt;
+                                            &lt;option value="Canada"&gt;Canada&lt;/option&gt;
+                                            &lt;option value="UK"&gt;UK&lt;/option&gt;
+                                        &lt;/select&gt;
+                                        {errors.country && &lt;div&gt; className="invalid-feedback">{errors.country}&lt;/div&gt;}
+                                    &lt;/div&gt;
+                                    &lt;button type="submit" className="btn btn-primary"&gt;Submit&lt;/button&gt;
+                                &lt;/form&gt;
+                                );
+                            }
+                        </code></pre>
+                    </div>
+                </div>
+                                    
 
 
 
@@ -3451,9 +4818,13 @@
                 document.body.classList.add("dark-mode");
             }
 
-            const savedFont = localStorage.getItem("noteInRectFont");
-            document.body.classList.toggle("reading-large", savedFont === "large");
-            document.body.classList.toggle("reading-small", savedFont === "small");
+            const savedScale = Number(localStorage.getItem("noteInRectFontScale"));
+            const legacyFont = localStorage.getItem("noteInRectFont");
+            const initialScale = Number.isFinite(savedScale) && savedScale >= 100
+                ? savedScale
+                : legacyFont === "large" ? 125 : 100;
+            applyFontScale(initialScale);
+            localStorage.removeItem("noteInRectFont");
 
             updateThemeButton();
         }
@@ -3709,10 +5080,30 @@
             if (progress) progress.textContent = percent + "% read";
         }
 
+        function applyFontScale(scale) {
+            const normalizedScale = Math.min(400, Math.max(100, Math.round(scale / 25) * 25));
+            const decreaseButton = document.getElementById("fontSizeDecrease");
+            const increaseButton = document.getElementById("fontSizeIncrease");
+
+            document.body.style.setProperty("--note-font-scale", String(normalizedScale / 100));
+            document.body.dataset.noteFontScale = String(normalizedScale);
+            localStorage.setItem("noteInRectFontScale", String(normalizedScale));
+
+            if (decreaseButton) {
+                decreaseButton.disabled = normalizedScale === 100;
+                decreaseButton.setAttribute("aria-label", `Decrease note text size (currently ${normalizedScale}%)`);
+                decreaseButton.title = `Decrease note text size (currently ${normalizedScale}%)`;
+            }
+            if (increaseButton) {
+                increaseButton.disabled = normalizedScale === 400;
+                increaseButton.setAttribute("aria-label", `Increase note text size (currently ${normalizedScale}%)`);
+                increaseButton.title = `Increase note text size (currently ${normalizedScale}%)`;
+            }
+        }
+
         function changeFontSize(direction) {
-            document.body.classList.toggle("reading-large", direction > 0);
-            document.body.classList.toggle("reading-small", direction < 0);
-            localStorage.setItem("noteInRectFont", direction > 0 ? "large" : "small");
+            const currentScale = Number(document.body.dataset.noteFontScale) || 100;
+            applyFontScale(currentScale + Math.sign(direction) * 25);
         }
 
         function exportNotes() {
