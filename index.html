@@ -3,11 +3,11 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="google" value="notranslate">
     <meta name="robots" content="noindex">
     <meta name="google-site-verification" content="LrdTUW9psUAMbh4Ia074-BPEVmcpBxF6Gwf0MSgQXZs">
-    <title>ReactJS Notes</title>
+    <title>React Notes | Learn, organize, build</title>
     <link rel="icon" type="image/svg+xml" href="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg">
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -2988,6 +2988,938 @@
                 font-size: calc(0.75rem * var(--note-font-scale));
             }
         }
+
+        /* React Notes study-studio refresh */
+        :root {
+            color-scheme: light;
+            --studio-ink: #172c2a;
+            --studio-muted: #647875;
+            --studio-teal: #087f70;
+            --studio-teal-dark: #056657;
+            --studio-paper: #fffefa;
+            --studio-border: rgba(23, 65, 59, 0.12);
+        }
+
+        body {
+            min-height: 100vh;
+            padding: 28px clamp(14px, 3vw, 40px);
+            color: var(--studio-ink);
+            background-color: #f3f0e8;
+            background-image:
+                linear-gradient(145deg, rgba(247, 245, 239, 0.78), rgba(237, 243, 238, 0.82)),
+                radial-gradient(ellipse at 12% 8%, rgba(180, 220, 201, 0.42), transparent 35%),
+                radial-gradient(ellipse at 90% 88%, rgba(246, 205, 169, 0.26), transparent 34%),
+                url("https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=2400&q=85");
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        body.dark-mode {
+            color-scheme: dark;
+            color: #e5efeb;
+            background-color: #101e1c;
+            background-image:
+                linear-gradient(145deg, rgba(12, 25, 23, 0.82), rgba(16, 30, 28, 0.86)),
+                radial-gradient(ellipse at 12% 8%, rgba(12, 89, 73, 0.32), transparent 35%),
+                radial-gradient(ellipse at 90% 88%, rgba(113, 75, 51, 0.16), transparent 34%),
+                url("https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=2400&q=85");
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        .login-screen,
+        .signup-screen {
+            min-height: calc(100vh - 56px);
+            padding: 28px 16px;
+        }
+
+        .login-card,
+        .signup-screen .login-card {
+            position: relative;
+            width: min(440px, 100%);
+            overflow: hidden;
+            padding: 42px clamp(24px, 7vw, 42px) 34px;
+            border: 1px solid var(--studio-border);
+            border-radius: 26px;
+            background: rgba(255, 254, 250, 0.94);
+            text-align: left;
+            box-shadow: 0 28px 80px rgba(32, 60, 50, 0.14), 0 3px 10px rgba(32, 60, 50, 0.04);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+        }
+
+        .login-card::before {
+            position: absolute;
+            inset: 0 0 auto;
+            height: 5px;
+            background: linear-gradient(90deg, #087f70, #83b89a 58%, #e3a878);
+            content: "";
+        }
+
+        .login-logo {
+            width: 54px;
+            height: 54px;
+            margin: 0 0 24px;
+            padding: 10px;
+            border: 1px solid rgba(8, 127, 112, 0.12);
+            border-radius: 17px;
+            background: #e7f3ec;
+        }
+
+        .login-card h1 {
+            margin: 0 0 8px;
+            color: var(--studio-ink);
+            font-family: "Space Grotesk", "Outfit", sans-serif;
+            font-size: clamp(27px, 5vw, 32px);
+            font-weight: 700;
+            letter-spacing: -1.1px;
+            line-height: 1.16;
+            text-align: left;
+        }
+
+        .login-card p {
+            margin: 0 0 24px;
+            color: var(--studio-muted);
+            font-size: 14px;
+        }
+
+        .login-form label {
+            margin: 15px 0 7px;
+            color: #334c47;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .login-form input {
+            min-height: 48px;
+            padding: 12px 14px;
+            border: 1px solid #d8e2db;
+            border-radius: 12px;
+            background: #fbfcf9;
+            color: var(--studio-ink);
+            font-size: 14px;
+            transition: border-color 160ms ease, box-shadow 160ms ease, background 160ms ease;
+        }
+
+        .login-form input:focus {
+            border-color: var(--studio-teal);
+            background: #fff;
+            box-shadow: 0 0 0 4px rgba(8, 127, 112, 0.12);
+        }
+
+        .forgot-password,
+        .signup-button,
+        .chooser-cancel {
+            color: var(--studio-teal-dark);
+        }
+
+        .login-submit {
+            min-height: 49px;
+            margin-top: 22px;
+            border: 0;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #087f70, #096b5c);
+            box-shadow: 0 8px 18px rgba(8, 127, 112, 0.2);
+            font-weight: 700;
+            letter-spacing: 0.15px;
+            transition: transform 160ms ease, box-shadow 160ms ease, filter 160ms ease;
+        }
+
+        .login-submit:hover {
+            background: linear-gradient(135deg, #087f70, #096b5c);
+            filter: brightness(1.06);
+            transform: translateY(-1px);
+            box-shadow: 0 11px 22px rgba(8, 127, 112, 0.25);
+        }
+
+        .login-divider {
+            margin: 21px 0;
+            color: #879691;
+        }
+
+        .google-login {
+            min-height: 46px;
+            border: 1px solid #dce5df;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.72);
+            font-weight: 600;
+        }
+
+        .google-login:hover {
+            background: #f5f8f5;
+        }
+
+        .app-content .top-bar {
+            max-width: 1280px;
+            min-height: 52px;
+            margin-bottom: 18px;
+        }
+
+        .app-content {
+            margin-left: calc(-1 * clamp(14px, 3vw, 40px));
+            margin-right: calc(-1 * clamp(14px, 3vw, 40px));
+        }
+
+        body.scrolled .top-bar {
+            height: 68px;
+            padding: 0 clamp(16px, 4vw, 56px);
+            border-bottom-color: rgba(23, 65, 59, 0.1);
+            background: rgba(247, 247, 241, 0.88);
+            box-shadow: 0 8px 28px rgba(28, 49, 43, 0.08);
+        }
+
+        body.dark-mode.scrolled .top-bar {
+            border-bottom-color: rgba(177, 208, 195, 0.12);
+            background: rgba(16, 30, 28, 0.88);
+        }
+
+        .scroll-title {
+            color: var(--studio-ink);
+            font-family: "Space Grotesk", "Outfit", sans-serif;
+            font-size: 20px;
+            letter-spacing: -0.5px;
+        }
+
+        body.dark-mode .scroll-title {
+            color: #d7eee5;
+        }
+
+        .apps-button,
+        .account-button {
+            width: 44px;
+            height: 44px;
+            border: 1px solid var(--studio-border);
+            background: rgba(255, 254, 250, 0.86);
+            color: var(--studio-ink);
+            box-shadow: 0 5px 16px rgba(28, 49, 43, 0.08);
+            transition: transform 160ms ease, box-shadow 160ms ease;
+        }
+
+        .apps-button:hover,
+        .account-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(28, 49, 43, 0.13);
+        }
+
+        .app-content .note-box {
+            width: min(100%, 1240px);
+            margin: 0 auto 36px;
+            padding: clamp(22px, 4vw, 48px);
+            border: 1px solid var(--studio-border);
+            border-radius: 28px;
+            background: rgba(255, 254, 250, 0.78);
+            box-shadow: 0 22px 64px rgba(35, 66, 55, 0.1);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            transform: none;
+        }
+
+        .app-content .note-box:hover {
+            transform: none;
+            box-shadow: 0 22px 64px rgba(35, 66, 55, 0.1);
+        }
+
+        .app-content .note-box > h1 {
+            margin: 4px 0 24px;
+            color: var(--studio-ink);
+            font-family: "Space Grotesk", "Outfit", sans-serif;
+            font-weight: 700;
+            letter-spacing: -1.8px;
+            text-align: center;
+        }
+
+        .study-toolbar {
+            max-width: none;
+            margin: 0 auto 25px;
+            padding: 12px;
+            border: 1px solid rgba(23, 65, 59, 0.09);
+            border-radius: 18px;
+            background: rgba(241, 246, 239, 0.78);
+        }
+
+        .study-toolbar input,
+        .study-toolbar select,
+        .study-toolbar button,
+        .import-label {
+            min-height: 42px;
+            border-color: #dce6dd;
+            border-radius: 11px;
+            background: #fffefa;
+            color: #334c47;
+            transition: border-color 150ms ease, background 150ms ease, transform 150ms ease;
+        }
+
+        .study-toolbar input:focus,
+        .study-toolbar select:focus {
+            border-color: var(--studio-teal);
+            outline: 3px solid rgba(8, 127, 112, 0.12);
+        }
+
+        .study-toolbar button:hover,
+        .import-label:hover {
+            border-color: rgba(8, 127, 112, 0.34);
+            background: #eaf4ed;
+            transform: translateY(-1px);
+        }
+
+        .app-content .content-box {
+            margin: 14px 0;
+            padding: clamp(18px, 3vw, 28px);
+            border: 1px solid rgba(23, 65, 59, 0.09);
+            border-left: 4px solid #70a88c;
+            border-radius: 18px;
+            background: rgba(255, 255, 252, 0.88);
+            color: var(--studio-ink);
+            box-shadow: 0 7px 22px rgba(35, 66, 55, 0.045);
+            transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+        }
+
+        .app-content .content-box:hover {
+            border-left-color: var(--studio-teal);
+            background: #fffefa;
+            box-shadow: 0 12px 28px rgba(35, 66, 55, 0.09);
+            transform: translateY(-2px);
+        }
+
+        .app-content .content-box h2 {
+            color: #176b5e;
+            font-family: "Space Grotesk", "Outfit", sans-serif;
+            font-weight: 650;
+            letter-spacing: -0.45px;
+        }
+
+        .app-content .content-box p,
+        .app-content .content-box li,
+        .app-content .content-box .intro {
+            color: #435b55;
+            line-height: 1.8;
+        }
+
+        .app-content .content-box pre {
+            overflow-x: auto;
+            border: 1px solid rgba(144, 183, 159, 0.2);
+            border-radius: 14px;
+            background: #172623;
+        }
+
+        .app-content .content-box .code-box pre,
+        .app-content .content-box .code-box pre code {
+            color: #d7e8df;
+        }
+
+        .theme-button,
+        .sticky-note-button,
+        .add-button,
+        .ai-button {
+            border: 1px solid rgba(255, 255, 255, 0.72);
+            background: linear-gradient(145deg, #087f70, #096b5c);
+            box-shadow: 0 10px 26px rgba(8, 91, 77, 0.25);
+        }
+
+        .theme-button:hover,
+        .sticky-note-button:hover,
+        .add-button:hover,
+        .ai-button:hover {
+            background: linear-gradient(145deg, #096b5c, #07594d);
+            box-shadow: 0 13px 30px rgba(8, 91, 77, 0.32);
+        }
+
+        body.dark-mode .login-card,
+        body.dark-mode .signup-screen .login-card {
+            border-color: rgba(175, 211, 193, 0.14);
+            background: rgba(20, 39, 35, 0.96);
+            color: #e5efeb;
+            box-shadow: 0 28px 80px rgba(0, 0, 0, 0.35);
+        }
+
+        body.dark-mode .login-card h1,
+        body.dark-mode .login-form label {
+            color: #e5efeb;
+        }
+
+        body.dark-mode .login-card p {
+            color: #a8beb4;
+        }
+
+        body.dark-mode .login-form input {
+            border-color: #35554b;
+            background: #152d27;
+            color: #e5efeb;
+        }
+
+        body.dark-mode .login-form input:focus {
+            border-color: #55b89d;
+            background: #18332c;
+            box-shadow: 0 0 0 4px rgba(85, 184, 157, 0.16);
+        }
+
+        body.dark-mode .google-login {
+            border-color: #35554b;
+            background: #19342d;
+            color: #e5efeb;
+        }
+
+        body.dark-mode .google-login:hover {
+            background: #214238;
+        }
+
+        body.dark-mode .app-content .note-box {
+            border-color: rgba(175, 211, 193, 0.14);
+            background: rgba(17, 34, 30, 0.82);
+            box-shadow: 0 22px 64px rgba(0, 0, 0, 0.2);
+        }
+
+        body.dark-mode .app-content .note-box > h1 {
+            color: #e4f1ea;
+        }
+
+        body.dark-mode .study-toolbar {
+            border-color: rgba(175, 211, 193, 0.12);
+            background: rgba(24, 48, 41, 0.78);
+        }
+
+        body.dark-mode .study-toolbar input,
+        body.dark-mode .study-toolbar select,
+        body.dark-mode .study-toolbar button,
+        body.dark-mode .import-label {
+            border-color: #35554b;
+            background: #19342d;
+            color: #e0eee7;
+        }
+
+        body.dark-mode .study-toolbar button:hover,
+        body.dark-mode .import-label:hover {
+            border-color: #55b89d;
+            background: #21483c;
+        }
+
+        body.dark-mode .app-content .content-box {
+            border-color: rgba(175, 211, 193, 0.1);
+            border-left-color: #55a787;
+            background: rgba(24, 45, 39, 0.82);
+            color: #e0eee7;
+        }
+
+        body.dark-mode .app-content .content-box:hover {
+            border-left-color: #71c5a5;
+            background: #1b3a31;
+        }
+
+        body.dark-mode .app-content .content-box h2 {
+            color: #8ed3b6;
+        }
+
+        body.dark-mode .app-content .content-box p,
+        body.dark-mode .app-content .content-box li,
+        body.dark-mode .app-content .content-box .intro {
+            color: #c1d4ca;
+        }
+
+        body.dark-mode .theme-button,
+        body.dark-mode .sticky-note-button,
+        body.dark-mode .add-button,
+        body.dark-mode .ai-button {
+            border-color: rgba(142, 211, 182, 0.42);
+            background: linear-gradient(145deg, #176d5b, #124d43) !important;
+            color: #effaf4 !important;
+            box-shadow: 0 10px 26px rgba(0, 0, 0, 0.3);
+        }
+
+        body.dark-mode .theme-button:hover,
+        body.dark-mode .sticky-note-button:hover,
+        body.dark-mode .add-button:hover,
+        body.dark-mode .ai-button:hover {
+            background: linear-gradient(145deg, #21856e, #176d5b) !important;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 14px;
+                background-attachment: scroll;
+            }
+
+            body.dark-mode {
+                background-attachment: scroll;
+            }
+
+            .login-screen,
+            .signup-screen {
+                min-height: calc(100vh - 28px);
+                padding: 14px 4px;
+            }
+
+            .app-content .top-bar {
+                margin-bottom: 12px;
+            }
+
+            .app-content .note-box {
+                border-radius: 22px;
+            }
+
+            .study-toolbar {
+                padding: 9px;
+                border-radius: 15px;
+            }
+
+            .app-content .content-box {
+                border-radius: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding-bottom: 90px;
+            }
+
+            .login-card,
+            .signup-screen .login-card {
+                padding: 34px 23px 27px;
+                border-radius: 22px;
+            }
+
+            .app-content .note-box {
+                padding: 18px 14px;
+                border-radius: 18px;
+            }
+
+            .app-content .note-box > h1 {
+                margin-bottom: 18px;
+                letter-spacing: -1px;
+            }
+
+            body.scrolled .top-bar {
+                height: 60px;
+                padding: 0 14px;
+            }
+
+            body::after {
+                position: fixed;
+                inset: auto 0 0;
+                z-index: 9000;
+                height: 72px;
+                background: linear-gradient(to top, rgba(247, 247, 241, 0.98), rgba(247, 247, 241, 0.82));
+                content: "";
+                pointer-events: none;
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
+            }
+
+            body.dark-mode::after {
+                background: linear-gradient(to top, rgba(16, 30, 28, 0.98), rgba(16, 30, 28, 0.82));
+            }
+
+            .theme-button,
+            .sticky-note-button,
+            .add-button,
+            .ai-button {
+                bottom: 14px;
+                width: 44px;
+                height: 44px;
+                min-width: 44px;
+                min-height: 44px;
+                border-radius: 15px;
+            }
+
+            .theme-button {
+                left: 14px;
+            }
+
+            .sticky-note-button {
+                left: 66px;
+            }
+
+            .add-button {
+                right: 66px;
+                width: 82px;
+                min-width: 82px;
+                border-radius: 14px;
+            }
+
+            .ai-button {
+                right: 14px;
+            }
+
+            .ai-button img {
+                width: 25px;
+                height: 25px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                transition-duration: 0.01ms !important;
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+            }
+        }
+
+        /* Responsive embedded AI chat panel */
+        .ai-chat-panel {
+            right: 88px;
+            bottom: max(16px, env(safe-area-inset-bottom));
+            width: min(460px, calc(100vw - 112px));
+            height: min(760px, calc(100dvh - 32px));
+            min-height: 360px;
+            border-radius: 20px;
+            background: var(--studio-paper, #fffefa);
+        }
+
+        .ai-chat-header {
+            flex: 0 0 auto;
+            min-height: 66px;
+            gap: 12px;
+            padding: 10px 14px;
+        }
+
+        .ai-chat-heading {
+            min-width: 0;
+        }
+
+        .ai-chat-heading > div {
+            min-width: 0;
+        }
+
+        .ai-chat-heading span {
+            display: block;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .ai-chat-header > div:last-child {
+            display: flex;
+            flex: 0 0 auto;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .ai-chat-new,
+        .ai-chat-close {
+            min-height: 38px;
+        }
+
+        .ai-chat-new {
+            white-space: nowrap;
+        }
+
+        .ai-chat-close {
+            width: 38px;
+            min-width: 38px;
+            border-radius: 10px;
+        }
+
+        .app-content .account-button {
+            justify-content: center;
+            gap: 0;
+            padding: 3px;
+            overflow: hidden;
+        }
+
+        .app-content .account-avatar {
+            display: block;
+            width: 34px;
+            height: 34px;
+            flex: 0 0 34px;
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .ai-chat-embed {
+            display: block;
+            width: 100%;
+            min-width: 0;
+            min-height: 0;
+            flex: 1 1 auto;
+        }
+
+        @media (max-width: 900px) {
+            .ai-chat-panel {
+                right: max(16px, env(safe-area-inset-right));
+                bottom: max(16px, env(safe-area-inset-bottom));
+                width: min(540px, calc(100vw - 32px));
+                height: min(760px, calc(100dvh - 32px));
+            }
+        }
+
+        @media (max-width: 700px) {
+            .ai-chat-panel {
+                inset:
+                    max(8px, env(safe-area-inset-top))
+                    max(8px, env(safe-area-inset-right))
+                    max(8px, env(safe-area-inset-bottom))
+                    max(8px, env(safe-area-inset-left));
+                width: auto;
+                height: auto;
+                min-width: 0;
+                min-height: 0;
+                max-width: none;
+                max-height: none;
+                border-radius: 18px;
+                z-index: 10000;
+            }
+
+            .ai-chat-header {
+                min-height: 60px;
+                padding: 8px 10px;
+            }
+
+            .ai-chat-heading {
+                gap: 9px;
+            }
+
+            .ai-chat-heading img,
+            body.dark-mode .ai-chat-heading img {
+                width: 30px;
+                height: 30px;
+                flex: 0 0 30px;
+            }
+
+            .ai-chat-new {
+                min-height: 36px;
+                padding: 5px 9px;
+                font-size: 12px;
+            }
+
+            .ai-chat-close {
+                width: 36px;
+                min-width: 36px;
+                min-height: 36px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .ai-chat-header {
+                gap: 6px;
+                padding-right: 7px;
+                padding-left: 8px;
+            }
+
+            .ai-chat-header > div:last-child {
+                gap: 5px;
+            }
+
+            .ai-chat-heading {
+                gap: 7px;
+            }
+
+            .ai-chat-new {
+                padding-right: 7px;
+                padding-left: 7px;
+            }
+        }
+
+        @media (max-height: 520px) and (max-width: 700px) {
+            .ai-chat-panel {
+                inset:
+                    max(4px, env(safe-area-inset-top))
+                    max(4px, env(safe-area-inset-right))
+                    max(4px, env(safe-area-inset-bottom))
+                    max(4px, env(safe-area-inset-left));
+                border-radius: 14px;
+            }
+
+            .ai-chat-header {
+                min-height: 52px;
+                padding-top: 5px;
+                padding-bottom: 5px;
+            }
+        }
+
+        html,
+        body {
+            scrollbar-color: #689b82 #e8eee8;
+            scrollbar-width: thin;
+        }
+
+        html::-webkit-scrollbar,
+        body::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+        }
+
+        html::-webkit-scrollbar-track,
+        body::-webkit-scrollbar-track {
+            background: #e8eee8;
+        }
+
+        html::-webkit-scrollbar-thumb,
+        body::-webkit-scrollbar-thumb {
+            border: 2px solid #e8eee8;
+            border-radius: 999px;
+            background: #689b82;
+        }
+
+        html::-webkit-scrollbar-thumb:hover,
+        body::-webkit-scrollbar-thumb:hover {
+            background: #087f70;
+        }
+
+        body.dark-mode,
+        html.dark-mode {
+            scrollbar-color: #4f9678 #172a25;
+        }
+
+        body.dark-mode::-webkit-scrollbar-track,
+        html.dark-mode::-webkit-scrollbar-track {
+            background: #172a25;
+        }
+
+        body.dark-mode::-webkit-scrollbar-thumb,
+        html.dark-mode::-webkit-scrollbar-thumb {
+            border-color: #172a25;
+            background: #4f9678;
+        }
+
+        body.dark-mode::-webkit-scrollbar-thumb:hover,
+        html.dark-mode::-webkit-scrollbar-thumb:hover {
+            background: #71c5a5;
+        }
+
+        .quick-note-sheet {
+            border: 1px solid rgba(255, 255, 255, 0.72);
+            background: rgba(235, 243, 250, 0.97);
+            color: #17364c;
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+        }
+
+        .quick-note-sheet h2 {
+            color: #087ea4;
+        }
+
+        .quick-note-sheet > p {
+            color: #587286;
+        }
+
+        .quick-note-toolbar {
+            border-color: #d2dee8;
+            background: rgba(225, 236, 245, 0.82);
+        }
+
+        .quick-note-tool {
+            border-color: #c2d1df;
+            background: rgba(255, 255, 255, 0.52);
+            color: #456273;
+        }
+
+        .quick-note-tool:hover,
+        .quick-note-tool.active {
+            border-color: #1685ae;
+            background: #e2f4fb;
+            color: #08749c;
+        }
+
+        .quick-note-color {
+            border-color: #c2d1df;
+            background: #fff;
+        }
+
+        .quick-note-canvas-wrap {
+            border-color: #d2dee8;
+            background: #fff;
+        }
+
+        .quick-note-actions button:not(.save-quick-note) {
+            border-color: #c2d1df;
+            background: #f8fbfd;
+            color: #29485a;
+        }
+
+        .quick-note-actions button:not(.save-quick-note):hover {
+            background: #e7f1f7;
+        }
+
+        .saved-quick-note {
+            border-color: #d2dee8;
+            background: rgba(255, 255, 255, 0.76);
+        }
+
+        .saved-quick-note p {
+            color: #29485a;
+        }
+
+        body.dark-mode .quick-note-sheet {
+            border-color: rgba(142, 211, 182, 0.2);
+            background: rgba(20, 39, 35, 0.98);
+            color: #e5efeb;
+        }
+
+        body.dark-mode .quick-note-sheet h2 {
+            color: #8ed3b6;
+        }
+
+        body.dark-mode .quick-note-sheet > p {
+            color: #b7ccc2;
+        }
+
+        body.dark-mode .quick-note-toolbar {
+            border-color: #35554b;
+            background: rgba(24, 48, 41, 0.82);
+        }
+
+        body.dark-mode .quick-note-tool {
+            border-color: #426458;
+            background: rgba(21, 45, 38, 0.8);
+            color: #d3e3da;
+        }
+
+        body.dark-mode .quick-note-tool:hover,
+        body.dark-mode .quick-note-tool.active {
+            border-color: #71c5a5;
+            background: #21483c;
+            color: #b6efd2;
+        }
+
+        body.dark-mode .quick-note-color {
+            border-color: #426458;
+            background: #19342d;
+        }
+
+        body.dark-mode .quick-note-canvas-wrap {
+            border-color: #35554b;
+            background: #fff;
+        }
+
+        body.dark-mode .quick-note-actions button:not(.save-quick-note) {
+            border-color: #426458;
+            background: #19342d;
+            color: #e0eee7;
+        }
+
+        body.dark-mode .quick-note-actions button:not(.save-quick-note):hover {
+            background: #21483c;
+        }
+
+        body.dark-mode .saved-quick-note {
+            border-color: #35554b;
+            background: rgba(24, 48, 41, 0.82);
+        }
+
+        body.dark-mode .saved-quick-note p {
+            color: #d4e5db;
+        }
+
+        @media (max-width: 600px) {
+            .quick-note-sheet {
+                padding: 24px 18px;
+            }
+
+            .quick-note-sheet > p {
+                color: #587286;
+            }
+
+            body.dark-mode .quick-note-sheet > p {
+                color: #b7ccc2;
+            }
+        }
     </style>
 </head>
 
@@ -3004,9 +3936,9 @@
 
     <main class="login-screen" id="loginScreen">
         <section class="login-card" aria-labelledby="loginTitle">
-            <img class="login-logo" src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
-                alt="Google">
-            <h1 id="loginTitle">Sign in to Note in Rect</h1>
+            <img class="login-logo" src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg"
+                alt="React">
+            <h1 id="loginTitle">Sign in to React Notes</h1>
             <p>Sign in to continue to your ReactJS notes.</p>
             <form class="login-form" onsubmit="loginWithEmail(event)">
                 <label for="loginEmail">Email</label>
@@ -3042,7 +3974,7 @@
             <img class="chooser-google-logo" src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
                 alt="Google">
             <h2 id="chooserTitle">Choose an account</h2>
-            <p>to continue to Note in Rect</p>
+            <p>to continue to React Notes</p>
 
             <button class="google-account-option" type="button" onclick="chooseGoogleAccount()">
                 <img class="chooser-avatar"
@@ -3065,7 +3997,7 @@
 
     <main class="signup-screen" id="signupScreen">
         <section class="login-card" aria-labelledby="signupTitle">
-            <img class="login-logo" src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="">
+            <img class="login-logo" src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" alt="React">
             <h1 id="signupTitle">Create your account</h1>
             <p>Sign up to save and manage your ReactJS notes.</p>
 
@@ -3092,7 +4024,7 @@
 
     <div class="app-content" id="appContent">
         <div class="top-bar">
-            <div class="scroll-title">Note in React</div>
+            <div class="scroll-title">React Notes</div>
 
             <div class="apps-launcher">
                 <button class="apps-button" type="button" aria-label="Google apps" title="Google apps"
@@ -3148,7 +4080,7 @@
 
         <div class="container">
             <div class="note-box">
-                <h1>Note in React</h1>
+                <h1>React Notes</h1>
                 <div class="study-toolbar" aria-label="Study tools">
                     <button type="button" class="toolbar-menu-btn" id="toolbarMenuBtn"
                         onclick="toggleToolbarMenu()">⋯</button>
@@ -4638,7 +5570,8 @@
         </div>
 
         <!-- AI BUTTON -->
-        <button class="ai-button" onclick="openAI()">
+        <button class="ai-button" id="aiChatToggle" type="button" aria-label="Open AI chat"
+            aria-expanded="false" aria-controls="aiChatPanel" onclick="openAI()">
             <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/6/66/OpenAI_logo_2025_%28symbol%29.svg/250px-OpenAI_logo_2025_%28symbol%29.svg.png?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=thumbnail"
                 alt="Open AI chat">
         </button>
@@ -5355,6 +6288,7 @@
 
             panel.classList.add("open");
             panel.setAttribute("aria-modal", "true");
+            document.getElementById("aiChatToggle")?.setAttribute("aria-expanded", "true");
 
             const iframe = panel.querySelector(".ai-chat-embed");
 
@@ -5372,6 +6306,7 @@
 
             panel.classList.remove("open");
             panel.setAttribute("aria-modal", "false");
+            document.getElementById("aiChatToggle")?.setAttribute("aria-expanded", "false");
         }
 
         function toggleAI() {
