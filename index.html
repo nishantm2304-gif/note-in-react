@@ -5511,6 +5511,573 @@
                         </code></pre>
                     </div>
                 </div>
+
+                <div class="content-box">
+                    <h2>what is Insert data into localStorage?with example.</h2>
+                    <p>
+                        In a React application, you can use the browser's localStorage to store data persistently. Below is an example of how to insert data into localStorage when a form is submitted.
+                    </p>
+                    <div class="code-box">
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            Copy
+                        </button>
+                        <pre><code>
+                        // Example of inserting data into localStorage in a React component
+
+                        import React, { useState } from 'react';
+
+                        function LocalStorageForm() {
+                            const [name, setName] = useState('');
+
+                            const handleSubmit = (e) => {
+                                e.preventDefault();
+                                localStorage.setItem('userName', name);
+                                alert(`Name "${name}" saved to localStorage!`);
+                                setName('');
+                            };
+
+                            return (
+                                &lt;form onSubmit={handleSubmit}&gt;
+                                    &lt;div&gt;
+                                        &lt;label&gt;Name:&lt;/label&gt;
+                                        &lt;input
+                                            type="text"
+                                            value={name}
+                                            onChange={(e) =&gt; setName(e.target.value)}
+                                        /&gt;
+                                    &lt;/div&gt;
+                                    &lt;button type="submit"&gt;Save to localStorage&lt;/button&gt;
+                                &lt;/form&gt;
+                            );
+                        }
+
+                        export default LocalStorageForm;</code></pre>
+                    </div>
+                </div>
+
+                <div class="content-box">
+                    <h2>what is  useNavigate hook And show Data in Next Page?with example.</h2>
+                    <p>
+                        In a React application, you can use the `useNavigate` hook from `react-router-dom` to programmatically navigate to another page. You can also pass data to the next page using state or URL parameters. Below is an example of how to use the `useNavigate` hook and show data on the next page.
+                    </p>
+                    <div class="code-box">
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            Copy
+                        </button>
+                        <pre><code>
+                        // Example of using useNavigate hook to navigate and show data on the next page
+
+                        import React, { useState } from 'react';
+                        import { useNavigate } from 'react-router-dom';
+
+                        function FirstPage() {
+                            const [name, setName] = useState('');
+                            const navigate = useNavigate();
+
+                            const handleSubmit = (e) => {
+                                e.preventDefault();
+                                navigate('/second', { state: { name } });
+                            };
+
+                            return (
+                                &lt;form onSubmit={handleSubmit}&gt;
+                                    &lt;div&gt;
+                                        &lt;label&gt;Name:&lt;/label&gt;
+                                        &lt;input
+                                            type="text"
+                                            value={name}
+                                            onChange={(e) =&gt; setName(e.target.value)}
+                                        /&gt;
+                                    &lt;/div&gt;
+                                    &lt;button type="submit"&gt;Go to Second Page&lt;/button&gt;
+                                &lt;/form&gt;
+                            );
+                        }
+
+                        export default FirstPage;
+
+                        // SecondPage.js
+                        import React from 'react';
+                        import { useLocation } from 'react-router-dom';
+
+                        function SecondPage() {
+                            const location = useLocation();
+                            const { name } = location.state || {};
+
+                            return (
+                                &lt;div&gt;
+                                    &lt;h1&gt;Welcome, {name}!&lt;/h1&gt;
+                                &lt;/div&gt;
+                            );
+                        }
+
+                        export default SecondPage;</code></pre>
+                    </div>
+                </div>
+
+                <div class="content-box">
+                    <h2>what is delete record using useParams Hook?with example.</h2>
+                    <p>
+                        In a React application, you can use the `useParams` hook from `react-router-dom` to access URL parameters and perform actions such as deleting a record based on an ID. Below is an example of how to use the `useParams` hook to delete a record.
+                    </p>
+                    <div class="code-box">
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            Copy
+                        </button>
+                        <pre><code>
+                        // Example of deleting a record using useParams hook in React
+
+                        import React, { useState } from 'react';
+                        import { useParams, useNavigate } from 'react-router-dom';
+
+                        function DeleteRecord() {
+                            const { id } = useParams();
+                            const navigate = useNavigate();
+                            const [records, setRecords] = useState([
+                                { id: 1, name: 'Record 1' },
+                                { id: 2, name: 'Record 2' },
+                                { id: 3, name: 'Record 3' },
+                            ]);
+
+                            const handleDelete = () => {
+                                const updatedRecords = records.filter(record => record.id !== parseInt(id));
+                                setRecords(updatedRecords);
+                                alert(`Record with ID ${id} deleted!`);
+                                navigate('/records'); // Navigate back to records list
+                            };
+
+                            return (
+                                &lt;div&gt;
+                                    &lt;h1&gt;Delete Record&lt;/h1&gt;
+                                    &lt;p&gt;Are you sure you want to delete record with ID: {id}?&lt;/p&gt;
+                                    &lt;button onClick={handleDelete}&gt;Delete&lt;/button&gt;
+                                &lt;/div&gt;
+                            );
+                        }
+
+                        export default DeleteRecord;</code></pre>
+                    </div>
+                </div>
+
+                <div class="content-box">
+                    <h2>what is Update Record?with example.</h2>
+                    <p>
+                        In a React application, you can update a record by allowing users to edit the existing data and then saving the changes. Below is an example of how to implement an update record functionality.
+                    </p>
+                    <div class="code-box">
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            Copy
+                        </button>
+                        <pre><code>
+                        // Example of updating a record in React
+
+                        import React, { useState } from 'react';
+
+                        function UpdateRecord() {
+                            const [records, setRecords] = useState([
+                                { id: 1, name: 'Record 1' },
+                                { id: 2, name: 'Record 2' },
+                                { id: 3, name: 'Record 3' },
+                            ]);
+                            const [editingId, setEditingId] = useState(null);
+                            const [newName, setNewName] = useState('');
+
+                            const handleEdit = (id) => {
+                                setEditingId(id);
+                                const recordToEdit = records.find(record => record.id === id);
+                                setNewName(recordToEdit.name);
+                            };
+
+                            const handleUpdate = () => {
+                                const updatedRecords = records.map(record =>
+                                    record.id === editingId ? { ...record, name: newName } : record
+                                );
+                                setRecords(updatedRecords);
+                                setEditingId(null);
+                                setNewName('');
+                            };
+
+                            return (
+                                &lt;div&gt;
+                                    &lt;h1&gt;Update Record&lt;/h1&gt;
+                                    &lt;ul&gt;
+                                        {records.map(record =&gt; (
+                                            &lt;li key={record.id}&gt;
+                                                {editingId === record.id ? (
+                                                    &lt;input
+                                                        type="text"
+                                                        value={newName}
+                                                        onChange={(e) =&gt; setNewName(e.target.value)}
+                                                    /&gt;
+                                                ) : (
+                                                    record.name
+                                                )}
+                                                &lt;button onClick={() =&gt; handleEdit(record.id)}&gt;Edit&lt;/button&gt;
+                                                {editingId === record.id && (
+                                                    &lt;button onClick={handleUpdate}&gt;Update&lt;/button&gt;
+                                                )}
+                                            &lt;/li&gt;
+                                        ))}
+                                    &lt;/ul&gt;
+                                &lt;/div&gt;
+                            );
+                        }
+
+                        export default UpdateRecord;</code></pre>
+                    </div>
+                </div>
+
+                <div class="content-box">
+                    <h2>what is Searching , sorting and Paginate data?with examples.</h2>
+                    <p>
+                        In a React application, you can implement searching, sorting, and pagination functionality to allow users to filter, organize, and navigate through large datasets. Below is an example of how to implement these features in a list of items.
+                    </p>
+                    <div class="code-box">
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            Copy
+                        </button>
+                        <pre><code>
+                        // Example of searching, sorting, and paginating data in a React component
+
+                        import React, { useState } from 'react';
+
+                        function SearchSortPaginate() {
+                            const itemsPerPage = 5;
+                            const [currentPage, setCurrentPage] = useState(1);
+                            const [searchTerm, setSearchTerm] = useState('');
+                            const [sortOrder, setSortOrder] = useState('asc');
+                            const items = Array.from({ length: 50 }, (_, i) => `Item ${i + 1}`);
+
+                            const handleSearch = (e) => {
+                                setSearchTerm(e.target.value);
+                                setCurrentPage(1); // Reset to first page on search
+                            };
+
+                            const handleSort = () => {
+                                setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
+                            };
+
+                            const filteredItems = items.filter(item =>
+                                item.toLowerCase().includes(searchTerm.toLowerCase())
+                            );
+
+                            const sortedItems = [...filteredItems].sort((a, b) => {
+                                return sortOrder === 'asc'
+                                    ? a.localeCompare(b)
+                                    : b.localeCompare(a);
+                            });
+
+                            const indexOfLastItem = currentPage * itemsPerPage;
+                            const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+                            const currentItems = sortedItems.slice(indexOfFirstItem, indexOfLastItem);
+
+                            const totalPages = Math.ceil(sortedItems.length / itemsPerPage);
+
+                            return (
+                                &lt;div&gt;
+                                    &lt;input
+                                        type="text"
+                                        placeholder="Search..."
+                                        value={searchTerm}
+                                        onChange={handleSearch}
+                                    /&gt;
+                                    &lt;button onClick={handleSort}&gt;Sort ({sortOrder})&lt;/button&gt;
+                                    &lt;ul&gt;
+                                        {currentItems.map((item, index) =&gt; (
+                                            &lt;li key={index}&gt;{item}&lt;/li&gt;
+                                        ))}
+                                    &lt;/ul&gt;
+                                    &lt;button onClick={() =&gt; setCurrentPage(prev =&gt; Math.max(prev - 1, 1))} disabled={currentPage === 1}&gt;Previous&lt;/button&gt;
+                                    &lt;button onClick={() =&gt; setCurrentPage(prev =&gt; Math.min(prev + 1, totalPages))} disabled={currentPage === totalPages}&gt;Next&lt;/button&gt;
+                                    &lt;p&gt;Page {currentPage} of {totalPages}&lt;/p&gt;
+                                &lt;/div&gt;
+                            );
+                        }
+
+                        export default SearchSortPaginate;</code></pre>
+                    </div>
+                </div>
+
+                <div class="content-box">
+                    <h2>what is useCallback and useMemo with basic example?with example.</h2>
+                    <p>
+                        In React, `useCallback` and `useMemo` are hooks that help optimize performance by memoizing functions and values, respectively. `useCallback` returns a memoized version of a callback function that only changes if one of its dependencies has changed. `useMemo` returns a memoized value that is recalculated only when its dependencies change.
+                    </p>
+                    <div class="code-box">
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            Copy
+                        </button>
+                        <pre><code>
+                        // Example of using useCallback and useMemo in a React component
+
+                        import React, { useState, useCallback, useMemo } from 'react';
+
+                        function ExpensiveComponent({ compute }) {
+                            const result = compute();
+                            return &lt;div&gt;Computed Result: {result}&lt;/div&gt;;
+                        }
+
+                        function UseCallbackUseMemoExample() {
+                            const [count, setCount] = useState(0);
+                            const [inputValue, setInputValue] = useState('');
+
+                            const handleIncrement = () =&gt; {
+                                setCount(prevCount =&gt; prevCount + 1);
+                            };
+
+                            const handleInputChange = (e) =&gt; {
+                                setInputValue(e.target.value);
+                            };
+
+                            const computeExpensiveValue = useCallback(() =&gt; {
+                                console.log('Computing expensive value...');
+                                return count * 2;
+                            }, [count]);
+
+                            const memoizedValue = useMemo(() =&gt; {
+                                console.log('Calculating memoized value...');
+                                return inputValue.length;
+                            }, [inputValue]);
+
+                            return (
+                                &lt;div&gt;
+                                    &lt;h1&gt;useCallback and useMemo Example&lt;/h1&gt;
+                                    &lt;button onClick={handleIncrement}&gt;Increment Count ({count})&lt;/button&gt;
+                                    &lt;input
+                                        type="text"
+                                        value={inputValue}
+                                        onChange={handleInputChange}
+                                        placeholder="Type something..."
+                                    /&gt;
+                                    &lt;p&gt;Length of input: {memoizedValue}&lt;/p&gt;
+                                    &lt;ExpensiveComponent compute={computeExpensiveValue} /&gt;
+                                &lt;/div&gt;
+                            );
+                        }
+
+                        export default UseCallbackUseMemoExample;</code></pre>
+                    </div>
+                </div>
+
+                <div class="content-box">
+                    <h2>what is basic Structure of Redux?with example.</h2>
+                    <p>
+                        Redux is a predictable state container for JavaScript applications. It helps manage the state of an application in a single store, making it easier to reason about and debug. The basic structure of Redux consists of actions, reducers, and the store.
+                    </p>
+                    <div class="code-box">
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            Copy
+                        </button>
+                        <pre><code>
+                        // Basic structure of Redux with example
+
+                        // actions.js
+                        export const increment = () =&gt; ({
+                            type: 'INCREMENT'
+                        });
+
+                        export const decrement = () =&gt; ({
+                            type: 'DECREMENT'
+                        });
+
+                        // reducer.js
+                        const initialState = {
+                            count: 0
+                        };
+
+                        export const counterReducer = (state = initialState, action) =&gt; {
+                            switch (action.type) {
+                                case 'INCREMENT':
+                                    return { ...state, count: state.count + 1 };
+                                case 'DECREMENT':
+                                    return { ...state, count: state.count - 1 };
+                                default:
+                                    return state;
+                            }
+                        };
+
+                        // store.js
+                        import { createStore } from 'redux';
+                        import { counterReducer } from './reducer';
+
+                        export const store = createStore(counterReducer);
+
+                        // CounterComponent.js
+                        import React from 'react';
+                        import { useSelector, useDispatch } from 'react-redux';
+                        import { increment, decrement } from './actions';
+
+                        function CounterComponent() {
+                            const count = useSelector(state =&gt; state.count);
+                            const dispatch = useDispatch();
+
+                            return (
+                                &lt;div&gt;
+                                    &lt;h1&gt;Count: {count}&lt;/h1&gt;
+                                    &lt;button onClick={() =&gt; dispatch(increment())}&gt;Increment&lt;/button&gt;
+                                    &lt;button onClick={() =&gt; dispatch(decrement())}&gt;Decrement&lt;/button&gt;
+                                &lt;/div&gt;
+                            );
+                        }
+
+                        export default CounterComponent;</code></pre>
+                    </div>
+                </div>
+
+                <div class="content-box">
+                    <h2>what is Architecture of Redux?with example.</h2>
+                    <p>
+                        The architecture of Redux is based on a unidirectional data flow and consists of three main components: Actions, Reducers, and the Store. Actions are payloads of information that send data from the application to the store. Reducers specify how the application's state changes in response to actions. The Store holds the entire state of the application.
+                    </p>
+                    <div class="code-box">
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            Copy
+                        </button>
+                        <pre><code>
+                        // Example of Redux architecture
+
+                        // actions.js
+                        export const addTodo = (todo) =&gt; ({
+                            type: 'ADD_TODO',
+                            payload: todo
+                        });
+
+                        export const removeTodo = (id) =&gt; ({
+                            type: 'REMOVE_TODO',
+                            payload: id
+                        });
+
+                        // reducer.js
+                        const initialState = {
+                            todos: []
+                        };
+
+                        export const todoReducer = (state = initialState, action) =&gt; {
+                            switch (action.type) {
+                                case 'ADD_TODO':
+                                    return { ...state, todos: [...state.todos, action.payload] };
+                                case 'REMOVE_TODO':
+                                    return { ...state, todos: state.todos.filter(todo =&gt; todo.id !== action.payload) };
+                                default:
+                                    return state;
+                            }
+                        };
+
+                        // store.js
+                        import { createStore } from 'redux';
+                        import { todoReducer } from './reducer';
+
+                        export const store = createStore(todoReducer);
+
+                        // TodoComponent.js
+                        import React, { useState } from 'react';
+                        import { useSelector, useDispatch } from 'react-redux';
+                        import { addTodo, removeTodo } from './actions';
+
+                        function TodoComponent() {
+                            const [todoText, setTodoText] = useState('');
+                            const todos = useSelector(state =&gt; state.todos);
+                            const dispatch = useDispatch();
+
+                            const handleAddTodo = () =&gt; {
+                                if (todoText.trim()) {
+                                    dispatch(addTodo({ id: Date.now(), text: todoText }));
+                                    setTodoText('');
+                                }
+                            };
+
+                            return (
+                                &lt;div&gt;
+                                    &lt;h1&gt;Todo List&lt;/h1&gt;
+                                    &lt;input
+                                        type="text"
+                                        value={todoText}
+                                        onChange={(e) =&gt; setTodoText(e.target.value)}
+                                        placeholder="Enter a new todo"
+                                    /&gt;
+                                    &lt;button onClick={handleAddTodo}&gt;Add Todo&lt;/button&gt;
+                                    &lt;ul&gt;
+                                        {todos.map(todo =&gt; (
+                                            &lt;li key={todo.id}&gt;
+                                                {todo.text}
+                                                &lt;button onClick={() =&gt; dispatch(removeTodo(todo.id))}&gt;Remove&lt;/button&gt;
+                                            &lt;/li&gt;
+                                        ))}
+                                    &lt;/ul&gt;
+                                &lt;/div&gt;
+                            );
+                        }
+
+                        export default TodoComponent;</code></pre>
+                    </div>
+                </div>
+
+                <div class="content-box">
+                    <h2>what is Counter using Redux?with example.</h2>
+                    <p>
+                        A counter application using Redux allows you to manage the state of a counter in a predictable way. Below is an example of how to implement a simple counter using Redux.
+                    </p>
+                    <div class="code-box">
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            Copy
+                        </button>
+                        <pre><code>
+                        // Example of a counter using Redux
+
+                        // actions.js
+                        export const increment = () =&gt; ({
+                            type: 'INCREMENT'
+                        });
+
+                        export const decrement = () =&gt; ({
+                            type: 'DECREMENT'
+                        });
+
+                        // reducer.js
+                        const initialState = {
+                            count: 0
+                        };
+
+                        export const counterReducer = (state = initialState, action) =&gt; {
+                            switch (action.type) {
+                                case 'INCREMENT':
+                                    return { ...state, count: state.count + 1 };
+                                case 'DECREMENT':
+                                    return { ...state, count: state.count - 1 };
+                                default:
+                                    return state;
+                            }
+                        };
+
+                        // store.js
+                        import { createStore } from 'redux';
+                        import { counterReducer } from './reducer';
+
+                        export const store = createStore(counterReducer);
+
+                        // CounterComponent.js
+                        import React from 'react';
+                        import { useSelector, useDispatch } from 'react-redux';
+                        import { increment, decrement } from './actions';
+
+                        function CounterComponent() {
+                            const count = useSelector(state =&gt; state.count);
+                            const dispatch = useDispatch();
+
+                            return (
+                                &lt;div&gt;
+                                    &lt;h1&gt;Count: {count}&lt;/h1&gt;
+                                    &lt;button onClick={() =&gt; dispatch(increment())}&gt;Increment&lt;/button&gt;
+                                    &lt;button onClick={() =&gt; dispatch(decrement())}&gt;Decrement&lt;/button&gt;
+                                &lt;/div&gt;
+                            );
+                        }
+
+                        export default CounterComponent;</code></pre>
+                    </div>
+                </div>
+
+
                                     
 
 
