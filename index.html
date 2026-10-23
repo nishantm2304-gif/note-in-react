@@ -5,8 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="google" value="notranslate">
-    <meta name="robots" content="noindex">
+    <meta name="robots" content="index, follow">
     <meta name="google-site-verification" content="LrdTUW9psUAMbh4Ia074-BPEVmcpBxF6Gwf0MSgQXZs">
+    <link rel="canonical" href="https://www.reactnote.com/">
     <title>React Notes | Learn, organize, build</title>
     <link rel="icon" type="image/svg+xml" href="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg">
     <!-- Bootstrap 5 CSS -->
@@ -24,6 +25,8 @@
     <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://unpkg.com/redux@4.2.1/dist/redux.min.js"></script>
+    <script src="https://unpkg.com/react-redux@8.1.3/dist/react-redux.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
 
     <style>
@@ -65,6 +68,198 @@
             background-position: center;
             background-attachment: fixed;
             color: #e5e7eb;
+        }
+
+        .footer-bar {
+            position: relative;
+            isolation: isolate;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 12px 24px;
+            width: min(100%, 1200px);
+            margin: 38px auto 20px;
+            padding: 18px 24px;
+            border: 1px solid rgba(148, 163, 184, 0.28);
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.82);
+            box-shadow: 0 14px 36px rgba(15, 23, 42, 0.1);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            overflow: hidden;
+            animation: footer-arrive 700ms cubic-bezier(0.2, 0.75, 0.25, 1) both;
+        }
+
+        .footer-bar::before {
+            position: absolute;
+            z-index: -1;
+            inset: 0;
+            background: linear-gradient(110deg, transparent 25%, rgba(56, 189, 248, 0.14) 48%, transparent 70%);
+            content: "";
+            transform: translateX(-120%);
+            animation: footer-sheen 1.2s 450ms ease-out both;
+        }
+
+        .footer-bar a {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            min-height: 42px;
+            padding: 8px 12px;
+            border-radius: 12px;
+            color: #334155;
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: color 160ms ease, background-color 160ms ease, transform 160ms ease;
+            animation: footer-link-arrive 500ms both;
+        }
+
+        .footer-bar a:nth-child(1) {
+            animation-delay: 120ms;
+        }
+
+        .footer-bar a:nth-child(2) {
+            animation-delay: 240ms;
+        }
+
+        .footer-bar a:nth-child(3) {
+            animation-delay: 360ms;
+        }
+
+        .footer-bar a:hover {
+            transform: translateY(-2px);
+            background: rgba(14, 165, 233, 0.1);
+            color: #0369a1;
+        }
+
+        .footer-bar a:focus-visible {
+            outline: 3px solid #0ea5e9;
+            outline-offset: 3px;
+        }
+
+        .footer-bar i {
+            font-size: 1.2rem;
+        }
+
+        body.dark-mode .footer-bar {
+            border-color: rgba(148, 163, 184, 0.2);
+            background: rgba(15, 23, 42, 0.84);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.28);
+        }
+
+        body.dark-mode .footer-bar a {
+            color: #dbeafe;
+        }
+
+        body.dark-mode .footer-bar a:hover {
+            background: rgba(56, 189, 248, 0.14);
+            color: #7dd3fc;
+        }
+
+        body.site-motion-ready .site-reveal {
+            opacity: 0;
+            translate: 0 20px;
+            transition:
+                opacity 620ms ease var(--site-reveal-delay, 0ms),
+                translate 620ms cubic-bezier(0.2, 0.75, 0.25, 1) var(--site-reveal-delay, 0ms);
+            will-change: opacity, translate;
+        }
+
+        body.site-motion-ready .site-reveal.is-visible {
+            opacity: 1;
+            translate: 0 0;
+            will-change: auto;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            body.site-motion-ready .site-reveal,
+            body.site-motion-ready .site-reveal.is-visible {
+                opacity: 1;
+                translate: none;
+                transition: none;
+                will-change: auto;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .footer-bar,
+            .footer-bar::before,
+            .footer-bar a {
+                animation: none !important;
+            }
+        }
+
+        @keyframes footer-arrive {
+            from {
+                opacity: 0;
+                transform: translateY(22px) scale(0.98);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes footer-link-arrive {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes footer-sheen {
+            to {
+                transform: translateX(120%);
+            }
+        }
+
+        .content-us button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            min-height: 42px;
+            padding: 10px 17px;
+            border: 1px solid rgba(14, 116, 144, 0.2);
+            border-radius: 999px;
+            background: linear-gradient(135deg, #ecfeff, #dbeafe);
+            color: #075985;
+            font: inherit;
+            font-size: 0.92rem;
+            font-weight: 700;
+            white-space: nowrap;
+            cursor: pointer;
+            box-shadow: 0 5px 16px rgba(14, 116, 144, 0.14);
+            transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+        }
+
+        .content-us button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 9px 22px rgba(14, 116, 144, 0.22);
+        }
+
+        .content-us button:focus-visible {
+            outline: 3px solid #0ea5e9;
+            outline-offset: 3px;
+        }
+
+        body.dark-mode .content-us button {
+            border-color: rgba(125, 211, 252, 0.28);
+            background: linear-gradient(135deg, #164e63, #1e3a5f);
+            color: #e0f2fe;
+            box-shadow: 0 5px 18px rgba(2, 132, 199, 0.22);
+        }
+
+        body.dark-mode .content-us button:hover {
+            background: linear-gradient(135deg, #0e7490, #1d4ed8);
+            box-shadow: 0 9px 24px rgba(2, 132, 199, 0.32);
         }
 
         @media (max-width: 768px) {
@@ -2461,7 +2656,8 @@
 
         /* SHOW TITLE IN HEADER */
         body.scrolled .scroll-title {
-            display: block;
+            display: flex;
+            align-items: center;
         }
 
         /* Dark mode */
@@ -3795,7 +3991,7 @@
 
         html,
         body {
-            scrollbar-color: #689b82 #e8eee8;
+            scrollbar-color: #38bdf8 #e8f4f8;
             scrollbar-width: thin;
         }
 
@@ -3807,40 +4003,53 @@
 
         html::-webkit-scrollbar-track,
         body::-webkit-scrollbar-track {
-            background: #e8eee8;
+            background: #e8f4f8;
         }
 
         html::-webkit-scrollbar-thumb,
         body::-webkit-scrollbar-thumb {
-            border: 2px solid #e8eee8;
+            border: 2px solid #e8f4f8;
             border-radius: 999px;
-            background: #689b82;
+            background: #38bdf8;
         }
 
         html::-webkit-scrollbar-thumb:hover,
         body::-webkit-scrollbar-thumb:hover {
-            background: #087f70;
+            background: #0ea5e9;
         }
 
         body.dark-mode,
         html.dark-mode {
-            scrollbar-color: #4f9678 #172a25;
+            scrollbar-color: #38bdf8 #172033;
         }
 
         body.dark-mode::-webkit-scrollbar-track,
         html.dark-mode::-webkit-scrollbar-track {
-            background: #172a25;
+            background: #172033;
         }
 
         body.dark-mode::-webkit-scrollbar-thumb,
         html.dark-mode::-webkit-scrollbar-thumb {
-            border-color: #172a25;
-            background: #4f9678;
+            border-color: #172033;
+            background: #38bdf8;
         }
 
         body.dark-mode::-webkit-scrollbar-thumb:hover,
         html.dark-mode::-webkit-scrollbar-thumb:hover {
-            background: #71c5a5;
+            background: #7dd3fc;
+        }
+
+        .code-box pre {
+            scrollbar-color: #38bdf8 transparent;
+            scrollbar-width: thin;
+        }
+
+        .code-box pre::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .code-box pre::-webkit-scrollbar-thumb {
+            border-color: transparent;
         }
 
         .quick-note-sheet {
@@ -4283,10 +4492,17 @@
         </section>
     </main>
 
+  
+
     <div class="app-content" id="appContent">
         <div class="top-bar">
-            <div class="scroll-title">React Notes</div>
-
+            <div class="scroll-title"><img style="width: 30px; height: 30px; margin-right: 8px; align-self: center;" src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" alt="React"> React Notes</div>
+                <div class="content-us">
+                    <button type="button" aria-controls="content" onclick="scrollToContact()">
+                        <i class="bi bi-chat-dots-fill" aria-hidden="true"></i>
+                        <span>Contact Us</span>
+                    </button>
+                </div>
             <div class="apps-launcher">
                 <button class="apps-button" type="button" aria-label="Google apps" title="Google apps"
                     aria-expanded="false" onclick="toggleAppsMenu(event)">
@@ -6338,16 +6554,580 @@
                     </div>
                 </div>
 
+                <div class="content-box">
+                    <h2>what is Crud Operation using Redux?with example.</h2>
+                    <p>
+                        CRUD operations (Create, Read, Update, Delete) can be implemented using Redux to manage the state of a list of items. Below is an example of how to perform CRUD operations in a React application using Redux.
+                    </p>
+                    <div class="code-box">
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            Copy
+                        </button>
+                        <pre><code>
+                        // Example of CRUD operations using Redux
 
-                                    
+                        // actions.js
+                        export const addItem = (item) =&gt; ({
+                            type: 'ADD_ITEM',
+                            payload: item
+                        });
 
+                        export const updateItem = (id, newItem) =&gt; ({
+                            type: 'UPDATE_ITEM',
+                            payload: { id, newItem }
+                        });
 
+                        export const deleteItem = (id) =&gt; ({
+                            type: 'DELETE_ITEM',
+                            payload: id
+                        });
 
+                        // reducer.js
+                        const initialState = {
+                            items: []
+                        };
 
+                        export const itemsReducer = (state = initialState, action) =&gt; {
+                            switch (action.type) {
+                                case 'ADD_ITEM':
+                                    return { ...state, items: [...state.items, action.payload] };
+                                case 'UPDATE_ITEM':
+                                    return {
+                                        ...state,
+                                        items: state.items.map(item =>
+                                            item.id === action.payload.id ? { ...item, ...action.payload.newItem } : item
+                                        )
+                                    };
+                                case 'DELETE_ITEM':
+                                    return { ...state, items: state.items.filter(item =&gt; item.id !== action.payload) };
+                                default:
+                                    return state;
+                            }
+                        };
 
+                        // store.js
+                        import { createStore } from 'redux';
+                        import { itemsReducer } from './reducer';
+
+                        export const store = createStore(itemsReducer);
+
+                        // ItemsComponent.js
+                        import React, { useState } from 'react';
+                        import { useSelector, useDispatch } from 'react-redux';
+                        import { addItem, updateItem, deleteItem } from './actions';
+
+                        function ItemsComponent() {
+                            const [newItemText, setNewItemText] = useState('');
+                            const [editingId, setEditingId] = useState(null);
+                            const [editingText, setEditingText] = useState('');
+                            const items = useSelector(state =&gt; state.items);
+                            const dispatch = useDispatch();
+
+                            const handleAddItem = () =&gt; {
+                                if (newItemText.trim()) {
+                                    dispatch(addItem({ id: Date.now(), text: newItemText }));
+                                    setNewItemText('');
+                                }
+                            };
+
+                            const handleUpdateItem = (id) =&gt; {
+                                if (editingText.trim()) {
+                                    dispatch(updateItem(id, { text: editingText }));
+                                    setEditingId(null);
+                                    setEditingText('');
+                                }
+                            };
+                        }
+                        </code></pre>
+                    </div>
+                </div>
+
+                <div class="content-box">
+                    <h2>what is Crud Operation using Redux?with example.</h2>
+                    <p>
+                        CRUD operations (Create, Read, Update, Delete) can be implemented using Redux to manage the state of a list of items. Below is an example of how to perform CRUD operations in a React application using Redux.
+                    </p>
+                    <div class="code-box">
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            Copy
+                        </button>
+                        <pre><code>
+                        // Example of CRUD operations using Redux
+
+                        // actions.js
+                        export const addItem = (item) =&gt; ({
+                            type: 'ADD_ITEM',
+                            payload: item
+                        });
+
+                        export const updateItem = (id, newItem) =&gt; ({
+                            type: 'UPDATE_ITEM',
+                            payload: { id, newItem }
+                        });
+
+                        export const deleteItem = (id) =&gt; ({
+                            type: 'DELETE_ITEM',
+                            payload: id
+                        });
+
+                        // reducer.js
+                        const initialState = {
+                            items: []
+                        };
+
+                        export const itemsReducer = (state = initialState, action) =&gt; {
+                            switch (action.type) {
+                                case 'ADD_ITEM':
+                                    return { ...state, items: [...state.items, action.payload] };
+                                case 'UPDATE_ITEM':
+                                    return {
+                                        ...state,
+                                        items: state.items.map(item =&gt;
+                                            item.id === action.payload.id ? { ...item, ...action.payload.newItem } : item
+                                        )
+                                    };
+                                case 'DELETE_ITEM':
+                                    return { ...state, items: state.items.filter(item =&gt; item.id !== action.payload) };
+                                default:
+                                    return state;
+                            }
+                        };
+
+                        // store.js
+                        import { createStore } from 'redux';
+                        import { itemsReducer } from './reducer';
+
+                        export const store = createStore(itemsReducer);
+
+                        // ItemsComponent.js
+                        import React, { useState } from 'react';
+                        import { useSelector, useDispatch } from 'react-redux';
+                        import { addItem, updateItem, deleteItem } from './actions';
+
+                        function ItemsComponent() {
+                            const [newItemText, setNewItemText] = useState('');
+                            const [editingId, setEditingId] = useState(null);
+                            const [editingText, setEditingText] = useState('');
+                            const items = useSelector(state =&gt; state.items);
+                            const dispatch = useDispatch();
+
+                            const handleAddItem = () =&gt; {
+                                if (newItemText.trim()) {
+                                    dispatch(addItem({ id: Date.now(), text: newItemText }));
+                                    setNewItemText('');
+                                }
+                            };
+
+                            const handleUpdateItem = (id) =&gt; {
+                                if (editingText.trim()) {
+                                    dispatch(updateItem(id, { text: editingText }));
+                                    setEditingId(null);
+                                    setEditingText('');
+                                }
+                            };
+                        }
+                        </code></pre>
+                    </div>
+
+                </div>
+
+                <div class="content-box">
+                    <h2>what is Setup JSON server?with example.</h2>
+                    <p>
+                        JSON Server is a simple way to set up a RESTful API using a JSON file as the database. It allows you to quickly create a mock backend for testing and prototyping your applications. Below is an example of how to set up JSON Server.
+                    </p>
+                    <div class="code-box">
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            Copy
+                        </button>
+                        <pre><code>
+                        // Steps to set up JSON Server
+
+                        1. Install JSON Server globally using npm:
+                           npm install -g json-server
+
+                        2. Create a db.json file with some sample data:
+                           {
+                             "posts": [
+                               { "id": 1, "title": "Hello World", "author": "John Doe" },
+                               { "id": 2, "title": "JSON Server", "author": "Jane Doe" }
+                             ],
+                             "comments": [
+                               { "id": 1, "body": "Great post!", "postId": 1 },
+                               { "id": 2, "body": "Thanks for sharing!", "postId": 1 }
+                             ]
+                           }
+
+                        3. Start the JSON Server:
+                           json-server --watch db.json --port 3001
+
+                        4. Access the API endpoints:
+                           - GET /posts
+                           - GET /posts/1
+                           - POST /posts
+                           - PUT /posts/1
+                           - DELETE /posts/1
+                        </code></pre>
+                    </div>  
+                </div>
+
+                <div class="content-box">
+                    <h2>what is Basic understanding API?with example.</h2>
+                    <p>
+                        An API (Application Programming Interface) is a set of rules and protocols that allows different software applications to communicate with each other. In web development, APIs are often used to fetch data from a server or send data to a server. Below is an example of how to use the Fetch API in a React application to get data from a public API.
+                    </p>
+                    <div class="code-box">
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            Copy
+                        </button>
+                        <pre><code>
+                        // Example of using Fetch API in a React component
+
+                        import React, { useState, useEffect } from 'react';
+
+                        function FetchDataExample() {
+                            const [data, setData] = useState([]);
+                            const [loading, setLoading] = useState(true);
+                            const [error, setError] = useState(null);
+
+                            useEffect(() =&gt; {
+                                fetch('https://jsonplaceholder.typicode.com/posts')
+                                    .then(response =&gt; {
+                                        if (!response.ok) {
+                                            throw new Error('Network response was not ok');
+                                        }
+                                        return response.json();
+                                    })
+                                    .then(data =&gt; {
+                                        setData(data);
+                                        setLoading(false);
+                                    })
+                                    .catch(error =&gt; {
+                                        setError(error);
+                                        setLoading(false);
+                                    });
+                            }, []);
+
+                            if (loading) return &lt;p&gt;Loading...&lt;/p&gt;;
+                            if (error) return &lt;p&gt;Error: {error.message}&lt;/p&gt;;
+
+                            return (
+                                &lt;div&gt;
+                                    &lt;h1&gt;Fetched Data&lt;/h1&gt;
+                                    &lt;ul&gt;
+                                        {data.map(post =&gt; (
+                                            &lt;li key={post.id}&gt;{post.title}&lt;/li&gt;
+                                        ))}
+                                    &lt;/ul&gt;
+                                &lt;/div&gt;
+                            );
+                        }
+
+                        export default FetchDataExample;</code></pre>
+                    </div>
+                </div>
+
+                <div class="content-box">
+                    <h2>what is Make Crud Operation using Routing?with example.</h2>
+                    <p>
+                        In a React application, you can implement CRUD operations along with routing to navigate between different views. Below is an example of how to set up a simple CRUD application using React Router for navigation.
+                    </p>
+                    <div class="code-box">
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            Copy
+                        </button>
+                        <pre><code>
+                        // Example of CRUD operations with routing in a React application
+
+                        import React, { useState } from 'react';
+                        import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
+
+                        function Home({ items }) {
+                            return (
+                                &lt;div&gt;
+                                    &lt;h1&gt;Home&lt;/h1&gt;
+                                    &lt;ul&gt;
+                                        {items.map(item =&gt; (
+                                            &lt;li key={item.id}&gt;
+                                                {item.text} - &lt;Link to={`/edit/${item.id}`}&gt;Edit&lt;/Link&gt;
+                                            &lt;/li&gt;
+                                        ))}
+                                    &lt;/ul&gt;
+                                    &lt;Link to="/add"&gt;Add New Item&lt;/Link&gt;
+                                &lt;/div&gt;
+                            );
+                        }
+
+                        function AddItem({ addItem }) {
+                            const [text, setText] = useState('');
+
+                            const handleSubmit = (e) =&gt; {
+                                e.preventDefault();
+                                if (text.trim()) {
+                                    addItem({ id: Date.now(), text });
+                                    setText('');
+                                }
+                            };
+
+                            return (
+                                &lt;div&gt;
+                                    &lt;h1&gt;Add Item&lt;/h1&gt;
+                                    &lt;form onSubmit={handleSubmit}&gt;
+                                        &lt;input
+                                            type="text"
+                                            value={text}
+                                            onChange={(e) =&gt; setText(e.target.value)}
+                                            placeholder="Enter item text"
+                                        /&gt;
+                                        &lt;button type="submit"&gt;Add&lt;/button&gt;
+                                    &lt;/form&gt;
+                                &lt;/div&gt;
+                            );
+                        }
+
+                        function EditItem({ items, updateItem }) {
+                            const { id } = useParams();
+                            const item = items.find(item =&gt; item.id === Number(id));
+                            const [text, setText] = useState(item ? item.text : '');
+
+                            const handleSubmit = (e) =&gt; {
+                                e.preventDefault();
+                                if (text.trim()) {
+                                    updateItem(Number(id), { text });
+                                }
+                            };
+
+                            return (
+                                &lt;div&gt;
+                                    &lt;h1&gt;Edit Item&lt;/h1&gt;
+                                    &lt;form onSubmit={handleSubmit}&gt;
+                                        &lt;input
+                                            type="text"
+                                            value={text}
+                                            onChange={(e) =&gt; setText(e.target.value)}
+                                            placeholder="Edit item text"
+                                        /&gt;
+                                        &lt;button type="submit"&gt;Update&lt;/button&gt;
+                                    &lt;/form&gt;
+                                &lt;/div&gt;
+                            );
+                        }
+
+                        function App() {
+                            const [items, setItems] = useState([]);
+
+                            const addItem = (item) =&gt; {
+                                setItems(prevItems =&gt; [...prevItems, item]);
+                            };
+
+                            const updateItem = (id, newItem) =&gt; {
+                                setItems(prevItems =&gt; prevItems.map(item =&gt; item.id === id ? { ...item, ...newItem } : item));
+                            };
+
+                            return (
+                                &lt;Router&gt;
+                                    &lt;Switch&gt;
+                                        &lt;Route exact path="/"&gt;
+                                            &lt;Home items={items} /&gt;
+                                        &lt;/Route&gt;
+                                        &lt;Route path="/add"&gt;
+                                            &lt;AddItem addItem={addItem} /&gt;
+                                        &lt;/Route&gt;
+                                        &lt;Route path="/edit/:id"&gt;
+                                            &lt;EditItem items={items} updateItem={updateItem} /&gt;
+                                        &lt;/Route&gt;
+                                    &lt;/Switch&gt;
+                                &lt;/Router&gt;
+                            );
+                        }
+
+                        export default App;</code></pre>
+                    
+                    </div>
+                </div>
+
+                <div class="content-box">
+                    <h2>what is Methods Like ( Get, Post, Put, Patch, Delete)?with examples.</h2>
+                    <p>
+                        In web development, HTTP methods are used to perform different actions on resources. The most common methods are GET, POST, PUT, PATCH, and DELETE. Below are examples of how each method is used in a RESTful API context.
+                    </p>
+                    <div class="code-box">
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            Copy
+                        </button>
+                        <pre><code>
+                        // Example of HTTP methods
+
+                        // GET: Retrieve data from the server
+                        fetch('https://jsonplaceholder.typicode.com/posts')
+                            .then(response =&gt; response.json())
+                            .then(data =&gt; console.log(data));
+
+                        // POST: Send data to the server to create a new resource
+                        fetch('https://jsonplaceholder.typicode.com/posts', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({ title: 'New Post', body: 'This is a new post.', userId: 1 })
+                        })
+                            .then(response =&gt; response.json())
+                            .then(data =&gt; console.log(data));
+
+                        // PUT: Update an existing resource completely
+                        fetch('https://jsonplaceholder.typicode.com/posts/1', {
+                            method: 'PUT',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({ id: 1, title: 'Updated Post', body: 'This post has been updated.', userId: 1 })
+                        })
+                            .then(response =&gt; response.json())
+                            .then(data =&gt; console.log(data));
+
+                        // PATCH: Update an existing resource partially
+                        fetch('https://jsonplaceholder.typicode.com/posts/1', {
+                            method: 'PATCH',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({ title: 'Partially Updated Post' })
+                        })
+                            .then(response =&gt; response.json())
+                            .then(data =&gt; console.log(data));
+
+                        // DELETE: Remove a resource from the server
+                        fetch('https://jsonplaceholder.typicode.com/posts/1', {
+                            method: 'DELETE'
+                        })
+                            .then(response =&gt; {
+                                if (response.ok) {
+                                    console.log('Resource deleted successfully');
+                                }
+                            });
+                        </code></pre>
+                    </div>
+                </div>
+
+                <div class="content-box">
+                    <h2>what is Insert data?with example.</h2>
+                    <p>
+                        Inserting data refers to the process of adding new records to a database or a data structure. In web development, this is often done using an HTTP POST request to send data to a server, which then stores it in a database. Below is an example of how to insert data into a database using a RESTful API.
+                    </p>
+                    <div class="code-box">
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            Copy
+                        </button>
+                        <pre><code>
+                        // Example of inserting data using a POST request
+
+                        // Using Fetch API to insert data
+                        fetch('https://jsonplaceholder.typicode.com/posts', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                title: 'New Post',
+                                body: 'This is the content of the new post.',
+                                userId: 1
+                            })
+                        })
+                        .then(response =&gt; response.json())
+                        .then(data =&gt; console.log('Inserted data:', data))
+                        .catch(error =&gt; console.error('Error inserting data:', error));
+                        </code></pre>
+                    </div>
+                </div>
+
+                <div class="content-box">
+                    <h2>what is View and Delete Data?with example.</h2>
+                    <p>
+                        Viewing and deleting data are common operations in web applications. Viewing data typically involves sending a GET request to retrieve records, while deleting data involves sending a DELETE request to remove records from the database. Below are examples of how to view and delete data using a RESTful API.
+                    </p>
+                    <div class="code-box">
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            Copy
+                        </button>
+                        <pre><code>
+                        // Example of viewing and deleting data using Fetch API
+
+                        // Viewing data (GET request)
+                        fetch('https://jsonplaceholder.typicode.com/posts')
+                            .then(response =&gt; response.json())
+                            .then(data =&gt; console.log('Viewed data:', data))
+                            .catch(error =&gt; console.error('Error viewing data:', error));
+
+                        // Deleting data (DELETE request)
+                        fetch('https://jsonplaceholder.typicode.com/posts/1', {
+                            method: 'DELETE'
+                        })
+                        .then(response =&gt; {
+                            if (response.ok) {
+                                console.log('Data deleted successfully');
+                            } else {
+                                console.error('Error deleting data');
+                            }
+                        })
+                        .catch(error =&gt; console.error('Error deleting data:', error));
+                        </code></pre>
+                    </div>
+                </div>
+
+                <div class="content-box">
+                    <h2>what is Update Data?with example.</h2>
+                    <p>
+                        Updating data is another common operation in web applications. It typically involves sending a PUT or PATCH request to modify existing records in the database. Below is an example of how to update data using the Fetch API.
+                    </p>
+                    <div class="code-box">
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            Copy
+                        </button>
+                        <pre><code>
+                        // Example of updating data using Fetch API
+
+                        // Updating data (PUT request)
+                        fetch('https://jsonplaceholder.typicode.com/posts/1', {
+                            method: 'PUT',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                id: 1,
+                                title: 'Updated Title',
+                                body: 'Updated content',
+                                userId: 1
+                            })
+                        })
+                        .then(response =&gt; {
+                            if (response.ok) {
+                                console.log('Data updated successfully');
+                            } else {
+                                console.error('Error updating data');
+                            }
+                        })
+                        .catch(error =&gt; console.error('Error updating data:', error));
+                        </code></pre>
+                    </div>
+                </div>
             </div>
 
         </div>
+
+        <footer class="footer-bar" id="content" aria-label="Contact and social links">
+            <a href="https://www.instagram.com/nishant_mehta_8/" target="_blank" rel="noopener noreferrer">
+                <i class="bi bi-instagram" aria-hidden="true"></i>
+                <span>Instagram · @nishant_mehta_8</span>
+            </a>
+            <a href="tel:9484678680">
+                <i class="bi bi-telephone-fill" aria-hidden="true"></i>
+                <span>94846 78680</span>
+            </a>
+            <a href="https://github.com/nishantm2304-gif" target="_blank" rel="noopener noreferrer">
+                <i class="bi bi-github" aria-hidden="true"></i>
+                <span>GitHub · nishantm2304-gif</span>
+            </a>
+        </footer>
 
         <div class="all-button">
             <button class="theme-button" id="themeButton" type="button" aria-label="Switch to dark mode"
@@ -6498,6 +7278,9 @@
 
     <script>
         const GOOGLE_CLIENT_ID = "YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com";
+        let siteRevealObserver;
+        const siteAnimatedSelector =
+            ".login-screen .login-card, .signup-screen .login-card, #appContent .content-box";
 
         window.addEventListener("scroll", function () {
 
@@ -6509,12 +7292,66 @@
 
         });
 
+        function scrollToContact() {
+            const footer = document.getElementById("content");
+            if (!footer) {
+                console.error("Contact footer was not found.");
+                return;
+            }
+
+            footer.scrollIntoView({
+                behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+                block: "center",
+            });
+        }
+
+        function observeSiteAnimations(root = document) {
+            if (!siteRevealObserver || !root) return;
+
+            const elements = [];
+            if (root.matches && root.matches(siteAnimatedSelector)) {
+                elements.push(root);
+            }
+            elements.push(...root.querySelectorAll(siteAnimatedSelector));
+
+            elements.forEach((element, index) => {
+                if (element.classList.contains("site-reveal") || element.getClientRects().length === 0) return;
+
+                element.classList.add("site-reveal");
+                element.style.setProperty("--site-reveal-delay", `${(index % 4) * 55}ms`);
+                siteRevealObserver.observe(element);
+            });
+        }
+
+        function initializeSiteAnimations() {
+            if (!("IntersectionObserver" in window) ||
+                window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+                return;
+            }
+
+            document.body.classList.add("site-motion-ready");
+            siteRevealObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) return;
+
+                    entry.target.classList.add("is-visible");
+                    observer.unobserve(entry.target);
+                });
+            }, {
+                threshold: 0.12,
+                rootMargin: "0px 0px -32px 0px",
+            });
+
+            observeSiteAnimations();
+        }
+
         function showApp() {
             localStorage.setItem("noteInRectLoggedIn", "true");
             document.getElementById("loginScreen").style.display = "none";
             document.getElementById("signupScreen").style.display = "none";
             document.getElementById("googleChooser").classList.remove("open");
             document.getElementById("appContent").style.display = "block";
+            observeSiteAnimations(document.getElementById("appContent"));
         }
 
         function checkLoginStatus() {
@@ -6553,6 +7390,7 @@
         window.addEventListener("DOMContentLoaded", loadTheme);
         window.addEventListener("DOMContentLoaded", enhanceNotes);
         window.addEventListener("DOMContentLoaded", updateProgress);
+        window.addEventListener("DOMContentLoaded", initializeSiteAnimations);
         document.addEventListener("click", function (event) {
             if (event.target.closest(".run-btn, .code-output")) return;
             document.querySelectorAll(".code-output.visible").forEach(output => {
@@ -6735,6 +7573,8 @@
             const hasJsx = /<\/?[A-Za-z][^>]*>/.test(code);
             const isTerminalCode = /(^|\n)\s*(npm|yarn|npx|node)\s+/.test(code);
             const isMarkupExample = /<!--|styles\.css|<style>/.test(code);
+            const usesRedux = /\bfrom\s*['"]redux['"]/.test(code);
+            const usesReactRedux = /\bfrom\s*['"]react-redux['"]/.test(code);
 
             if (isTerminalCode) {
                 output.textContent = "This is a terminal command. Run it in the VS Code terminal.";
@@ -6748,6 +7588,18 @@
                 return;
             }
 
+            if (usesRedux && !window.Redux) {
+                output.textContent = "Redux could not load. Check your internet connection, refresh the page, and try again.";
+                output.classList.add("visible");
+                return;
+            }
+
+            if (usesReactRedux && !window.ReactRedux) {
+                output.textContent = "React Redux could not load. Check your internet connection, refresh the page, and try again.";
+                output.classList.add("visible");
+                return;
+            }
+
             console.log = function (...values) {
                 messages.push(values.map(value => typeof value === "string" ? value : JSON.stringify(value)).join(" "));
             };
@@ -6755,18 +7607,42 @@
             try {
                 const importsRemoved = code
                     .replace(/import[\s\S]*?;\s*/g, "")
-                    .replace(/export\s+default\s+/g, "");
+                    .replace(/\bexport\s+default\s+/g, "")
+                    .replace(/\bexport\s+(?=(?:const|let|var|function|class)\b)/g, "")
+                    .replace(/\bexport\s*\{[^}]*\}\s*;?/g, "");
                 const executableCode = hasJsx
                     ? Babel.transform(importsRemoved, { presets: [["react", { runtime: "classic" }]] }).code
                     : importsRemoved;
-                const result = Function("React", "useState", "useEffect", executableCode + "\nreturn " + (componentMatch ? componentMatch[1] : "undefined"))(React, React.useState, React.useEffect);
+                const result = Function(
+                    "React",
+                    "useState",
+                    "useEffect",
+                    "createStore",
+                    "useSelector",
+                    "useDispatch",
+                    executableCode + "\nreturn { component: " + (componentMatch ? componentMatch[1] : "undefined") + ", store: typeof store === 'undefined' ? null : store };"
+                )(
+                    React,
+                    React.useState,
+                    React.useEffect,
+                    window.Redux ? window.Redux.createStore : undefined,
+                    window.ReactRedux ? window.ReactRedux.useSelector : undefined,
+                    window.ReactRedux ? window.ReactRedux.useDispatch : undefined
+                );
                 output.innerHTML = "";
 
-                if (hasJsx && componentMatch && typeof result === "function") {
+                if (hasJsx && componentMatch && typeof result.component === "function") {
+                    if (usesReactRedux && !result.store) {
+                        throw new Error("This React Redux example needs a store before it can be previewed.");
+                    }
                     const preview = document.createElement("div");
                     preview.className = "react-preview";
                     output.appendChild(preview);
-                    ReactDOM.createRoot(preview).render(React.createElement(result));
+                    const component = React.createElement(result.component);
+                    const previewElement = usesReactRedux
+                        ? React.createElement(window.ReactRedux.Provider, { store: result.store }, component)
+                        : component;
+                    ReactDOM.createRoot(preview).render(previewElement);
                     if (messages.length) {
                         const consoleOutput = document.createElement("pre");
                         consoleOutput.textContent = messages.join("\n");
@@ -6774,7 +7650,14 @@
                     }
                 } else {
                     if (messages.length) output.textContent = messages.join("\n");
-                    else output.textContent = "Code ran successfully. No output.";
+                    else if (result.store) {
+                        output.textContent = "Redux store created successfully.\nInitial state:\n" +
+                            JSON.stringify(result.store.getState(), null, 2);
+                    } else if (hasJsx) {
+                        output.textContent = "JSX compiled successfully, but no preview component was found. Export a React component as the default export to preview it.";
+                    } else {
+                        output.textContent = "Code ran successfully. This example defines code but does not print a result. Add console.log(...) to display a value.";
+                    }
                 }
             } catch (error) {
                 output.textContent = "Error: " + error.message;
@@ -7003,12 +7886,16 @@
 
         function signUp() {
             document.getElementById("loginScreen").style.display = "none";
-            document.getElementById("signupScreen").style.display = "flex";
+            const signupScreen = document.getElementById("signupScreen");
+            signupScreen.style.display = "flex";
+            observeSiteAnimations(signupScreen);
         }
 
         function showLogin() {
             document.getElementById("signupScreen").style.display = "none";
-            document.getElementById("loginScreen").style.display = "flex";
+            const loginScreen = document.getElementById("loginScreen");
+            loginScreen.style.display = "flex";
+            observeSiteAnimations(loginScreen);
         }
 
         function createAccount(event) {
@@ -7561,6 +8448,7 @@
 
             document.querySelector(".note-box").appendChild(contentBox);
             addNoteTools(contentBox, String(note.id), true);
+            observeSiteAnimations(contentBox);
             return contentBox;
         }
 
