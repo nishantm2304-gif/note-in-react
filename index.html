@@ -4390,6 +4390,286 @@
                 background-attachment: scroll;
             }
         }
+
+        :root {
+            --react-accent: #4f46e5;
+            --react-accent-strong: #4338ca;
+            --react-cyan: #0891b2;
+            --react-ink: #1e293b;
+            --react-muted: #64748b;
+            --react-border: rgba(99, 102, 241, 0.16);
+            --react-shadow: 0 24px 70px rgba(39, 54, 112, 0.12);
+        }
+
+        body {
+            background-color: #f5f7ff;
+            background-image:
+                radial-gradient(ellipse at 8% 4%, rgba(129, 140, 248, 0.18), transparent 38%),
+                radial-gradient(ellipse at 92% 12%, rgba(34, 211, 238, 0.14), transparent 34%),
+                linear-gradient(145deg, #f8faff 0%, #f1f5ff 52%, #f5f3ff 100%);
+            color: var(--react-ink);
+        }
+
+        body.dark-mode {
+            background-color: #0b1020;
+            background-image:
+                radial-gradient(ellipse at 8% 4%, rgba(79, 70, 229, 0.22), transparent 40%),
+                radial-gradient(ellipse at 92% 12%, rgba(8, 145, 178, 0.16), transparent 36%),
+                linear-gradient(145deg, #10172b 0%, #0b1020 58%, #17152e 100%);
+            color: #e2e8f0;
+        }
+
+        .login-card,
+        .signup-screen .login-card,
+        .app-content .note-box,
+        .chooser-card,
+        .quiz-card,
+        .add-form,
+        .quick-note-sheet {
+            border: 1px solid var(--react-border);
+            border-radius: 24px;
+            background: rgba(255, 255, 255, 0.92);
+            box-shadow: var(--react-shadow);
+        }
+
+        .login-card h1,
+        .login-form label,
+        .chooser-card h2 {
+            color: var(--react-ink);
+        }
+
+        .login-card p,
+        .chooser-card p {
+            color: var(--react-muted);
+        }
+
+        .login-logo {
+            padding: 8px;
+            background: #eef2ff;
+        }
+
+        .login-form input,
+        .add-form input,
+        .add-form textarea {
+            border: 1px solid #dbe2f0;
+            border-radius: 12px;
+            background: #fbfcff;
+            color: var(--react-ink);
+            transition: border-color 160ms ease, box-shadow 160ms ease;
+        }
+
+        .login-form input:focus,
+        .add-form input:focus,
+        .add-form textarea:focus {
+            border-color: var(--react-accent);
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.13);
+        }
+
+        .login-submit,
+        .theme-button,
+        .sticky-note-button,
+        .add-button,
+        .ai-button {
+            border: 0;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--react-accent), var(--react-cyan));
+            box-shadow: 0 8px 20px rgba(79, 70, 229, 0.22);
+            transition: transform 160ms ease, box-shadow 160ms ease;
+        }
+
+        .login-submit:hover,
+        .theme-button:hover,
+        .sticky-note-button:hover,
+        .add-button:hover,
+        .ai-button:hover {
+            background: linear-gradient(135deg, var(--react-accent-strong), #0e7490);
+            box-shadow: 0 11px 25px rgba(79, 70, 229, 0.28);
+            transform: translateY(-2px);
+        }
+
+        .forgot-password,
+        .signup-button,
+        .chooser-cancel {
+            color: var(--react-accent);
+        }
+
+        .google-login {
+            border-color: #dbe2f0;
+            border-radius: 12px;
+            background: #fff;
+            color: var(--react-ink);
+        }
+
+        .app-content .note-box {
+            border-color: var(--react-border);
+            background: rgba(255, 255, 255, 0.84);
+            box-shadow: var(--react-shadow);
+        }
+
+        .app-content .note-box > h1,
+        .app-content h1,
+        .app-content h2 {
+            color: var(--react-accent-strong);
+        }
+
+        .app-content .content-box {
+            border: 1px solid rgba(99, 102, 241, 0.12);
+            border-left: 4px solid var(--react-accent);
+            border-radius: 16px;
+            background: rgba(248, 250, 255, 0.95);
+            color: var(--react-ink);
+            box-shadow: 0 8px 22px rgba(39, 54, 112, 0.06);
+        }
+
+        .app-content .content-box:hover {
+            border-left-color: var(--react-cyan);
+            background: #f1f5ff;
+            color: var(--react-ink);
+            box-shadow: 0 12px 28px rgba(39, 54, 112, 0.1);
+        }
+
+        .app-content .content-box h2 {
+            color: var(--react-accent-strong);
+        }
+
+        .app-content .content-box p,
+        .app-content .content-box li,
+        .app-content .content-box .intro {
+            color: #475569;
+        }
+
+        .study-toolbar {
+            border-color: var(--react-border);
+            border-radius: 16px;
+            background: rgba(238, 242, 255, 0.8);
+        }
+
+        .study-toolbar input,
+        .study-toolbar select,
+        .study-toolbar button,
+        .note-tools button,
+        .note-tools label,
+        .import-label {
+            border-color: #dbe2f0;
+            border-radius: 10px;
+            background: #fff;
+            color: var(--react-ink);
+        }
+
+        .study-toolbar button:hover,
+        .note-tools button:hover,
+        .note-tools label:hover,
+        .import-label:hover {
+            border-color: rgba(79, 70, 229, 0.35);
+            background: #eef2ff;
+        }
+
+        .note-tag {
+            background: #e0e7ff;
+            color: #4338ca;
+        }
+
+        body.dark-mode .login-card,
+        body.dark-mode .signup-screen .login-card,
+        body.dark-mode .app-content .note-box,
+        body.dark-mode .chooser-card,
+        body.dark-mode .quiz-card,
+        body.dark-mode .add-form,
+        body.dark-mode .quick-note-sheet {
+            border-color: rgba(129, 140, 248, 0.2);
+            background: rgba(17, 25, 46, 0.94);
+            color: #e2e8f0;
+            box-shadow: 0 24px 70px rgba(0, 0, 0, 0.3);
+        }
+
+        body.dark-mode .login-card h1,
+        body.dark-mode .login-form label,
+        body.dark-mode .chooser-card h2,
+        body.dark-mode .app-content .note-box > h1,
+        body.dark-mode .app-content h1,
+        body.dark-mode .app-content h2 {
+            color: #c7d2fe;
+        }
+
+        body.dark-mode .login-card p,
+        body.dark-mode .chooser-card p {
+            color: #a5b4cc;
+        }
+
+        body.dark-mode .login-form input,
+        body.dark-mode .add-form input,
+        body.dark-mode .add-form textarea,
+        body.dark-mode .study-toolbar input,
+        body.dark-mode .study-toolbar select,
+        body.dark-mode .study-toolbar button,
+        body.dark-mode .note-tools button,
+        body.dark-mode .note-tools label,
+        body.dark-mode .import-label {
+            border-color: #34415e;
+            background: #151f38;
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .login-form input:focus,
+        body.dark-mode .add-form input:focus,
+        body.dark-mode .add-form textarea:focus {
+            border-color: #818cf8;
+            box-shadow: 0 0 0 4px rgba(129, 140, 248, 0.18);
+        }
+
+        body.dark-mode .google-login {
+            border-color: #34415e;
+            background: #151f38;
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .forgot-password,
+        body.dark-mode .signup-button,
+        body.dark-mode .chooser-cancel {
+            color: #a5b4fc;
+        }
+
+        body.dark-mode .app-content .content-box {
+            border-color: rgba(129, 140, 248, 0.14);
+            border-left-color: #818cf8;
+            background: rgba(25, 36, 64, 0.9);
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .app-content .content-box:hover {
+            border-left-color: #22d3ee;
+            background: #202c4a;
+            color: #f1f5f9;
+        }
+
+        body.dark-mode .app-content .content-box h2 {
+            color: #a5b4fc;
+        }
+
+        body.dark-mode .app-content .content-box p,
+        body.dark-mode .app-content .content-box li,
+        body.dark-mode .app-content .content-box .intro {
+            color: #cbd5e1;
+        }
+
+        body.dark-mode .study-toolbar {
+            border-color: rgba(129, 140, 248, 0.16);
+            background: rgba(21, 31, 56, 0.8);
+        }
+
+        body.dark-mode .study-toolbar button:hover,
+        body.dark-mode .note-tools button:hover,
+        body.dark-mode .note-tools label:hover,
+        body.dark-mode .import-label:hover {
+            border-color: #818cf8;
+            background: #26345a;
+        }
+
+        body.dark-mode .note-tag {
+            background: #292f67;
+            color: #c7d2fe;
+        }
     </style>
 </head>
 
@@ -7538,8 +7818,28 @@
                     addNoteTools(noteCard, getNoteId(heading.textContent), false);
                 }
             });
+            formatCodeExamples();
             enhanceCodeRunners();
             updateProgress();
+        }
+
+        function formatCodeExamples() {
+            document.querySelectorAll(".code-box pre code").forEach(code => {
+                const lines = code.textContent.replace(/\r\n?/g, "\n").split("\n");
+
+                while (lines.length && !lines[0].trim()) lines.shift();
+                while (lines.length && !lines[lines.length - 1].trim()) lines.pop();
+
+                const indentation = lines
+                    .filter(line => line.trim())
+                    .reduce((minimum, line) => Math.min(minimum, line.match(/^[ \t]*/)[0].length), Infinity);
+
+                if (Number.isFinite(indentation) && indentation > 0) {
+                    code.textContent = lines.map(line => line.slice(indentation)).join("\n");
+                } else {
+                    code.textContent = lines.join("\n");
+                }
+            });
         }
 
         function enhanceCodeRunners() {
